@@ -1,5 +1,71 @@
 // Navbar functionality
+function loadToursFromBackend() {
+    fetch("http://localhost:8000/api/tours")
+        .then(response => response.json())
+        .then(data => {
+            const container = document.getElementById("tours-container");
+            container.innerHTML = "";
+
+            if (data.length === 0) {
+                container.innerHTML = "<p>No tours available.</p>";
+                return;
+            }
+
+            data.forEach(tour => {
+                const div = document.createElement("div");
+
+                div.style.border = "1px solid #ccc";
+                div.style.padding = "12px";
+                div.style.margin = "10px 0";
+                div.style.borderRadius = "6px";
+
+                div.innerHTML = `
+                    <h3>${tour.name}</h3>
+                    <p>${tour.description}</p>
+                    <button onclick="deleteTour(${tour.id})"
+                        style="background:#c0392b;color:white;
+                               border:none;padding:8px 12px;
+                               border-radius:4px;cursor:pointer;">
+                        Delete Tour
+                    </button>
+                `;
+
+                container.appendChild(div);
+            });
+        })
+        .catch(error => {
+            document.getElementById("tours-container").innerText =
+                "Failed to load tours from backend.";
+            console.error(error);
+        });
+}
+
+function deleteTour(tourId) {
+    if (!confirm("Are you sure you want to delete this tour?")) {
+        return;
+    }
+
+    fetch(`http://localhost:8000/api/tours/${tourId}`, {
+        method: "DELETE"
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Failed to delete tour");
+        }
+        return response.json();
+    })
+    .then(() => {
+        loadToursFromBackend(); // refresh list
+    })
+    .catch(error => {
+        alert("Error deleting tour");
+        console.error(error);
+    });
+}
+
+
 document.addEventListener('DOMContentLoaded', () => {
+    loadToursFromBackend();
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
