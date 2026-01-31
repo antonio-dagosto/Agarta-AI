@@ -41,27 +41,24 @@ function loadToursFromBackend() {
 }
 
 function deleteTour(tourId) {
-    if (!confirm("Are you sure you want to delete this tour?")) {
-        return;
-    }
+    if (!confirm("Are you sure you want to delete this tour?")) return;
 
     fetch(`http://localhost:8000/api/tours/${tourId}`, {
         method: "DELETE"
     })
     .then(response => {
         if (!response.ok) {
-            throw new Error("Failed to delete tour");
+            throw new Error("Delete failed");
         }
-        return response.json();
-    })
-    .then(() => {
-        loadToursFromBackend(); // refresh list
+        // DO NOT try to parse JSON
+        loadToursFromBackend();
     })
     .catch(error => {
         alert("Error deleting tour");
         console.error(error);
     });
 }
+
 
 
 document.addEventListener('DOMContentLoaded', () => {
