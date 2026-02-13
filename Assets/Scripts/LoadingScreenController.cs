@@ -17,7 +17,7 @@ public class LoadingScreenController : MonoBehaviour
 
     IEnumerator LoadNextSceneAsync()
     {
-        string target = LoadingSceneTarget.NextSceneName;
+        string target = LoadingSceneTarget.TargetScene;
         if (loadingText != null)
             loadingText.text = "Loading...";
 

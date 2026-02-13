@@ -3,24 +3,28 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
-    [Header("Scene Names")]
-    public string loadingSceneName = "SC_Loading";
-    public string tourSceneName = "SC_MapTour"; // <- set to your actual map scene name
-
-    public void BeginTours()
+    public void OpenExploreWorld()
     {
-        // Go to loading screen, which will then load the tour scene
-        SceneManager.LoadScene(loadingSceneName);
-        LoadingSceneTarget.NextSceneName = tourSceneName;
+        SceneManager.LoadScene("ExploreWorld");
     }
 
-    public void ExitAgartaAI()
+    public void OpenStreamingHub()
     {
-        // Quits in build; stops play mode in editor
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
+        SceneManager.LoadScene("StreamingHub");
+    }
+
+    public void OpenVirtualCampus()
+    {
+        SceneManager.LoadScene("VirtualCampus");
+    }
+
+    public void OpenAgartaLab()
+    {
+        SceneManager.LoadScene("AgartaLab");
+    }
+
+    public void ExitApp()
+    {
         Application.Quit();
-#endif
     }
 }

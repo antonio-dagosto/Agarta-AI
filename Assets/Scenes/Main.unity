@@ -305,7 +305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 227b0fde96ae66e4a9295b86c7502534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startMenuSceneName: StartScreen
+  startMenuSceneName: MainMenu
 --- !u!224 &191526168
 RectTransform:
   m_ObjectHideFlags: 0
@@ -406,7 +406,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 303714618}
   serializedVersion: 2
-  m_LocalRotation: {x: 1.3877788e-17, y: 1.0241635e-16, z: -4.5930795e-17, w: 1}
+  m_LocalRotation: {x: 1.3877788e-17, y: 1.0242037e-16, z: -4.593414e-17, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -432,7 +432,7 @@ MonoBehaviour:
     c0:
       x: 0.9647534819407176
       y: -0.2631553136139595
-      z: -0.0000000000000002162269074430176
+      z: -0.00000000000000021624784112306765
       w: 0
     c1:
       x: -0.2023645503245802
@@ -1974,7 +1974,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1104753827}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 1.336917e-15, z: 2.231208e-16, w: 0.7071067}
+  m_LocalRotation: {x: 0.7071068, y: 1.3873827e-15, z: 2.346183e-16, w: 0.7071067}
   m_LocalPosition: {x: 0.0000000013969839, y: -0.0000000018626451, z: 0}
   m_LocalScale: {x: 1, y: 1.0000004, z: 1.0000004}
   m_ConstrainProportionsScale: 0
@@ -2065,16 +2065,16 @@ MonoBehaviour:
   _localToGlobeFixedMatrix:
     c0:
       x: 0.964753481940717
-      y: -0.263155313613962
-      z: 0.0000000000000001940516185153679
+      y: -0.2631553136139621
+      z: 0.0000000000000002002471477614133
       w: 0
     c1:
-      x: 0.16822406280611876
+      x: 0.16822406280611882
       y: 0.616726100300208
       z: 0.76899299652223
       w: 0
     c2:
-      x: 0.202364593166748
+      x: 0.2023645931667481
       y: 0.741888670982847
       z: -0.6392577086735046
       w: 0
@@ -2461,8 +2461,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150, y: 350}
+  m_AnchoredPosition: {x: 0, y: -40}
+  m_SizeDelta: {x: 150, y: 275}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1164228686
 MonoBehaviour:
@@ -2775,7 +2775,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 10, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 125, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1269696238
 MonoBehaviour:
@@ -2797,7 +2797,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Plots
+  m_text: Where would you like to go?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4325,7 +4325,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Exit To MainMenu
+  m_text: Back to the Hub
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

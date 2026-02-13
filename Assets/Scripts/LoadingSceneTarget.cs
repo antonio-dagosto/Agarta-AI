@@ -4,6 +4,6 @@ using UnityEngine;
 
 public static class LoadingSceneTarget
 {
-    public static string NextSceneName = "Main";
+    public static string TargetScene = "Main";
 }
 
