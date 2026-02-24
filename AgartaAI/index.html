@@ -4,30 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agarta - AI-Powered Virtual Tours and Interactive Simulations</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    
     <!-- Navigation Bar -->
-    <nav class="navbar" id="home">
+    <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <img src="Media/Agarta logo.png" alt="Agarta AI Logo">
+                <a href="#home">
+                    <img src="Media/LOGO 3.png" alt="Agarta AI Logo">
+                </a>
             </div>
-            
             <ul class="nav-menu">
-                <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#home" class="nav-link active">Home</a></li>
                 <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
-                <li class="nav-item"><a href="#why-choose" class="nav-link">Why Choose Us</a></li>
                 <li class="nav-item"><a href="#solutions" class="nav-link">Solutions</a></li>
                 <li class="nav-item"><a href="#playlab" class="nav-link">PlayLab</a></li>
                 <li class="nav-item"><a href="#partners" class="nav-link">Partners</a></li>
                 <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
-            
             <div class="nav-cta">
-                <button class="nav-btn">Get Started</button>
+                <button class="nav-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get Started</button>
             </div>
-            
+            <div class="nav-language">
+                <div class="language-switch">
+                    <button class="lang-switch-btn active" data-lang="en">EN</button>
+                    <button class="lang-switch-btn" data-lang="fr">FR</button>
+                    <div class="switch-slider"></div>
+                </div>
+            </div>
+
+            <!-- Signup/Login Button -->
+            <button class="nav-auth-btn" id="authOpenBtn">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+                Sign Up / Login
+            </button>
+
             <div class="hamburger">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -35,6 +52,63 @@
             </div>
         </div>
     </nav>
+
+    <!-- Auth Popup (Signup / Login) -->
+    <div class="auth-popup" id="authPopup">
+        <div class="auth-overlay" id="authOverlay"></div>
+        <div class="auth-card">
+            <button class="auth-close" id="authCloseBtn">&times;</button>
+            <div class="auth-logo">
+
+                <img src="Media/LOGO 3.png" alt="Agarta AI">
+            </div>
+
+            <!-- LOGIN VIEW -->
+            <div class="auth-view auth-view-login active" id="authLoginView">
+
+                <p class="auth-subtitle">Enter your email and password to login</p>
+                <form class="auth-form" id="loginForm">
+                    <input type="email" class="auth-input" placeholder="email@domain.com" required>
+                    <input type="password" class="auth-input" placeholder="Password" required>
+                    <button type="submit" class="auth-submit-btn">Sign up with email</button>
+                </form>
+                <div class="auth-divider"><span>or continue with</span></div>
+                <button class="auth-google-btn">
+                    <svg width="20" height="20" viewBox="0 0 48 48">
+                        <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/>
+                        <path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/>
+                        <path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/>
+                        <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/>
+                    </svg>
+                    Google
+                </button>
+                <p class="auth-footer">By clicking continue, you agree to our<br><a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></p>
+                <p class="auth-switch">Don't have an account? <a href="#" id="goToSignup">Sign up</a></p>
+            </div>
+
+            <!-- SIGNUP VIEW -->
+            <div class="auth-view auth-view-signup" id="authSignupView">
+
+                <p class="auth-subtitle">Enter your email to sign up for this app</p>
+                <form class="auth-form" id="signupForm">
+                    <input type="email" class="auth-input" placeholder="email@domain.com" required>
+                    <button type="submit" class="auth-submit-btn">Sign up with email</button>
+                </form>
+                <div class="auth-divider"><span>or continue with</span></div>
+                <button class="auth-google-btn">
+                    <svg width="20" height="20" viewBox="0 0 48 48">
+                        <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/>
+                        <path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/>
+                        <path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/>
+                        <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/>
+                    </svg>
+                    Google
+                </button>
+                <p class="auth-footer">By clicking continue, you agree to our<br><a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></p>
+                <p class="auth-switch">Already have an account? <a href="#" id="goToLogin">Login</a></p>
+            </div>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
@@ -48,11 +122,10 @@
         
         <!-- Content -->
         <div class="hero-content">
-            <img src="Media/Agarta logo.png" alt="Agarta Logo" class="logo">
-            <h1>Agarta: AI-Powered Virtual Tours and Interactive Simulations</h1>
+            <img src="Media/LOGOS 1.png" alt="Agarta Logo" class="logo">
+            <h1><b>AI-Powered Virtual Tours and Interactive Simulations</b></h1>
             <h2>Discover the Hidden Intelligence of Earth</h2>
             <p>Explore nature and the environment through AI-powered virtual tours, 3D simulations, and immersive reality education.</p>
-            <p>• Full-screen looping 360° or VR background video of farms, forests, and ecosystems blending with luminous AI data lines.<br>• Optional interactive camera pan (users can drag to look around).</p>
             
             <div class="cta-buttons">
                 <button class="btn">
@@ -73,21 +146,48 @@
 
     <!-- About Section -->
     <section class="about" id="about">
-        <h2>About Agarta AI</h2>
-        <div class="video-placeholder">
-            video montage of people using VR headsets in classrooms
-        </div>
-        <button class="read-more-btn">📖 [Read Full Story] — opens the detailed "About" page</button>
+        <h2>About Us</h2>
+<div class="hero-video-wrapper">
+                <video id="heroVideo" class="hero-video-element" preload="metadata" playsinline>
+                    <source src="Media/Aboutus_vid.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="video-overlay" id="videoOverlay">
+                    <button class="video-play-btn" id="playBtn" aria-label="Play video">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="video-controls" id="videoControls">
+                    <button class="control-btn" id="playPauseBtn" aria-label="Play/Pause">
+                        <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                        <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+                            <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+                        </svg>
+                    </button>
+                    <div class="progress-bar" id="progressBar">
+                        <div class="progress-filled" id="progressFilled"></div>
+                    </div>
+                    <button class="control-btn" id="muteBtn" aria-label="Mute/Unmute">
+                        <svg class="unmute-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                        </svg>
+                        <svg class="mute-icon" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+                            <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+                        </svg>
+                    </button>
+                    <button class="control-btn" id="fullscreenBtn" aria-label="Fullscreen">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        <button class="read-more-btn" onclick="window.location.href='about.html'">📖 [Read Full Story] — opens the detailed "About" page</button>
     </section>
-
-    <section class="about">
-        <h2>Manage Tours (Connected to Backend)</h2>
-
-        <div id="tours-container">
-            Loading tours from backend...
-        </div>
-    </section>
-
 
     <!-- Why Choose Us Section -->
     <section class="why-choose" id="why-choose">
@@ -247,7 +347,7 @@
             <h2>Featured Video / Virtual Expedition</h2>
             <div class="hero-video-wrapper">
                 <video id="heroVideo" class="hero-video-element" preload="metadata" playsinline>
-                    <source src="Media/Agarta VIDEO(1).mp4" type="video/mp4">
+                    <source src="Media/WhatsApp Video 2025-11-27 at 4.54.43 AM (1).mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <div class="video-overlay" id="videoOverlay">
@@ -408,23 +508,23 @@
             <div class="partners-carousel-wrapper">
                 <div class="partners-carousel">
                     <div class="partner-slide">
-                        <img src="Media/partner-dunbradstreet.jpg" alt="Dun & Bradstreet Partner">
+                        <img src="Media/WhatsApp Image 2025-11-27 at 4.54.10 AM (2).jpeg" alt="Dun & Bradstreet Partner">
                     </div>
                     <div class="partner-slide">
-                        <img src="Media/partner-iotnetwork.jpg" alt="IOT Network Partner">
+                        <img src="Media/Lot_Network_Logo_600_162_2 (1).png" alt="IOT Network Partner">
                     </div>
                     <div class="partner-slide">
-                        <img src="Media/partner-aws.jpg" alt="AWS Partner Network">
+                        <img src="Media/aws-partner-logo (1).png" alt="AWS Partner Network">
                     </div>
                     <!-- Duplicate slides for seamless loop -->
                     <div class="partner-slide">
-                        <img src="Media/partner-dunbradstreet.jpg" alt="Dun & Bradstreet Partner">
+                        <img src="Media/WhatsApp Image 2025-11-27 at 4.54.10 AM (2).jpeg" alt="Dun & Bradstreet Partner">
                     </div>
                     <div class="partner-slide">
-                        <img src="Media/partner-iotnetwork.jpg" alt="IOT Network Partner">
+                        <img src="Media/Lot_Network_Logo_600_162_2 (1).png" alt="IOT Network Partner">
                     </div>
                     <div class="partner-slide">
-                        <img src="Media/partner-aws.jpg" alt="AWS Partner Network">
+                        <img src="Media/aws-partner-logo (1).png" alt="AWS Partner Network">
                     </div>
                 </div>
             </div>
@@ -626,6 +726,48 @@
             </div>
         </div>
     </footer>
+
+    <!-- Newsletter Signup Popup -->
+
+    <div class="newsletter-popup" id="newsletterPopup">
+        <div class="popup-overlay"></div>
+        <div class="popup-content">
+            <button class="popup-close" id="closePopup">&times;</button>
+            
+            <div class="popup-image">
+                <img src="Media/Agarta logo.png" alt="Agarta AI">
+            </div>
+            
+            <div class="popup-form">
+                <div class="popup-header">
+                    <p style="text-align: center;">RECIEVE THE LATEST NEWS</p>
+                    <h2>Sign Up Today!</h2>
+                </div>
+                
+                <p class="popup-description">
+                 Be the first to know the latest in AI-assisted XR-based technology for learning and training.<br>
+                    Stay ahead of the curve.<b> Sign up today.</b>
+                </p>
+                
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="text" name="firstName" placeholder="First Name" required>
+                    <input type="text" name="lastName" placeholder="Last Name" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="text" name="country" placeholder="Country" required>
+                    
+                    <div class="recaptcha-placeholder">
+                        <small>protected by reCAPTCHA</small>
+                        <div class="recaptcha-links">
+                            <a href="https://policies.google.com/privacy" target="_blank">Privacy</a> - 
+                            <a href="https://policies.google.com/terms" target="_blank">Terms</a>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="popup-submit-btn">SIGN UP</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
