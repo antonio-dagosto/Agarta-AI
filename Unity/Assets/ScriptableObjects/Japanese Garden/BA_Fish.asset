@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e20745648461757438c863bfaf198809, type: 3}
+  m_Name: BA_Fish
+  m_EditorClassIdentifier: 
+  areaName: Fish
+  equirect360: {fileID: 2800000, guid: a04755c9dbcbfc54f85a74b8d9c66c22, type: 3}
+  description: 
+  nextArea: {fileID: 11400000, guid: 408e6b83fe46ead428562b4b0265e36f, type: 2}
+  prevArea: {fileID: 11400000, guid: 4b5f4ee9677289b448bbe853b313791c, type: 2}
+  hotspots: []

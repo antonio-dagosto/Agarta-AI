@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5daf9eb23b33e954cb0561db92516cf7, type: 3}
+  m_Name: PLOT_Garden
+  m_EditorClassIdentifier: 
+  plotName: Japanese Friendship Garden
+  latitude: 33.46108
+  longitude: -112.07682
+  heightMeters: 400
+  enterLatitude: 33.46108
+  enterLongitude: -112.07682
+  enterHeightMeters: 350
+  entryBubbleArea: {fileID: 11400000, guid: 4b5f4ee9677289b448bbe853b313791c, type: 2}
