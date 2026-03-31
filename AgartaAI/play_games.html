@@ -1,0 +1,1896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play & Games — Agarta AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-primary: #050f0a;
+    --bg-card: #0a1a12;
+    --bg-card-hover: #0f2419;
+    --green-primary: #00a86b;
+    --green-light: #00d485;
+    --green-pale: #d4f4dd;
+    --green-dark: #00925d;
+    --green-glow: rgba(0, 168, 107, 0.3);
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --text-muted: rgba(255, 255, 255, 0.4);
+    --border: rgba(255, 255, 255, 0.08);
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+}
+
+body {
+    font-family: var(--font-body);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/*NAVBAR*/
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 72px;
+    background: #050f0a;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 1000;
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+    background: rgba(0,0,0,0.97);
+    box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.nav-logo img {
+    height: 42px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    transition: transform 0.3s ease;
+}
+
+.nav-logo img:hover { transform: scale(1.05); }
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 32px;
+    align-items: center;
+}
+
+.nav-link {
+    color: rgba(255,255,255,0.75);
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    transition: color 0.3s ease;
+    position: relative;
+    padding: 4px 0;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--green-primary);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover { color: #fff; }
+.nav-link:hover::after, .nav-link.active::after { width: 100%; }
+.nav-link.active { color: #fff; }
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.language-switch {
+    position: relative;
+    display: flex;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50px;
+    padding: 3px;
+    border: 1px solid rgba(255,255,255,0.15);
+}
+
+.lang-btn {
+    position: relative;
+    padding: 6px 14px;
+    background: transparent;
+    border: none;
+    color: rgba(255,255,255,0.5);
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    transition: color 0.3s ease;
+    z-index: 2;
+}
+
+.lang-btn.active { color: #fff; }
+
+.lang-slider {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: calc(50% - 3px);
+    height: calc(100% - 6px);
+    background: var(--green-primary);
+    border-radius: 50px;
+    transition: transform 0.3s ease;
+    z-index: 1;
+    box-shadow: 0 2px 8px rgba(0,168,107,0.4);
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.hamburger .bar {
+    width: 24px;
+    height: 2px;
+    background: white;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+/*SECTION COMMON*/
+section {
+    padding: 100px 0;
+    position: relative;
+}
+
+.section-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0,168,107,0.1);
+    border: 1px solid rgba(0,168,107,0.25);
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green-light);
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem,5vw,4rem);
+    letter-spacing: 2px;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.section-sub {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 650px;
+    line-height: 1.7;
+}
+
+.text-accent { color: var(--green-light); }
+
+/*1. HERO SECTION*/
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 140px 20px 100px;
+    overflow: hidden;
+    background: #004d33;
+}
+
+.hero-bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(0,168,107,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,168,107,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black, transparent);
+}
+
+.hero-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    animation: pulseGlow 6s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+    0%,100% { transform: translate(-50%,-50%) scale(1); opacity: 0.6; }
+    50% { transform: translate(-50%,-50%) scale(1.15); opacity: 1; }
+}
+
+.hero-particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    font-size: 1.5rem;
+    opacity: 0.15;
+    animation: floatParticle 20s linear infinite;
+}
+
+@keyframes floatParticle {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.15; }
+    90% { opacity: 0.15; }
+    100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+}
+
+.hero .section-badge { margin-bottom: 30px; }
+
+.hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem,7vw,5.5rem);
+    letter-spacing: 3px;
+    line-height: 1.05;
+    margin-bottom: 24px;
+}
+
+.hero-title .line { display: block; }
+
+.hero-sub {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin: 0 auto 50px;
+    line-height: 1.7;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+}
+
+.btn-primary {
+    padding: 14px 32px;
+    background: var(--green-primary);
+    color: #fff;
+    border: 2px solid var(--green-primary);
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-primary:hover {
+    background: var(--green-dark);
+    border-color: var(--green-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,168,107,0.3);
+}
+
+.btn-outline {
+    padding: 14px 32px;
+    background: transparent;
+    color: #fff;
+    border: 2px solid rgba(255,255,255,0.2);
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-outline:hover {
+    border-color: var(--green-primary);
+    color: var(--green-light);
+    transform: translateY(-2px);
+}
+
+.btn-ghost {
+    padding: 14px 24px;
+    background: transparent;
+    color: var(--text-secondary);
+    border: none;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-ghost:hover { color: var(--green-light); }
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.hero-stat { text-align: center; }
+
+.hero-stat-num {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    color: var(--green-light);
+    letter-spacing: 2px;
+}
+
+.hero-stat-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+/*2. GAME HUB*/
+.game-hub {
+    background: #d4f4dd;
+    border-top: 1px solid var(--border);
+}
+
+.game-hub-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.game-hub-header .section-sub { margin: 0 auto; }
+
+.hub-features {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 20px;
+    margin-bottom: 50px;
+}
+
+.hub-feature {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 30px 24px;
+    text-align: center;
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+.hub-feature:hover {
+    border-color: #004d33;
+    background: var(--bg-card-hover);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,168,107,0.1);
+}
+
+.hub-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    background: #004d33;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.hub-feature:hover .hub-icon {
+    background: #004d33;
+    transform: scale(1.1);
+}
+
+.hub-feature h3 {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.hub-feature p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.hub-dashboard {
+    background: #004d33;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.dash-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.dash-title {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.dash-filters {
+    display: flex;
+    gap: 8px;
+}
+
+.dash-filter {
+    padding: 6px 16px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dash-filter.active, .dash-filter:hover {
+    background: rgba(0,168,107,0.15);
+    border-color: rgba(0,168,107,0.3);
+    color: var(--green-light);
+}
+
+.dash-games {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 16px;
+}
+
+.dash-game-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.dash-game-card:hover {
+    border-color: rgba(0,168,107,0.3);
+    transform: translateY(-2px);
+}
+
+.dash-game-thumb {
+    height: 120px;
+    background: linear-gradient(135deg, rgba(0,168,107,0.2), rgba(0,212,133,0.1));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    position: relative;
+}
+
+.dash-game-tag {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 3px 10px;
+    background: var(--green-primary);
+    border-radius: 10px;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.dash-game-info { padding: 14px; }
+
+.dash-game-info h4 {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.dash-game-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dash-game-meta span {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+.xp-badge { color: var(--green-light) !important; }
+
+/*3. GAME CATEGORIES*/
+.categories {
+    background: linear-gradient(180deg, var(--bg-primary), #081610, var(--bg-primary));
+}
+
+.categories-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.categories-header .section-sub { margin: 0 auto; }
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 24px;
+}
+
+.category-card {
+    position: relative;
+    border-radius: 20px;
+    padding: 40px 36px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.category-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    border-radius: 20px;
+}
+
+.category-card:hover {
+    border-color: rgba(0,168,107,0.4);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0,168,107,0.15);
+}
+
+.category-card:hover::before { opacity: 1; }
+
+.cat-edu { background: linear-gradient(160deg, #0a1f14 0%, #0d2a1a 100%); }
+
+.cat-edu::before {
+    background: linear-gradient(160deg, #0d2a1a 0%, #134025 100%);
+}
+
+.cat-vr { background: linear-gradient(160deg, #0a0f1f 0%, #0d1a2e 100%); }
+
+.cat-vr::before {
+    background: linear-gradient(160deg, #0d1a2e 0%, #132a45 100%);
+}
+
+.cat-ai { background: linear-gradient(160deg, #1a0f1f 0%, #2a0d2e 100%); }
+
+.cat-ai::before {
+    background: linear-gradient(160deg, #2a0d2e 0%, #401340 100%);
+}
+
+.cat-multi { background: linear-gradient(160deg, #1a1a0a 0%, #2e2a0d 100%); }
+
+.cat-multi::before {
+    background: linear-gradient(160deg, #2e2a0d 0%, #454013 100%);
+}
+
+.cat-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.cat-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green-light);
+    margin-bottom: 8px;
+}
+
+.category-card h3 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.category-card p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.cat-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.cat-tag {
+    padding: 5px 14px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+}
+
+/*4. CHALLENGES & QUESTS*/
+.challenges {
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border);
+}
+
+.challenges-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+.challenges-left { padding-top: 20px; }
+.challenges-left .section-sub { margin-bottom: 30px; }
+
+.challenge-types {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.challenge-type {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.challenge-type:hover {
+    border-color: rgba(0,168,107,0.3);
+    background: var(--bg-card-hover);
+}
+
+.challenge-type-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(0,168,107,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.challenge-type h4 {
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.challenge-type p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.quest-map {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 30px;
+    position: relative;
+}
+
+.quest-map-title {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+}
+
+.quest-path {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.quest-node {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 16px 0;
+    position: relative;
+}
+
+.quest-node::before {
+    content: '';
+    position: absolute;
+    left: 22px;
+    top: 56px;
+    width: 2px;
+    height: calc(100% - 44px);
+    background: var(--border);
+}
+
+.quest-node:last-child::before { display: none; }
+
+.quest-dot {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+    background: var(--bg-primary);
+    position: relative;
+    z-index: 1;
+}
+
+.quest-dot.completed {
+    border-color: var(--green-primary);
+    background: rgba(0,168,107,0.15);
+}
+
+.quest-dot.active {
+    border-color: var(--green-light);
+    background: rgba(0,168,107,0.2);
+    box-shadow: 0 0 20px rgba(0,168,107,0.3);
+    animation: questPulse 2s ease-in-out infinite;
+}
+
+@keyframes questPulse {
+    0%,100% { box-shadow: 0 0 20px rgba(0,168,107,0.3); }
+    50% { box-shadow: 0 0 30px rgba(0,168,107,0.5); }
+}
+
+.quest-dot.locked {
+    border-color: rgba(255,255,255,0.1);
+    opacity: 0.4;
+}
+
+.quest-info h4 {
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.quest-info p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.quest-xp {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--green-light);
+    letter-spacing: 1px;
+}
+
+/*5. LEADERBOARDS*/
+.leaderboards {
+    background: linear-gradient(180deg, var(--bg-primary), #081610, var(--bg-primary));
+}
+
+.leaderboards-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.leaderboards-header .section-sub { margin: 0 auto; }
+
+.lb-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 40px;
+}
+
+.lb-tab {
+    padding: 10px 24px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 30px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+}
+
+.lb-tab.active, .lb-tab:hover {
+    background: rgba(0,168,107,0.15);
+    border-color: rgba(0,168,107,0.3);
+    color: var(--green-light);
+}
+
+.lb-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.lb-podium {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.podium-title {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+
+.podium-places {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+.podium-place {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.podium-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    border: 2px solid var(--border);
+}
+
+.podium-place.first .podium-avatar {
+    width: 64px;
+    height: 64px;
+    font-size: 1.6rem;
+    border-color: #ffd700;
+    box-shadow: 0 0 20px rgba(255,215,0,0.2);
+}
+
+.podium-bar {
+    width: 70px;
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 10px;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+
+.podium-place.first .podium-bar {
+    height: 120px;
+    background: linear-gradient(180deg, rgba(255,215,0,0.2), rgba(255,215,0,0.05));
+    border: 1px solid rgba(255,215,0,0.3);
+    color: #ffd700;
+}
+
+.podium-place.second .podium-bar {
+    height: 90px;
+    background: linear-gradient(180deg, rgba(192,192,192,0.15), rgba(192,192,192,0.03));
+    border: 1px solid rgba(192,192,192,0.2);
+    color: #c0c0c0;
+}
+
+.podium-place.third .podium-bar {
+    height: 70px;
+    background: linear-gradient(180deg, rgba(205,127,50,0.15), rgba(205,127,50,0.03));
+    border: 1px solid rgba(205,127,50,0.2);
+    color: #cd7f32;
+}
+
+.podium-name {
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.podium-xp {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--green-light);
+}
+
+.lb-list {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 24px;
+}
+
+.lb-list-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 16px 16px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 8px;
+}
+
+.lb-list-header span {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.lb-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.lb-row:hover { background: rgba(255,255,255,0.03); }
+
+.lb-rank {
+    width: 28px;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+.lb-user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(0,168,107,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+}
+
+.lb-user-name {
+    flex: 1;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.lb-user-xp {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--green-light);
+}
+
+.lb-user-badges {
+    display: flex;
+    gap: 4px;
+    font-size: 0.8rem;
+}
+
+/*6. REWARDS & ACHIEVEMENTS*/
+.rewards {
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border);
+}
+
+.rewards-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.rewards-header .section-sub { margin: 0 auto; }
+
+.rewards-grid {
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    gap: 16px;
+    margin-bottom: 50px;
+}
+
+.reward-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px 16px;
+    text-align: center;
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+.reward-item:hover {
+    border-color: rgba(0,168,107,0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,168,107,0.1);
+}
+
+.reward-icon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.reward-item h4 {
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.reward-item p {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+}
+
+.achievement-bar {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.achievement-bar p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.achievement-bar strong { color: var(--green-light); }
+
+/*7. AI INTELLIGENCE*/
+.ai-section {
+    background: linear-gradient(180deg, var(--bg-primary), #081610, var(--bg-primary));
+}
+
+.ai-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.ai-left .section-sub { margin-bottom: 32px; }
+
+.ai-features {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.ai-feature {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 16px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.ai-feature:hover { background: rgba(0,168,107,0.05); }
+
+.ai-feature-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--green-primary);
+    flex-shrink: 0;
+    margin-top: 6px;
+}
+
+.ai-feature h4 {
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.ai-feature p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+/* AI Radar Chart */
+.ai-visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+}
+
+.radar-wrap {
+    position: relative;
+    width: 360px;
+    height: 360px;
+}
+
+.radar-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.radar-grid {
+    fill: none;
+    stroke: rgba(255,255,255,0.06);
+    stroke-width: 1;
+}
+
+.radar-grid:last-of-type { stroke: rgba(255,255,255,0.12); }
+
+.radar-axis {
+    stroke: rgba(255,255,255,0.06);
+    stroke-width: 1;
+}
+
+.radar-area {
+    fill: rgba(0,168,107,0.12);
+    stroke: var(--green-primary);
+    stroke-width: 2.5;
+    stroke-linejoin: round;
+    transform-origin: 180px 180px;
+    animation: radarGrow 1.8s cubic-bezier(0.22,1,0.36,1) forwards;
+    opacity: 0;
+}
+
+@keyframes radarGrow {
+    0% { transform: scale(0); opacity: 0; }
+    50% { opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.radar-area-glow {
+    fill: none;
+    stroke: var(--green-light);
+    stroke-width: 2;
+    stroke-linejoin: round;
+    opacity: 0;
+    filter: blur(6px);
+    transform-origin: 180px 180px;
+    animation: radarGrow 1.8s cubic-bezier(0.22,1,0.36,1) 0.1s forwards;
+}
+
+.radar-dot {
+    fill: var(--bg-primary);
+    stroke: var(--green-light);
+    stroke-width: 2.5;
+    opacity: 0;
+    animation: dotPop 0.4s ease forwards;
+}
+
+.radar-dot:nth-child(1) { animation-delay: 1.2s; }
+.radar-dot:nth-child(2) { animation-delay: 1.35s; }
+.radar-dot:nth-child(3) { animation-delay: 1.5s; }
+.radar-dot:nth-child(4) { animation-delay: 1.65s; }
+.radar-dot:nth-child(5) { animation-delay: 1.8s; }
+
+@keyframes dotPop {
+    0% { opacity: 0; r: 0; }
+    60% { r: 7; }
+    100% { opacity: 1; r: 5; }
+}
+
+.radar-label {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    fill: rgba(255,255,255,0.45);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.radar-val {
+    font-family: var(--font-display);
+    font-size: 18px;
+    fill: var(--green-light);
+    letter-spacing: 2px;
+    opacity: 0;
+    animation: valFade 0.5s ease forwards;
+}
+
+.radar-val:nth-of-type(1) { animation-delay: 1.3s; }
+.radar-val:nth-of-type(2) { animation-delay: 1.45s; }
+.radar-val:nth-of-type(3) { animation-delay: 1.6s; }
+.radar-val:nth-of-type(4) { animation-delay: 1.75s; }
+.radar-val:nth-of-type(5) { animation-delay: 1.9s; }
+
+@keyframes valFade {
+}
+
+.radar-scan {
+    stroke: rgba(0,212,133,0.08);
+    stroke-width: 1;
+    fill: none;
+    transform-origin: 180px 180px;
+    animation: scanSpin 6s linear infinite;
+}
+
+@keyframes scanSpin {
+}
+
+.radar-pulse-ring {
+    fill: none;
+    stroke: rgba(0,168,107,0.1);
+    stroke-width: 1;
+    transform-origin: 180px 180px;
+    animation: rPulse 3s ease-out infinite;
+}
+
+@keyframes rPulse {
+    0% { transform: scale(0.3); opacity: 0.6; }
+    100% { transform: scale(1.2); opacity: 0; }
+}
+
+.radar-center {
+    fill: var(--green-primary);
+    opacity: 0.5;
+}
+
+/*8. SAFE & INCLUSIVE*/
+.safety {
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border);
+}
+
+.safety-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.safety-header .section-sub { margin: 0 auto; }
+
+.safety-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 20px;
+}
+
+.safety-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px 24px;
+    text-align: center;
+    transition: all 0.4s ease;
+}
+
+.safety-card:hover {
+    border-color: rgba(0,168,107,0.3);
+    transform: translateY(-4px);
+}
+
+.safety-icon {
+    font-size: 2rem;
+    margin-bottom: 16px;
+    display: block;
+}
+
+.safety-card h3 {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.safety-card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+/*9. CTA SECTION*/
+.cta-section {
+    padding: 120px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    background: #004d33;
+}
+
+.cta-content {
+    position: relative;
+    z-index: 2;
+}
+
+.cta-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem,5vw,4rem);
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
+
+.cta-sub {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 550px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/*FOOTER*/
+.footer {
+    background: #0f2419;
+    border-top: 1px solid var(--border);
+    padding: 60px 0 30px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-brand p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    max-width: 300px;
+    margin-top: 16px;
+}
+
+.footer-col h4 {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+}
+
+.footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-col a {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.footer-col a:hover { color: var(--green-light); }
+
+.footer-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-bottom p {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+}
+
+/*SCROLL ANIMATIONS*/
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/*RESPONSIVE*/
+@media (max-width: 1024px) {
+    .hub-features { grid-template-columns: repeat(2,1fr); }
+    .category-grid { grid-template-columns: 1fr; }
+    .challenges-layout { grid-template-columns: 1fr; }
+    .ai-layout { grid-template-columns: 1fr; }
+    .lb-layout { grid-template-columns: 1fr; }
+    .rewards-grid { grid-template-columns: repeat(3,1fr); }
+    .safety-grid { grid-template-columns: repeat(2,1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .radar-wrap { margin: 0 auto; }
+
+}
+
+@media (max-width: 768px) {
+    .nav-menu { display: none; }
+    .hamburger { display: flex; }
+    .nav-menu.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 72px;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.97);
+    padding: 20px;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    }
+
+    .nav-menu.open .nav-link {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    }
+
+    .hero-title { font-size: clamp(2.5rem,10vw,4rem); }
+    .hero-stats { gap: 30px; }
+    .hub-features { grid-template-columns: 1fr; }
+    .dash-games { grid-template-columns: 1fr; }
+    .rewards-grid { grid-template-columns: repeat(2,1fr); }
+    .safety-grid { grid-template-columns: 1fr; }
+    .podium-places { gap: 10px; }
+    .podium-bar { width: 55px; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom {
+    flex-direction: column;
+    gap: 10px;
+    }
+
+    section { padding: 70px 0; }
+    .nav-container { padding: 0 20px; }
+    .radar-wrap {
+    width: 300px;
+    height: 300px;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+    .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+    }
+
+    .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+    }
+
+    .lb-tabs { flex-wrap: wrap; }
+
+    .radar-wrap {
+    width: 260px;
+    height: 260px;
+    }
+
+}
+
+    </style>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+    <div class="nav-container">
+        <a href="index.html" class="nav-logo"><img src="Media/LOGO 3.png" alt="Agarta AI"></a>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="explore.html" class="nav-link">Explore</a></li>
+            <li><a href="play-games.html" class="nav-link active">Play & Games</a></li>
+            <li><a href="#" class="nav-link">Learn</a></li>
+            <li><a href="#" class="nav-link">Community</a></li>
+        </ul>
+        <div class="nav-right">
+            <div class="language-switch">
+                <div class="lang-slider"></div>
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="es">FR</button>
+            </div>
+            <div class="hamburger" id="hamburger"><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
+        </div>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-particles">
+        <span class="particle" style="left:10%;animation-delay:0s;">🎮</span>
+        <span class="particle" style="left:25%;animation-delay:3s;">🏆</span>
+        <span class="particle" style="left:40%;animation-delay:7s;">🎯</span>
+        <span class="particle" style="left:55%;animation-delay:2s;">🧩</span>
+        <span class="particle" style="left:70%;animation-delay:5s;">⚡</span>
+        <span class="particle" style="left:85%;animation-delay:9s;">🌍</span>
+        <span class="particle" style="left:15%;animation-delay:11s;">🎓</span>
+        <span class="particle" style="left:60%;animation-delay:14s;">👓</span>
+        <span class="particle" style="left:90%;animation-delay:6s;">🤖</span>
+    </div>
+    <div class="hero-content fade-in">
+        <h1 class="hero-title">
+            <span class="line">LEARN BY PLAYING.</span>
+            <span class="line">EXPLORE BY <span class="text-accent">COMPETING.</span></span>
+            <span class="line">GROW BY <span class="text-accent">DISCOVERING.</span></span>
+        </h1>
+        <p class="hero-sub">Agarta Play & Games transforms education into immersive adventures, where curiosity, competition, and collaboration drive learning across multiple dimensions.</p>
+        <div class="hero-buttons">
+            <button class="btn-primary">▶️ Start Playing</button>
+            <button class="btn-outline">🎮 Explore Games</button>
+            <button class="btn-ghost">🏆 View Challenges</button>
+        </div>
+        <div class="hero-stats">
+            <div class="hero-stat"><div class="hero-stat-num">500+</div><div class="hero-stat-label">Games</div></div>
+            <div class="hero-stat"><div class="hero-stat-num">50K+</div><div class="hero-stat-label">Players</div></div>
+            <div class="hero-stat"><div class="hero-stat-num">360°</div><div class="hero-stat-label">VR Worlds</div></div>
+            <div class="hero-stat"><div class="hero-stat-num">AI</div><div class="hero-stat-label">Adaptive</div></div>
+        </div>
+    </div>
+</section>
+
+<section class="game-hub" id="game-hub">
+    <div class="container">
+        <div class="game-hub-header fade-in">
+            <h2 class="section-title"><span class="text-accent">YOUR CENTRAL GAMING UNIVERSE</span></h2>
+            <p class="section-sub">The Game Hub is your personal gateway to all Agarta games - educational, immersive, competitive, and collaborative.</p>
+        </div>
+        <div class="hub-features fade-in">
+            <div class="hub-feature"><div class="hub-icon">🤖</div><h3>AI Recommendations</h3><p>Personalized game suggestions powered by AI</p></div>
+            <div class="hub-feature"><div class="hub-icon">📍</div><h3>Continue Playing</h3><p>Pick up right where you left off</p></div>
+            <div class="hub-feature"><div class="hub-icon">🔥</div><h3>Trending Games</h3><p>See what's popular right now</p></div>
+            <div class="hub-feature"><div class="hub-icon">🎚️</div><h3>Smart Filters</h3><p>Age-based and skill-based filtering</p></div>
+        </div>
+        <div class="hub-dashboard fade-in">
+            <div class="dash-header">
+                <div class="dash-title">📊 Your Dashboard</div>
+                <div class="dash-filters"><button class="dash-filter active">All</button><button class="dash-filter">Education</button><button class="dash-filter">VR</button><button class="dash-filter">Multiplayer</button></div>
+            </div>
+            <div class="dash-games">
+                <div class="dash-game-card"><div class="dash-game-thumb">🌍<span class="dash-game-tag">Trending</span></div><div class="dash-game-info"><h4>EcoWorld Builder</h4><div class="dash-game-meta"><span>Education</span><span class="xp-badge">+250 XP</span></div></div></div>
+                <div class="dash-game-card"><div class="dash-game-thumb" style="background:linear-gradient(135deg,rgba(100,100,255,0.2),rgba(150,100,255,0.1));">🌊<span class="dash-game-tag">New</span></div><div class="dash-game-info"><h4>Ocean Explorer VR</h4><div class="dash-game-meta"><span>VR Adventure</span><span class="xp-badge">+400 XP</span></div></div></div>
+                <div class="dash-game-card"><div class="dash-game-thumb" style="background:linear-gradient(135deg,rgba(255,180,50,0.2),rgba(255,130,50,0.1));">🏛️<span class="dash-game-tag">Popular</span></div><div class="dash-game-info"><h4>Ancient Civilizations</h4><div class="dash-game-meta"><span>History</span><span class="xp-badge">+180 XP</span></div></div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="categories" id="categories">
+    <div class="container">
+        <div class="categories-header fade-in">
+            <div class="section-badge">🧩 Categories</div>
+            <h2 class="section-title">CHOOSE YOUR <span class="text-accent">ADVENTURE</span></h2>
+            <p class="section-sub">Help users easily discover the type of play they enjoy — from educational missions to immersive VR worlds.</p>
+        </div>
+        <div class="category-grid">
+            <div class="category-card cat-edu fade-in"><span class="cat-icon">🎓</span><span class="cat-label">Learning</span><h3>EDUCATIONAL GAMES</h3><p>Learn science, geography, history, environment, and technology through interactive missions and simulations.</p><div class="cat-tags"><span class="cat-tag">Problem-Solving</span><span class="cat-tag">Simulations</span><span class="cat-tag">Knowledge Challenges</span></div></div>
+            <div class="category-card cat-vr fade-in"><span class="cat-icon">👓</span><span class="cat-label">Immersive</span><h3>VR ADVENTURES</h3><p>Step inside fully immersive worlds — explore ecosystems, visit museums, travel through space, and navigate historical eras.</p><div class="cat-tags"><span class="cat-tag">Ecosystems</span><span class="cat-tag">Museums</span><span class="cat-tag">Space</span><span class="cat-tag">History</span></div></div>
+            <div class="category-card cat-ai fade-in"><span class="cat-icon">🤖</span><span class="cat-label">Intelligence</span><h3>AI CHALLENGES</h3><p>Compete against intelligent systems with adaptive difficulty, personalized learning paths, and AI-driven puzzles.</p><div class="cat-tags"><span class="cat-tag">Adaptive Difficulty</span><span class="cat-tag">Personalized Paths</span><span class="cat-tag">AI Puzzles</span></div></div>
+            <div class="category-card cat-multi fade-in"><span class="cat-icon">🎮</span><span class="cat-label">Social</span><h3>MULTIPLAYER QUESTS</h3><p>Play and learn together with team missions, global challenges, and cooperative problem-solving adventures.</p><div class="cat-tags"><span class="cat-tag">Team Missions</span><span class="cat-tag">Global Challenges</span><span class="cat-tag">Co-op</span></div></div>
+        </div>
+    </div>
+</section>
+
+<section class="challenges" id="challenges">
+    <div class="container">
+        <div class="challenges-layout">
+            <div class="challenges-left fade-in">
+                <div class="section-badge">🎯 Challenges</div>
+                <h2 class="section-title">PLAY WITH <span class="text-accent">PURPOSE</span></h2>
+                <p class="section-sub">Challenges and quests push players to explore deeper, learn faster, and collaborate smarter.</p>
+                <div class="challenge-types">
+                    <div class="challenge-type"><div class="challenge-type-icon">📅</div><div><h4>Daily Challenges</h4><p>Fresh missions every day to keep you sharp</p></div></div>
+                    <div class="challenge-type"><div class="challenge-type-icon">📚</div><div><h4>Weekly Learning Quests</h4><p>Deep-dive into topics with multi-day adventures</p></div></div>
+                    <div class="challenge-type"><div class="challenge-type-icon">🎉</div><div><h4>Event-Based Missions</h4><p>Special challenges tied to real-world events</p></div></div>
+                    <div class="challenge-type"><div class="challenge-type-icon">🌐</div><div><h4>Global Competitions</h4><p>Compete with players worldwide for top rankings</p></div></div>
+                </div>
+            </div>
+            <div class="quest-map fade-in">
+                <div class="quest-map-title">🗺️ Active Quest Path</div>
+                <div class="quest-path">
+                    <div class="quest-node"><div class="quest-dot completed">✓</div><div class="quest-info"><h4>Save a Virtual Ecosystem</h4><p>Restore a damaged coral reef</p></div><span class="quest-xp">+200 XP</span></div>
+                    <div class="quest-node"><div class="quest-dot completed">✓</div><div class="quest-info"><h4>Build a Sustainable City</h4><p>Design an eco-friendly metropolis</p></div><span class="quest-xp">+350 XP</span></div>
+                    <div class="quest-node"><div class="quest-dot active">🔍</div><div class="quest-info"><h4>Solve a Climate Mystery</h4><p>Investigate environmental anomalies</p></div><span class="quest-xp">+500 XP</span></div>
+                    <div class="quest-node"><div class="quest-dot locked">🔒</div><div class="quest-info"><h4>Decode Ancient Languages</h4><p>Translate lost scripts from 5 civilizations</p></div><span class="quest-xp">+750 XP</span></div>
+                    <div class="quest-node"><div class="quest-dot locked">🔒</div><div class="quest-info"><h4>Lead a Global Expedition</h4><p>Complete all world exploration quests</p></div><span class="quest-xp">+1000 XP</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="leaderboards" id="leaderboards">
+    <div class="container">
+        <div class="leaderboards-header fade-in">
+            <div class="section-badge">🏆 Leaderboards</div>
+            <h2 class="section-title">COMPETE <span class="text-accent">GLOBALLY</span></h2>
+            <p class="section-sub">See how you rank among learners and explorers worldwide.</p>
+        </div>
+        <div class="lb-tabs fade-in"><button class="lb-tab active">Global</button><button class="lb-tab">Regional</button><button class="lb-tab">School</button><button class="lb-tab">Friends</button></div>
+        <div class="lb-layout fade-in">
+            <div class="lb-podium">
+                <div class="podium-title">Top Explorers</div>
+                <div class="podium-places">
+                    <div class="podium-place second"><div class="podium-avatar">🧑‍🚀</div><div class="podium-name">AstroKid</div><div class="podium-xp">48,200 XP</div><div class="podium-bar">2</div></div>
+                    <div class="podium-place first"><div class="podium-avatar">👑</div><div class="podium-name">EcoMaster</div><div class="podium-xp">52,100 XP</div><div class="podium-bar">1</div></div>
+                    <div class="podium-place third"><div class="podium-avatar">🌟</div><div class="podium-name">StarLearner</div><div class="podium-xp">45,800 XP</div><div class="podium-bar">3</div></div>
+                </div>
+            </div>
+            <div class="lb-list">
+                <div class="lb-list-header"><span>Rank</span><span>Player</span><span>XP</span></div>
+                <div class="lb-row"><span class="lb-rank">4</span><div class="lb-user-avatar">🦊</div><span class="lb-user-name">NatureFox</span><div class="lb-user-badges">🏅🌍</div><span class="lb-user-xp">42,300 XP</span></div>
+                <div class="lb-row"><span class="lb-rank">5</span><div class="lb-user-avatar">🐉</div><span class="lb-user-name">HistoryDragon</span><div class="lb-user-badges">🏅</div><span class="lb-user-xp">39,800 XP</span></div>
+                <div class="lb-row"><span class="lb-rank">6</span><div class="lb-user-avatar">🔬</div><span class="lb-user-name">ScienceWiz</span><div class="lb-user-badges">🌟🏅</div><span class="lb-user-xp">37,500 XP</span></div>
+                <div class="lb-row"><span class="lb-rank">7</span><div class="lb-user-avatar">🎨</div><span class="lb-user-name">ArtExplorer</span><div class="lb-user-badges">🎨</div><span class="lb-user-xp">35,100 XP</span></div>
+                <div class="lb-row"><span class="lb-rank">8</span><div class="lb-user-avatar">🌊</div><span class="lb-user-name">OceanDiver</span><div class="lb-user-badges">🌍🌟</div><span class="lb-user-xp">33,900 XP</span></div>
+                <div class="lb-row"><span class="lb-rank">9</span><div class="lb-user-avatar">⚡</div><span class="lb-user-name">TechSpark</span><div class="lb-user-badges">🏅</div><span class="lb-user-xp">31,200 XP</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="rewards" id="rewards">
+    <div class="container">
+        <div class="rewards-header fade-in">
+            <div class="section-badge">🏅 Rewards</div>
+            <h2 class="section-title">PROGRESS THAT <span class="text-accent">MATTERS</span></h2>
+            <p class="section-sub">Rewards are linked to learning outcomes, not just playtime. Every achievement reflects real growth.</p>
+        </div>
+        <div class="rewards-grid fade-in">
+            <div class="reward-item"><span class="reward-icon">⚡</span><h4>XP & Levels</h4><p>Earn & level up</p></div>
+            <div class="reward-item"><span class="reward-icon">🏆</span><h4>Badges & Trophies</h4><p>Collect achievements</p></div>
+            <div class="reward-item"><span class="reward-icon">🌍</span><h4>Unlockable Worlds</h4><p>Discover new realms</p></div>
+            <div class="reward-item"><span class="reward-icon">🎭</span><h4>Avatar Customs</h4><p>Personalize your look</p></div>
+            <div class="reward-item"><span class="reward-icon">📜</span><h4>Certificates</h4><p>For schools & courses</p></div>
+        </div>
+        <div class="achievement-bar fade-in"><p>Rewards are linked to <strong>learning outcomes</strong>, not just playtime — every badge represents real progress.</p><button class="btn-outline" style="white-space:nowrap;">View All Rewards</button></div>
+    </div>
+</section>
+
+<!--7. AI INTELLIGENCE — RADAR CHART-->
+<section class="ai-section" id="ai-intelligence">
+    <div class="container">
+        <div class="ai-layout">
+            <div class="ai-left fade-in">
+                <div class="section-badge">🧠 AI Engine</div>
+                <h2 class="section-title">PLAY THAT <span class="text-accent">LEARNS YOU</span></h2>
+                <p class="section-sub">Agarta's AI engine adapts in real time, creating a unique learning experience for every player.</p>
+                <div class="ai-features">
+                    <div class="ai-feature"><div class="ai-feature-dot"></div><div><h4>Adaptive Difficulty</h4><p>Adjusts challenge level in real time based on your performance</p></div></div>
+                    <div class="ai-feature"><div class="ai-feature-dot"></div><div><h4>Smart Recommendations</h4><p>Suggests games based on your interests and learning patterns</p></div></div>
+                    <div class="ai-feature"><div class="ai-feature-dot"></div><div><h4>Progress Tracking</h4><p>Detailed analytics on your learning journey and growth areas</p></div></div>
+                    <div class="ai-feature"><div class="ai-feature-dot"></div><div><h4>Real-Time Feedback</h4><p>Instant tips and guidance to improve your gameplay</p></div></div>
+                    <div class="ai-feature"><div class="ai-feature-dot"></div><div><h4>Multilingual Support</h4><p>Play and learn in multiple languages seamlessly</p></div></div>
+                </div>
+            </div>
+
+            <!-- AI Radar Chart Visualization -->
+            <div class="ai-visual fade-in">
+                <div class="radar-wrap">
+                    <svg class="radar-svg" viewBox="0 0 360 360">
+                        <defs>
+                            <radialGradient id="radarGrad" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="rgba(0,168,107,0.25)"/>
+                                <stop offset="100%" stop-color="rgba(0,168,107,0.03)"/>
+                            </radialGradient>
+                        </defs>
+
+                        <!-- Pulse ring -->
+                        <circle class="radar-pulse-ring" cx="180" cy="180" r="130"/>
+
+                        <!-- Scan line -->
+                        <line class="radar-scan" x1="180" y1="180" x2="180" y2="40"/>
+
+                        <!-- Grid rings (5 levels) -->
+                        <polygon class="radar-grid" points="180,54 299.4,131.1 273.4,274.9 86.6,274.9 60.6,131.1"/>
+                        <polygon class="radar-grid" points="180,79.2 275.5,140.3 253.5,249.2 106.5,249.2 84.5,140.3"/>
+                        <polygon class="radar-grid" points="180,104.4 251.6,149.5 233.6,223.4 126.4,223.4 108.4,149.5"/>
+                        <polygon class="radar-grid" points="180,129.6 227.7,158.7 213.7,197.7 146.3,197.7 132.3,158.7"/>
+                        <polygon class="radar-grid" points="180,154.8 203.8,167.9 193.8,171.9 166.2,171.9 156.2,167.9"/>
+
+                        <!-- Axes -->
+                        <line class="radar-axis" x1="180" y1="180" x2="180" y2="54"/>
+                        <line class="radar-axis" x1="180" y1="180" x2="299.4" y2="131.1"/>
+                        <line class="radar-axis" x1="180" y1="180" x2="273.4" y2="274.9"/>
+                        <line class="radar-axis" x1="180" y1="180" x2="86.6" y2="274.9"/>
+                        <line class="radar-axis" x1="180" y1="180" x2="60.6" y2="131.1"/>
+
+                        <!-- Center dot -->
+                        <circle class="radar-center" cx="180" cy="180" r="3"/>
+
+                        <!-- Data area (filled polygon) -->
+                        <polygon class="radar-area-glow" points="180,68 286,136 258,262 102,250 78,142"/>
+                        <polygon class="radar-area" points="180,68 286,136 258,262 102,250 78,142" fill="url(#radarGrad)" style="fill:url(#radarGrad);"/>
+
+                        <!-- Data points -->
+                        <circle class="radar-dot" cx="180" cy="68" r="5"/>
+                        <circle class="radar-dot" cx="286" cy="136" r="5"/>
+                        <circle class="radar-dot" cx="258" cy="262" r="5"/>
+                        <circle class="radar-dot" cx="102" cy="250" r="5"/>
+                        <circle class="radar-dot" cx="78" cy="142" r="5"/>
+
+                        <!-- Labels -->
+                        <text class="radar-label" x="180" y="38" text-anchor="middle">ADAPT</text>
+                        <text class="radar-val" x="180" y="26" text-anchor="middle">92</text>
+
+                        <text class="radar-label" x="316" y="131" text-anchor="start">LEARN</text>
+                        <text class="radar-val" x="316" y="148" text-anchor="start">87</text>
+
+                        <text class="radar-label" x="285" y="292" text-anchor="middle">TRACK</text>
+                        <text class="radar-val" x="285" y="307" text-anchor="middle">78</text>
+
+                        <text class="radar-label" x="75" y="292" text-anchor="middle">FEEDBACK</text>
+                        <text class="radar-val" x="75" y="307" text-anchor="middle">82</text>
+
+                        <text class="radar-label" x="44" y="131" text-anchor="end">SUGGEST</text>
+                        <text class="radar-val" x="44" y="148" text-anchor="end">85</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="safety" id="safety">
+    <div class="container">
+        <div class="safety-header fade-in">
+            <div class="section-badge">🛡️ Trust & Safety</div>
+            <h2 class="section-title">DESIGNED FOR <span class="text-accent">EVERYONE</span></h2>
+            <p class="section-sub">Building trust with parents, educators, and institutions through safety-first design.</p>
+        </div>
+        <div class="safety-grid fade-in">
+            <div class="safety-card"><span class="safety-icon">👶</span><h3>Age-Appropriate</h3><p>Content filters ensure experiences are right for every age group</p></div>
+            <div class="safety-card"><span class="safety-icon">👨‍👩‍👧‍👦</span><h3>Parental Controls</h3><p>Full oversight for parents and teachers to manage access and screen time</p></div>
+            <div class="safety-card"><span class="safety-icon">🔒</span><h3>Safe Multiplayer</h3><p>Moderated environments with anti-bullying and privacy protections</p></div>
+            <div class="safety-card"><span class="safety-icon">♿</span><h3>Inclusive Design</h3><p>Accessible for all abilities with adaptive interfaces and assistive features</p></div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="cta-rings"><div class="cta-ring"></div><div class="cta-ring"></div><div class="cta-ring"></div><div class="cta-ring"></div></div>
+    <div class="cta-content fade-in">
+        <div class="section-badge">🚀 Get Started</div>
+        <h2 class="cta-title">READY TO LEARN, PLAY, AND <span class="text-accent">EXPLORE THE FUTURE?</span></h2>
+        <p class="cta-sub">Join thousands of learners in the most immersive educational gaming platform ever created.</p>
+        <div class="cta-buttons">
+            <button class="btn-primary">🎮 Start Playing Now</button>
+            <button class="btn-outline">🎓 Join the Virtual Academy</button>
+            <button class="btn-ghost">🌍 Explore the World</button>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand"><img src="Media/LOGOS(169).png" alt="Agarta AI" style="height:40px;filter:brightness(0) invert(1);"><p>AI-Powered Virtual Tours and Interactive Simulations. Transforming how the world learns, explores, and plays.</p></div>
+            <div class="footer-col"><h4>Platform</h4><ul><li><a href="#">Explore</a></li><li><a href="#">Play & Games</a></li><li><a href="#">Learn</a></li><li><a href="#">Community</a></li></ul></div>
+            <div class="footer-col"><h4>Company</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Careers</a></li><li><a href="#">Press</a></li><li><a href="#">Contact</a></li></ul></div>
+            <div class="footer-col"><h4>Legal</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li><li><a href="#">Cookie Policy</a></li></ul></div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2025 Agarta AI. All rights reserved.</p></div>
+    </div>
+</footer>
+
+<script>
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 50); });
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('navMenu');
+hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navMenu.classList.toggle('open'); });
+document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const slider = document.querySelector('.lang-slider');
+        slider.style.transform = btn.dataset.lang === 'es' ? 'translateX(100%)' : 'translateX(0)';
+    });
+});
+document.querySelectorAll('.dash-filter').forEach(f => { f.addEventListener('click', () => { document.querySelectorAll('.dash-filter').forEach(x => x.classList.remove('active')); f.classList.add('active'); }); });
+document.querySelectorAll('.lb-tab').forEach(t => { t.addEventListener('click', () => { document.querySelectorAll('.lb-tab').forEach(x => x.classList.remove('active')); t.classList.add('active'); }); });
+const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,2561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore the World — Agarta AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+
+/*AGARTA AI — EXPLORE PAGE STYLES*/
+/*CSS Variables*/
+:root {
+    --green-primary: #00a86b;
+    --green-dark: #00925d;
+    --green-darker: #004d33;
+    --green-light: #d4f4dd;
+    --green-lighter: #eafaf0;
+    --green-accent: #00d485;
+    --black: #0a0a0a;
+    --dark: #1a1a1a;
+    --gray-900: #222;
+    --gray-700: #555;
+    --gray-500: #888;
+    --gray-300: #ccc;
+    --gray-100: #f5f5f5;
+    --white: #ffffff;
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-xl: 30px;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.12);
+    --shadow-xl: 0 16px 60px rgba(0, 0, 0, 0.15);
+    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/*Reset & Base*/
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    color: var(--gray-900);
+    background: var(--white);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/*NAVBAR*/
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 1000;
+    transition: all var(--transition);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.navbar.scrolled {
+    background: rgba(0, 0, 0, 0.97);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+.nav-container {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 72px;
+}
+
+.nav-logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.nav-logo img {
+    height: 150px;
+    width: auto;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-logo img:hover {
+    transform: scale(1.04);
+}
+
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 32px;
+    align-items: center;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    transition: color var(--transition);
+    padding: 6px 0;
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--green-primary);
+    transition: width var(--transition);
+    border-radius: 1px;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: #fff;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.nav-cta {
+    display: flex;
+    align-items: center;
+}
+
+.nav-btn {
+    padding: 10px 24px;
+    background: var(--green-primary);
+    color: #fff;
+    border: 2px solid var(--green-primary);
+    border-radius: var(--radius-sm);
+    font-size: 0.88rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all var(--transition);
+    letter-spacing: 0.02em;
+}
+
+.nav-btn:hover {
+    background: transparent;
+    color: var(--green-primary);
+    transform: translateY(-1px);
+}
+
+/* Language Toggle */
+.nav-language {
+    display: flex;
+    align-items: center;
+    margin-left: 16px;
+}
+
+.language-switch {
+    position: relative;
+    display: flex;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50px;
+    padding: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.lang-switch-btn {
+    position: relative;
+    padding: 6px 14px;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    font-family: 'Space Mono', monospace;
+    transition: color var(--transition);
+    z-index: 2;
+    min-width: 40px;
+}
+
+.lang-switch-btn.active {
+    color: #fff;
+}
+
+.switch-slider {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: calc(50% - 3px);
+    height: calc(100% - 6px);
+    background: var(--green-primary);
+    border-radius: 50px;
+    transition: transform var(--transition);
+    z-index: 1;
+}
+
+/* Hamburger */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.hamburger .bar {
+    width: 24px;
+    height: 2px;
+    background: #fff;
+    transition: all var(--transition);
+    border-radius: 2px;
+}
+
+.hamburger.active .bar:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.active .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/*HERO SECTION*/
+.hero {
+    position: relative;
+    color: #fff;
+    padding: 160px 24px 100px;
+    text-align: center;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(160deg, #00925d 0%, #00a86b 40%, #00c07a 100%);
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 80%;
+    height: 200%;
+    background: radial-gradient(ellipse, rgba(255,255,255,0.06) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.logo {
+    width: 280px;
+    height: auto;
+    margin-bottom: 32px;
+    filter: brightness(0) invert(1) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+}
+
+.hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 4rem;
+    font-weight: 400;
+    margin-bottom: 18px;
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    max-width: 640px;
+    margin: 0 auto 40px;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.7;
+    font-weight: 300;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 14px 28px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: inherit;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    color: #fff;
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all var(--transition);
+    text-decoration: none;
+}
+
+.btn:hover {
+    background: #fff;
+    color: var(--green-primary);
+    border-color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+/*SHARED SECTION STYLING*/
+.section-header {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.section-header.light h2 {
+    color: var(--gray-900);
+}
+
+.section-header.light p {
+    color: var(--gray-700);
+}
+
+.section-tag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--green-accent);
+    background: rgba(0, 168, 107, 0.1);
+    padding: 6px 16px;
+    border-radius: 50px;
+    margin-bottom: 16px;
+}
+
+.section-tag.green {
+    color: var(--green-primary);
+    background: rgba(0, 168, 107, 0.08);
+}
+
+.section-tag.glow-tag {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.section-header h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    color: #fff;
+    margin-bottom: 12px;
+    line-height: 1.15;
+}
+
+.section-header.light h2 {
+    color: var(--gray-900);
+}
+
+.section-header p {
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 560px;
+    margin: 0 auto;
+    font-weight: 300;
+}
+
+.section-header.light p {
+    color: var(--gray-700);
+}
+
+/*SECTION 2 — WORLD MAP*/
+.world-map-section {
+    background: var(--dark);
+    padding: 100px 24px;
+    position: relative;
+    overflow: hidden;
+}
+
+.world-map-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(0, 168, 107, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 30%, rgba(0, 168, 107, 0.02) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.map-filters {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.map-filter {
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.6);
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-family: inherit;
+    font-weight: 500;
+    transition: all var(--transition);
+}
+
+.map-filter:hover {
+    background: rgba(0, 168, 107, 0.15);
+    border-color: rgba(0, 168, 107, 0.3);
+    color: #fff;
+}
+
+.map-filter.active {
+    background: var(--green-primary);
+    border-color: var(--green-primary);
+    color: #fff;
+}
+
+.map-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.map-globe-visual {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: rgba(0, 10, 5, 0.4);
+    border: 1px solid rgba(0, 168, 107, 0.15);
+}
+
+.world-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.continent {
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.continent:hover {
+    fill-opacity: 0.8;
+    filter: drop-shadow(0 0 15px rgba(0, 212, 133, 0.4));
+}
+
+.hotspot {
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.hotspot:hover {
+    r: 12;
+    fill: #fff;
+}
+
+.pulse-hotspot {
+    animation: pulseHotspot 2s ease-in-out infinite;
+}
+
+@keyframes pulseHotspot {
+    0%, 100% { r: 10; opacity: 1; }
+    50% { r: 14; opacity: 0.7; }
+}
+
+.map-tooltip {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 168, 107, 0.3);
+    border-radius: var(--radius-sm);
+    padding: 14px 18px;
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    pointer-events: none;
+    z-index: 10;
+    min-width: 180px;
+}
+
+.map-tooltip.visible {
+    display: flex;
+}
+
+.map-tooltip strong {
+    color: #fff;
+    font-size: 0.95rem;
+}
+
+.map-tooltip span {
+    color: var(--green-accent);
+    font-size: 0.8rem;
+    font-family: 'Space Mono', monospace;
+}
+
+.tooltip-explore {
+    background: none;
+    border: none;
+    color: var(--green-primary);
+    font-size: 0.8rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    text-align: left;
+    padding: 0;
+    margin-top: 4px;
+}
+
+/*SECTION 3 — CATEGORIES*/
+.categories-section {
+    background: var(--white);
+    padding: 100px 24px;
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.cat-card {
+    position: relative;
+    background: var(--white);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: var(--radius-md);
+    padding: 36px 28px;
+    cursor: pointer;
+    transition: all var(--transition);
+    overflow: hidden;
+    text-align: center;
+}
+
+.cat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--green-primary);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition);
+}
+
+.cat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: transparent;
+}
+
+.cat-card:hover::before {
+    transform: scaleX(1);
+}
+
+.cat-bg-effect {
+    display: none;
+}
+
+.cat-icon {
+    font-size: 2.8rem;
+    margin-bottom: 18px;
+    display: block;
+}
+
+.cat-content h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.03em;
+    color: var(--gray-900);
+    margin-bottom: 14px;
+}
+
+.cat-content ul {
+    list-style: none;
+    margin-bottom: 18px;
+}
+
+.cat-content ul li {
+    font-size: 0.88rem;
+    color: var(--gray-700);
+    padding: 4px 0;
+    position: relative;
+}
+
+.cat-content ul li::before {
+    content: '→';
+    color: var(--green-primary);
+    margin-right: 8px;
+    font-size: 0.75rem;
+}
+
+.cat-count {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--green-primary);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.cat-hover-btn {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 14px;
+    background: var(--green-primary);
+    color: #fff;
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-align: center;
+    transform: translateY(100%);
+    transition: transform var(--transition);
+}
+
+.cat-card:hover .cat-hover-btn {
+    transform: translateY(0);
+}
+
+/*SECTION 4 — FEATURED TOURS*/
+.featured-tours-section {
+    background: var(--dark);
+    padding: 100px 24px;
+}
+
+.tours-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: 48px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50px;
+    padding: 4px;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tour-tab {
+    padding: 10px 24px;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    font-family: inherit;
+    transition: all var(--transition);
+    white-space: nowrap;
+}
+
+.tour-tab:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.tour-tab.active {
+    background: var(--green-primary);
+    color: #fff;
+}
+
+.tours-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    transition: all 0.4s ease;
+}
+
+.tour-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.tour-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    border-color: rgba(0, 168, 107, 0.2);
+}
+
+.tour-thumb {
+    position: relative;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.tour-play-btn {
+    width: 52px;
+    height: 52px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.2rem;
+    transition: all var(--transition);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.tour-card:hover .tour-play-btn {
+    background: var(--green-primary);
+    border-color: var(--green-primary);
+    transform: scale(1.1);
+}
+
+.tour-badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    padding: 5px 12px;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-family: 'Space Mono', monospace;
+}
+
+.badge-original {
+    background: var(--green-primary);
+    color: #fff;
+}
+
+.badge-exclusive {
+    background: rgba(138, 68, 204, 0.9);
+    color: #fff;
+}
+
+.badge-new {
+    background: rgba(255, 180, 0, 0.9);
+    color: var(--dark);
+}
+
+.tour-360 {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    padding: 4px 10px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #fff;
+    font-family: 'Space Mono', monospace;
+}
+
+.tour-info {
+    padding: 20px 22px;
+}
+
+.tour-meta {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.tour-meta span {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.tour-info h4 {
+    font-size: 1.05rem;
+    color: #fff;
+    margin-bottom: 8px;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.tour-info p {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.5;
+}
+
+/*SECTION 5 — SPACE ZONE*/
+.space-section {
+    position: relative;
+    background: #070b14;
+    padding: 120px 24px;
+    overflow: hidden;
+    min-height: 600px;
+}
+
+.stars-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.space-content {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.space-left {
+    color: #fff;
+}
+
+.space-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+    margin-bottom: 18px;
+}
+
+.space-title em {
+    color: var(--green-accent);
+    font-style: normal;
+}
+
+.space-left > p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.65);
+    margin-bottom: 36px;
+    line-height: 1.7;
+    max-width: 480px;
+}
+
+.space-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 36px;
+}
+
+.space-feat {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.75);
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition);
+}
+
+.space-feat:hover {
+    background: rgba(0, 168, 107, 0.1);
+    border-color: rgba(0, 168, 107, 0.2);
+}
+
+.space-feat span {
+    font-size: 1.3rem;
+}
+
+.btn-space {
+    padding: 14px 32px;
+    background: var(--green-primary);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all var(--transition);
+    letter-spacing: 0.02em;
+}
+
+.btn-space:hover {
+    background: var(--green-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 168, 107, 0.3);
+}
+
+/* Planet System */
+.space-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.planet-system {
+    position: relative;
+    width: 360px;
+    height: 360px;
+}
+
+.planet {
+    position: absolute;
+    border-radius: 50%;
+}
+
+.planet.sun {
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, #ffd700 30%, #ff8c00 100%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.4), 0 0 80px rgba(255, 140, 0, 0.2);
+}
+
+.orbit {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.orbit-1 {
+    width: 140px;
+    height: 140px;
+    animation: orbitSpin 8s linear infinite;
+}
+
+.orbit-2 {
+    width: 220px;
+    height: 220px;
+    animation: orbitSpin 15s linear infinite;
+}
+
+.orbit-3 {
+    width: 300px;
+    height: 300px;
+    animation: orbitSpin 24s linear infinite;
+}
+
+@keyframes orbitSpin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.orbit .planet {
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.planet.mercury {
+    width: 12px;
+    height: 12px;
+    background: radial-gradient(circle, #b0b0b0, #666);
+}
+
+.planet.earth {
+    width: 18px;
+    height: 18px;
+    background: radial-gradient(circle, #4da6ff 30%, #0066cc 100%);
+    box-shadow: 0 0 12px rgba(77, 166, 255, 0.3);
+}
+
+.planet.mars {
+    width: 15px;
+    height: 15px;
+    background: radial-gradient(circle, #e6622e 30%, #a03820 100%);
+    box-shadow: 0 0 10px rgba(230, 98, 46, 0.2);
+}
+
+.planet-label {
+    position: absolute;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.label-sun {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 40px);
+}
+
+.label-earth {
+    top: calc(50% - 110px - 24px);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.label-mars {
+    top: calc(50% - 150px - 24px);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/*SECTION 6 — AGARTA LAB*/
+.lab-tours-section {
+    background: var(--gray-100);
+    padding: 100px 24px;
+}
+
+.lab-tours-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.lab-card {
+    position: relative;
+    border-radius: var(--radius-md);
+    padding: 36px 28px;
+    min-height: 320px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.lab-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-md);
+    z-index: 0;
+}
+
+.lab-museums {
+    background: linear-gradient(160deg, #004d33 0%, #00a86b 100%);
+}
+
+.lab-nature {
+    background: linear-gradient(160deg, #003d20 0%, #00925d 100%);
+}
+
+.lab-cities {
+    background: linear-gradient(160deg, #1a1a2e 0%, #4a6fa5 100%);
+}
+
+.lab-space {
+    background: linear-gradient(160deg, #0d0d2b 0%, #5a2d82 100%);
+}
+
+.lab-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-xl);
+}
+
+.lab-card-inner {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+}
+
+.lab-label {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.15);
+    padding: 4px 12px;
+    border-radius: 50px;
+    margin-bottom: 14px;
+}
+
+.lab-label.lab-new {
+    background: rgba(255, 180, 0, 0.8);
+    color: var(--dark);
+}
+
+.lab-label.lab-exclusive {
+    background: rgba(138, 68, 204, 0.8);
+}
+
+.lab-card-inner h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 0.03em;
+    margin-bottom: 10px;
+}
+
+.lab-card-inner p {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.lab-tech {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 0.05em;
+    margin-bottom: 18px;
+}
+
+.btn-lab {
+    padding: 10px 22px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #fff;
+    border-radius: var(--radius-sm);
+    font-size: 0.82rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.btn-lab:hover {
+    background: #fff;
+    color: var(--dark);
+    border-color: #fff;
+}
+
+/*SECTION 7 — SATELLITE DATA*/
+.satellite-section {
+    background: linear-gradient(160deg, #001a0e 0%, #002a15 100%);
+    padding: 100px 24px;
+}
+
+.satellite-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.satellite-left {
+    color: #fff;
+}
+
+.satellite-left h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+    margin-bottom: 18px;
+}
+
+.satellite-left > p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.7;
+    margin-bottom: 36px;
+    max-width: 480px;
+}
+
+.data-layers {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 36px;
+}
+
+.data-layer {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition);
+    cursor: pointer;
+}
+
+.data-layer:hover,
+.data-layer.active-layer {
+    background: rgba(0, 168, 107, 0.08);
+    border-color: rgba(0, 168, 107, 0.2);
+}
+
+.layer-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.live-dot {
+    background: #ff4444;
+    box-shadow: 0 0 8px rgba(255, 68, 68, 0.5);
+    animation: livePulse 1.5s ease-in-out infinite;
+}
+
+@keyframes livePulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+.ndvi-dot { background: var(--green-accent); }
+.co2-dot { background: #ff9500; }
+.climate-dot { background: #4da6ff; }
+
+.data-layer strong {
+    display: block;
+    font-size: 0.9rem;
+    color: #fff;
+    font-weight: 500;
+}
+
+.data-layer span {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.45);
+    font-family: 'Space Mono', monospace;
+}
+
+.satellite-partners {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.satellite-partners > span {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.partner-logos-text {
+    display: flex;
+    gap: 16px;
+}
+
+.partner-logos-text span {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.05em;
+    padding: 6px 14px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Satellite Display */
+.satellite-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.satellite-display {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+}
+
+.sat-screen {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: rgba(0, 20, 10, 0.6);
+    border: 1px solid rgba(0, 168, 107, 0.2);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.sat-grid {
+    position: absolute;
+    inset: 0;
+    background-image: 
+        linear-gradient(rgba(0, 168, 107, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 168, 107, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+.sat-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 168, 107, 0.15);
+    transform: translate(-50%, -50%);
+    animation: satPulse 3s ease-out infinite;
+}
+
+@keyframes satPulse {
+    0% { width: 50px; height: 50px; opacity: 0.6; }
+    100% { width: 250px; height: 250px; opacity: 0; }
+}
+
+.sat-scan {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 0%, rgba(0, 168, 107, 0.04) 50%, transparent 100%);
+    animation: satScan 4s linear infinite;
+}
+
+@keyframes satScan {
+    from { left: -100%; }
+    to { left: 100%; }
+}
+
+.sat-data-point {
+    position: absolute;
+    z-index: 3;
+}
+
+.sat-data-point span {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--green-accent);
+    background: rgba(0, 0, 0, 0.6);
+    padding: 4px 10px;
+    border-radius: 50px;
+    border: 1px solid rgba(0, 168, 107, 0.2);
+    white-space: nowrap;
+}
+
+.sat-label {
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: rgba(0, 168, 107, 0.5);
+    margin-top: 16px;
+}
+
+/*SECTION 8 — PERSONALIZED DISCOVERY*/
+.personalized-section {
+    background: var(--white);
+    padding: 100px 24px;
+}
+
+.personalized-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.personal-card {
+    background: var(--white);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: var(--radius-md);
+    padding: 32px 24px;
+    text-align: center;
+    transition: all var(--transition);
+}
+
+.personal-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: transparent;
+}
+
+.personal-icon {
+    font-size: 2.2rem;
+    margin-bottom: 16px;
+    display: block;
+}
+
+.personal-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin-bottom: 10px;
+}
+
+.personal-card p {
+    font-size: 0.88rem;
+    color: var(--gray-700);
+    line-height: 1.6;
+}
+
+/* AI Guide Featured Card */
+.featured-personal {
+    background: var(--green-primary);
+    border-color: var(--green-primary);
+    color: #fff;
+}
+
+.featured-personal:hover {
+    background: var(--green-dark);
+    border-color: var(--green-dark);
+}
+
+.featured-personal h3 {
+    color: #fff;
+}
+
+.featured-personal p {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.ai-avatar {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 18px;
+}
+
+.ai-ring {
+    position: absolute;
+    inset: 0;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    animation: aiRing 3s linear infinite;
+}
+
+@keyframes aiRing {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.ai-core {
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+}
+
+.btn-ai-guide {
+    margin-top: 16px;
+    padding: 10px 22px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.btn-ai-guide:hover {
+    background: #fff;
+    color: var(--green-primary);
+    border-color: #fff;
+}
+
+/*SECTION 9 — CTA*/
+.explore-cta {
+    position: relative;
+    background: linear-gradient(160deg, #00925d 0%, #00a86b 100%);
+    padding: 100px 24px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.cta-explore-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.cta-explore-content {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.cta-explore-content h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.2rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-bottom: 14px;
+}
+
+.cta-explore-content p {
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 40px;
+    line-height: 1.7;
+}
+
+.cta-explore-btns {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+}
+
+.btn-explore-primary,
+.btn-explore-secondary,
+.btn-explore-ghost {
+    padding: 14px 28px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    font-family: inherit;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition);
+    border: 2px solid transparent;
+}
+
+.btn-explore-primary {
+    background: #fff;
+    color: var(--green-primary);
+    border-color: #fff;
+}
+
+.btn-explore-primary:hover {
+    background: transparent;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.btn-explore-secondary {
+    background: transparent;
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.btn-explore-secondary:hover {
+    background: #fff;
+    color: var(--green-primary);
+    border-color: #fff;
+    transform: translateY(-2px);
+}
+
+.btn-explore-ghost {
+    background: transparent;
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.btn-explore-ghost:hover {
+    border-color: #fff;
+    transform: translateY(-2px);
+}
+
+.btn-explore-primary.large,
+.btn-explore-secondary.large,
+.btn-explore-ghost.large {
+    padding: 16px 32px;
+    font-size: 0.95rem;
+}
+
+.cta-footnote {
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.02em;
+}
+
+/*FOOTER*/
+.footer {
+    background: var(--green-darker);
+    color: #fff;
+    padding: 36px 24px;
+    text-align: center;
+}
+
+.footer-top {
+    margin: 0;
+}
+
+.footer-copyright {
+    font-size: 1rem;
+    opacity: 0.7;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/*RESPONSIVE*/
+@media (max-width: 1024px) {
+    .categories-grid,
+    .lab-tours-grid,
+    .personalized-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tours-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .space-content,
+    .satellite-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+    }
+
+    .space-right {
+        order: -1;
+    }
+
+    .planet-system {
+        width: 280px;
+        height: 280px;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-container {
+        padding: 0 20px;
+    }
+
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 72px;
+        flex-direction: column;
+        background: rgba(0, 0, 0, 0.98);
+        backdrop-filter: blur(20px);
+        width: 100%;
+        text-align: center;
+        transition: left var(--transition);
+        gap: 0;
+        padding: 24px 0;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-item {
+        width: 100%;
+        padding: 14px 0;
+    }
+
+    .nav-link {
+        font-size: 1.1rem;
+    }
+
+    .nav-cta {
+        display: none;
+    }
+
+    .nav-language {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.95);
+        padding: 6px;
+        border-radius: 50px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        z-index: 1001;
+        margin-left: 0;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    /* Hero */
+    .hero {
+        padding: 120px 20px 80px;
+        min-height: 60vh;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .logo {
+        width: 200px;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+    }
+
+    /* Sections */
+    .section-header h2,
+    .section-header.light h2 {
+        font-size: 2.2rem;
+    }
+
+    .categories-grid,
+    .lab-tours-grid,
+    .personalized-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tours-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tours-tabs {
+        flex-direction: column;
+        border-radius: var(--radius-md);
+        max-width: 280px;
+    }
+
+    .space-title {
+        font-size: 2.5rem;
+    }
+
+    .space-features {
+        grid-template-columns: 1fr;
+    }
+
+    .satellite-left h2 {
+        font-size: 2.2rem;
+    }
+
+    .satellite-display {
+        max-width: 100%;
+    }
+
+    .partner-logos-text {
+        flex-wrap: wrap;
+    }
+
+    /* CTA */
+    .cta-explore-content h2 {
+        font-size: 2.2rem;
+    }
+
+    .cta-explore-btns {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn-explore-primary.large,
+    .btn-explore-secondary.large,
+    .btn-explore-ghost.large {
+        width: 100%;
+        max-width: 280px;
+    }
+
+    .map-filters {
+        gap: 6px;
+    }
+
+    .map-filter {
+        padding: 8px 14px;
+        font-size: 0.78rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .section-header h2,
+    .section-header.light h2 {
+        font-size: 1.8rem;
+    }
+
+    .space-title {
+        font-size: 2rem;
+    }
+
+    .satellite-left h2 {
+        font-size: 1.8rem;
+    }
+
+    .cta-explore-content h2 {
+        font-size: 1.8rem;
+    }
+}
+
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+            <img src="Media/LOGO 3.png" alt="Agarta AI" class="logo">
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#home" class="nav-link active">Home</a></li>
+                <li class="nav-item"><a href="#map" class="nav-link">World Map</a></li>
+                <li class="nav-item"><a href="#categories" class="nav-link">Categories</a></li>
+                <li class="nav-item"><a href="#featured" class="nav-link">Featured Tours</a></li>
+                <li class="nav-item"><a href="#space" class="nav-link">Space</a></li>
+                <li class="nav-item"><a href="#lab" class="nav-link">Agarta Lab</a></li>
+                <li class="nav-item"><a href="#data" class="nav-link">Live Data</a></li>
+            </ul>
+            <div class="nav-cta">
+                <button class="nav-btn" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Start Exploring</button>
+            </div>
+            <div class="nav-language">
+                <div class="language-switch">
+                    <button class="lang-switch-btn active" data-lang="en">EN</button>
+                    <button class="lang-switch-btn" data-lang="fr">FR</button>
+                    <div class="switch-slider"></div>
+                </div>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <img src="Media/Agarta logo.png" alt="Agarta AI" class="logo">
+            <h1>Explore the World in Every Dimension</h1>
+            <p>Travel across cities, nature, museums, and space through immersive 3D, VR, and AI-powered experiences.</p>
+            <div class="cta-buttons">
+                <button class="btn" onclick="document.getElementById('map').scrollIntoView({behavior:'smooth'})">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    Start Exploring
+                </button>
+                <button class="btn">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                    Enter VR Mode
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2 — INTERACTIVE WORLD MAP -->
+    <section class="world-map-section" id="map">
+        <div class="section-header">
+            <h2>Your Global Navigation Hub</h2>
+            <p>Click any region to begin your immersive journey</p>
+        </div>
+
+        <div class="map-filters">
+            <button class="map-filter active" data-filter="all">🌐 All</button>
+            <button class="map-filter" data-filter="nature">🌱 Nature</button>
+            <button class="map-filter" data-filter="cities">🌆 Cities</button>
+            <button class="map-filter" data-filter="museums">🏛 Museums</button>
+            <button class="map-filter" data-filter="space">🌌 Space</button>
+            <button class="map-filter" data-filter="live">🔴 Live Data</button>
+        </div>
+
+        <div class="map-container">
+            <div class="map-globe-visual">
+                <svg class="world-svg" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="glow">
+                            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                        </filter>
+                    </defs>
+                    <g stroke="#00a86b" stroke-opacity="0.15" stroke-width="0.5" fill="none">
+                        <line x1="0" y1="100" x2="1000" y2="100"/>
+                        <line x1="0" y1="200" x2="1000" y2="200"/>
+                        <line x1="0" y1="300" x2="1000" y2="300"/>
+                        <line x1="0" y1="400" x2="1000" y2="400"/>
+                        <line x1="100" y1="0" x2="100" y2="500"/>
+                        <line x1="200" y1="0" x2="200" y2="500"/>
+                        <line x1="300" y1="0" x2="300" y2="500"/>
+                        <line x1="400" y1="0" x2="400" y2="500"/>
+                        <line x1="500" y1="0" x2="500" y2="500"/>
+                        <line x1="600" y1="0" x2="600" y2="500"/>
+                        <line x1="700" y1="0" x2="700" y2="500"/>
+                        <line x1="800" y1="0" x2="800" y2="500"/>
+                        <line x1="900" y1="0" x2="900" y2="500"/>
+                    </g>
+                    <path class="continent" data-region="North America" d="M 80 80 L 200 60 L 260 100 L 270 180 L 230 220 L 200 260 L 170 280 L 140 260 L 110 220 L 90 180 L 70 140 Z" fill="#00a86b" fill-opacity="0.5" stroke="#00d485" stroke-width="1.5"/>
+                    <path class="continent" data-region="South America" d="M 200 280 L 250 270 L 280 310 L 290 380 L 260 430 L 220 440 L 190 400 L 180 350 L 190 310 Z" fill="#00a86b" fill-opacity="0.5" stroke="#00d485" stroke-width="1.5"/>
+                    <path class="continent" data-region="Europe" d="M 430 60 L 510 50 L 540 80 L 530 120 L 500 140 L 460 130 L 430 110 L 420 85 Z" fill="#00a86b" fill-opacity="0.5" stroke="#00d485" stroke-width="1.5"/>
+                    <path class="continent" data-region="Africa" d="M 450 150 L 530 140 L 570 170 L 580 250 L 570 330 L 540 380 L 500 390 L 460 360 L 440 290 L 435 210 Z" fill="#00a86b" fill-opacity="0.5" stroke="#00d485" stroke-width="1.5"/>
+                    <path class="continent" data-region="Asia" d="M 540 50 L 750 40 L 850 80 L 880 150 L 840 200 L 760 220 L 680 200 L 620 180 L 560 160 L 530 120 L 540 80 Z" fill="#00a86b" fill-opacity="0.5" stroke="#00d485" stroke-width="1.5"/>
+                    <path class="continent" data-region="Australia" d="M 750 280 L 860 270 L 900 310 L 890 370 L 840 390 L 780 380 L 750 350 L 740 310 Z" fill="#00a86b" fill-opacity="0.5" stroke="#00d485" stroke-width="1.5"/>
+                    <circle class="hotspot" cx="155" cy="160" r="8" fill="#00d485" filter="url(#glow)"><title>New York, USA</title></circle>
+                    <circle class="hotspot" cx="480" cy="85" r="8" fill="#00d485" filter="url(#glow)"><title>Paris, France</title></circle>
+                    <circle class="hotspot" cx="700" cy="130" r="8" fill="#00d485" filter="url(#glow)"><title>Tokyo, Japan</title></circle>
+                    <circle class="hotspot" cx="500" cy="230" r="8" fill="#00d485" filter="url(#glow)"><title>Nairobi, Kenya</title></circle>
+                    <circle class="hotspot" cx="810" cy="330" r="8" fill="#00d485" filter="url(#glow)"><title>Sydney, Australia</title></circle>
+                    <circle class="hotspot pulse-hotspot" cx="600" cy="100" r="10" fill="#ffcc00" filter="url(#glow)"><title>Live: Climate Data</title></circle>
+                </svg>
+                <div class="map-tooltip" id="mapTooltip">
+                    <strong id="tooltipRegion">North America</strong>
+                    <span id="tooltipCount">2,400 experiences</span>
+                    <button class="tooltip-explore">Explore →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3 — EXPLORE BY CATEGORY -->
+    <section class="categories-section" id="categories">
+        <div class="section-header light">
+            <h2>Explore by Category</h2>
+            <p>Choose your destination and start your immersive journey</p>
+        </div>
+
+        <div class="categories-grid">
+            <div class="cat-card" data-category="Cities">
+                <div class="cat-icon">🌆</div>
+                <div class="cat-content">
+                    <h3>Cities & Countries</h3>
+                    <ul>
+                        <li>3D city walkthroughs</li>
+                        <li>Cultural landmarks</li>
+                        <li>Urban evolution maps</li>
+                    </ul>
+                    <span class="cat-count">3,200+ experiences</span>
+                </div>
+                <div class="cat-hover-btn">Explore →</div>
+            </div>
+            <div class="cat-card" data-category="Nature">
+                <div class="cat-icon">🌱</div>
+                <div class="cat-content">
+                    <h3>Nature & Ecosystems</h3>
+                    <ul>
+                        <li>Forests, oceans & farms</li>
+                        <li>Climate zones</li>
+                        <li>Biodiversity hotspots</li>
+                    </ul>
+                    <span class="cat-count">2,800+ experiences</span>
+                </div>
+                <div class="cat-hover-btn">Explore →</div>
+            </div>
+            <div class="cat-card" data-category="Museums">
+                <div class="cat-icon">🏛</div>
+                <div class="cat-content">
+                    <h3>Museums & History</h3>
+                    <ul>
+                        <li>Art & archaeology</li>
+                        <li>World history</li>
+                        <li>Cultural heritage</li>
+                    </ul>
+                    <span class="cat-count">1,900+ experiences</span>
+                </div>
+                <div class="cat-hover-btn">Explore →</div>
+            </div>
+            <div class="cat-card" data-category="Space">
+                <div class="cat-icon">🌌</div>
+                <div class="cat-content">
+                    <h3>Space & Universe</h3>
+                    <ul>
+                        <li>Planet simulations</li>
+                        <li>Galaxy exploration</li>
+                        <li>Space missions</li>
+                    </ul>
+                    <span class="cat-count">850+ experiences</span>
+                </div>
+                <div class="cat-hover-btn">Explore →</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4 — FEATURED & TRENDING TOURS -->
+    <section class="featured-tours-section" id="featured">
+        <div class="section-header">
+            <h2>Featured & Trending Tours</h2>
+            <p>Hand-picked by our AI editorial team</p>
+        </div>
+
+        <div class="tours-tabs">
+            <button class="tour-tab active" data-tab="picks">Editor's Picks</button>
+            <button class="tour-tab" data-tab="trending">Trending This Week</button>
+            <button class="tour-tab" data-tab="recommended">Recommended for You</button>
+        </div>
+
+        <div class="tours-grid" id="toursGrid">
+            <div class="tour-card">
+                <div class="tour-thumb" style="background: linear-gradient(135deg, #0a3d2e, #00a86b)">
+                    <div class="tour-play-btn">▶</div>
+                    <div class="tour-badge badge-original">Agarta Original</div>
+                    <div class="tour-360">360°</div>
+                </div>
+                <div class="tour-info">
+                    <div class="tour-meta"><span>🌿 Nature</span><span>⏱ 24 min</span><span>⭐ 4.9</span></div>
+                    <h4>Amazon Rainforest Deep Dive</h4>
+                    <p>Navigate through the world's largest ecosystem with AI narration.</p>
+                </div>
+            </div>
+            <div class="tour-card">
+                <div class="tour-thumb" style="background: linear-gradient(135deg, #1a1a2e, #4a4a8a)">
+                    <div class="tour-play-btn">▶</div>
+                    <div class="tour-badge badge-exclusive">Exclusive</div>
+                    <div class="tour-360">360°</div>
+                </div>
+                <div class="tour-info">
+                    <div class="tour-meta"><span>🌌 Space</span><span>⏱ 18 min</span><span>⭐ 5.0</span></div>
+                    <h4>Mars Surface Mission</h4>
+                    <p>Walk the red planet with NASA-calibrated terrain data.</p>
+                </div>
+            </div>
+            <div class="tour-card">
+                <div class="tour-thumb" style="background: linear-gradient(135deg, #2d1b00, #b8860b)">
+                    <div class="tour-play-btn">▶</div>
+                    <div class="tour-badge badge-new">New</div>
+                    <div class="tour-360">360°</div>
+                </div>
+                <div class="tour-info">
+                    <div class="tour-meta"><span>🏛 History</span><span>⏱ 31 min</span><span>⭐ 4.8</span></div>
+                    <h4>Ancient Egypt: The Pyramids</h4>
+                    <p>Step inside Giza with photogrammetry-accurate reconstructions.</p>
+                </div>
+            </div>
+            <div class="tour-card">
+                <div class="tour-thumb" style="background: linear-gradient(135deg, #001830, #0066cc)">
+                    <div class="tour-play-btn">▶</div>
+                    <div class="tour-badge badge-original">Agarta Original</div>
+                    <div class="tour-360">360°</div>
+                </div>
+                <div class="tour-info">
+                    <div class="tour-meta"><span>🌆 Cities</span><span>⏱ 22 min</span><span>⭐ 4.7</span></div>
+                    <h4>Tokyo at Night — Neon City</h4>
+                    <p>Drone & street-level views of Japan's electric capital.</p>
+                </div>
+            </div>
+            <div class="tour-card">
+                <div class="tour-thumb" style="background: linear-gradient(135deg, #003322, #00a86b)">
+                    <div class="tour-play-btn">▶</div>
+                    <div class="tour-badge badge-new">New</div>
+                    <div class="tour-360">360°</div>
+                </div>
+                <div class="tour-info">
+                    <div class="tour-meta"><span>🌱 Nature</span><span>⏱ 15 min</span><span>⭐ 4.9</span></div>
+                    <h4>Great Barrier Reef</h4>
+                    <p>Underwater 8K HDR footage from Insta360 Pro 2.</p>
+                </div>
+            </div>
+            <div class="tour-card">
+                <div class="tour-thumb" style="background: linear-gradient(135deg, #1a0a2e, #8b44cc)">
+                    <div class="tour-play-btn">▶</div>
+                    <div class="tour-badge badge-exclusive">Exclusive</div>
+                    <div class="tour-360">360°</div>
+                </div>
+                <div class="tour-info">
+                    <div class="tour-meta"><span>🌌 Space</span><span>⏱ 28 min</span><span>⭐ 4.9</span></div>
+                    <h4>ISS: Life in Orbit</h4>
+                    <p>Experience zero-gravity with ESA astronaut footage.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5 — SPACE & UNIVERSE ZONE -->
+    <section class="space-section" id="space">
+        <div class="stars-bg" id="starsBg"></div>
+        <div class="space-content">
+            <div class="space-left">
+                <h2 class="space-title">Journey Beyond<br><em>Earth's Limits</em></h2>
+                <p>Explore planets, galaxies, and cosmic phenomena through AI-narrated simulations powered by NASA and ESA data.</p>
+                <div class="space-features">
+                    <div class="space-feat"><span>🪐</span> 3D Planet Simulations</div>
+                    <div class="space-feat"><span>🔭</span> Real NASA & ESA Data</div>
+                    <div class="space-feat"><span>🚀</span> Space Mission Replays</div>
+                    <div class="space-feat"><span>🌠</span> Starfield Navigation</div>
+                </div>
+                <button class="btn-space">Launch Space Explorer</button>
+            </div>
+            <div class="space-right">
+                <div class="planet-system">
+                    <div class="planet sun"></div>
+                    <div class="orbit orbit-1"><div class="planet mercury"></div></div>
+                    <div class="orbit orbit-2"><div class="planet earth"></div></div>
+                    <div class="orbit orbit-3"><div class="planet mars"></div></div>
+                    <div class="planet-label label-sun">Sun</div>
+                    <div class="planet-label label-earth">Earth</div>
+                    <div class="planet-label label-mars">Mars</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6 — AGARTA LAB TOURS -->
+    <section class="lab-tours-section" id="lab">
+        <div class="section-header light">
+            <h2>Agarta Lab Tours</h2>
+            <p>Original content created by the Agarta team using 8K HDR & drone technology</p>
+        </div>
+
+        <div class="lab-tours-grid">
+            <div class="lab-card lab-museums">
+                <div class="lab-card-inner">
+                    <div class="lab-label">Agarta Original</div>
+                    <h3>Museum Series</h3>
+                    <p>Exclusive access to the world's greatest art & science museums in ultra-high definition.</p>
+                    <div class="lab-tech">Insta360 Pro 2 · 8K HDR</div>
+                    <button class="btn-lab">Explore Series</button>
+                </div>
+            </div>
+            <div class="lab-card lab-nature">
+                <div class="lab-card-inner">
+                    <div class="lab-label">Agarta Original</div>
+                    <h3>Nature Expeditions</h3>
+                    <p>Remote wilderness captured with DJI drone footage and photogrammetry scans.</p>
+                    <div class="lab-tech">DJI Pro · Drone Footage</div>
+                    <button class="btn-lab">View Expeditions</button>
+                </div>
+            </div>
+            <div class="lab-card lab-cities">
+                <div class="lab-card-inner">
+                    <div class="lab-label lab-new">New</div>
+                    <h3>City Stories</h3>
+                    <p>Narrative-driven urban explorations blending street-level and aerial perspectives.</p>
+                    <div class="lab-tech">AI-Generated · Mixed Media</div>
+                    <button class="btn-lab">Watch Stories</button>
+                </div>
+            </div>
+            <div class="lab-card lab-space">
+                <div class="lab-card-inner">
+                    <div class="lab-label lab-exclusive">Exclusive</div>
+                    <h3>Space Missions</h3>
+                    <p>AI-reconstructed space missions with real agency data and photorealistic rendering.</p>
+                    <div class="lab-tech">Unreal Engine · WebXR</div>
+                    <button class="btn-lab">Launch Mission</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7 — REAL-TIME DATA & SATELLITES -->
+    <section class="satellite-section" id="data">
+        <div class="satellite-inner">
+            <div class="satellite-left">
+                <h2>Real-Time Data<br>& Satellite Views</h2>
+                <p>Go beyond visuals. Overlay live scientific data from NASA, ESA, and Esri ArcGIS onto your explorations.</p>
+                <div class="data-layers">
+                    <div class="data-layer active-layer">
+                        <div class="layer-dot live-dot"></div>
+                        <div>
+                            <strong>Live Weather Patterns</strong>
+                            <span>Updated every 15 minutes</span>
+                        </div>
+                    </div>
+                    <div class="data-layer">
+                        <div class="layer-dot ndvi-dot"></div>
+                        <div>
+                            <strong>Vegetation Index (NDVI)</strong>
+                            <span>NASA EarthData</span>
+                        </div>
+                    </div>
+                    <div class="data-layer">
+                        <div class="layer-dot co2-dot"></div>
+                        <div>
+                            <strong>CO₂ & Pollution Maps</strong>
+                            <span>ESA Sentinel Hub</span>
+                        </div>
+                    </div>
+                    <div class="data-layer">
+                        <div class="layer-dot climate-dot"></div>
+                        <div>
+                            <strong>Climate Change Views</strong>
+                            <span>Esri ArcGIS Pro</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="satellite-partners">
+                    <span>Data from:</span>
+                    <div class="partner-logos-text">
+                        <span>NASA</span>
+                        <span>ESA</span>
+                        <span>Esri</span>
+                        <span>NOAA</span>
+                    </div>
+                </div>
+            </div>
+            <div class="satellite-right">
+                <div class="satellite-display">
+                    <div class="sat-screen">
+                        <div class="sat-grid"></div>
+                        <div class="sat-pulse"></div>
+                        <div class="sat-scan"></div>
+                        <div class="sat-data-point" style="top:30%; left:25%"><span>28°C</span></div>
+                        <div class="sat-data-point" style="top:55%; left:60%"><span>NDVI: 0.72</span></div>
+                        <div class="sat-data-point" style="top:20%; left:65%"><span>CO₂: 415ppm</span></div>
+                        <div class="sat-data-point" style="top:70%; left:35%"><span>Rain: 80%</span></div>
+                    </div>
+                    <div class="sat-label">LIVE SATELLITE FEED</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 8 — PERSONALIZED DISCOVERY -->
+    <section class="personalized-section" id="discover">
+        <div class="section-header light">
+            <h2>Personalized Discovery</h2>
+            <p>Your AI tour guide learns your interests and curates an experience just for you</p>
+        </div>
+        <div class="personalized-grid">
+            <div class="personal-card">
+                <div class="personal-icon">🗺️</div>
+                <h3>Saved Locations</h3>
+                <p>Bookmark destinations and return to them anytime across devices.</p>
+            </div>
+            <div class="personal-card featured-personal">
+                <div class="ai-avatar">
+                    <div class="ai-ring"></div>
+                    <div class="ai-core">AI</div>
+                </div>
+                <h3>AI Tour Guide</h3>
+                <p>Your personal guide narrates, answers questions, and adapts the journey to your pace in real time.</p>
+                <button class="btn-ai-guide">Meet Your Guide</button>
+            </div>
+            <div class="personal-card">
+                <div class="personal-icon">▶️</div>
+                <h3>Continue Exploring</h3>
+                <p>Pick up exactly where you left off in any tour, any session.</p>
+            </div>
+            <div class="personal-card">
+                <div class="personal-icon">⭐</div>
+                <h3>Recommended for You</h3>
+                <p>AI-matched tours based on your history, interests, and learning goals.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 9 — CALL TO ACTION -->
+    <section class="explore-cta" id="cta">
+        <div class="cta-explore-bg">
+            <div class="cta-ring r1"></div>
+            <div class="cta-ring r2"></div>
+        </div>
+        <div class="cta-explore-content">
+            <h2>Your Journey Starts Here</h2>
+            <p>Join millions of explorers discovering the world through AI-powered immersive experiences</p>
+            <div class="cta-explore-btns">
+                <button class="btn-explore-primary large">🌍 Start Tour</button>
+                <button class="btn-explore-secondary large">🎓 Join Virtual Campus</button>
+                <button class="btn-explore-ghost large">✏️ Create Your Own Tour</button>
+            </div>
+            <div class="cta-footnote">Free to start · No credit card required · Available on all devices</div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <p class="footer-copyright">© 2025 Agartha AI<br>All rights reserved. | Designed with purpose and powered by Kimuntu Power Inc.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+
+// EXPLORE PAGE — JAVASCRIPT
+
+document.addEventListener('DOMContentLoaded', () => {
+    initNavbar();
+    initStars();
+    initMapInteraction();
+    initMapFilters();
+    initTourTabs();
+    initScrollAnimations();
+    initLanguageSwitch();
+    initSmoothScroll();
+});
+
+// ── Smooth Scrolling ────────────────────
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+}
+
+// ── Navbar ──────────────────────────────
+function initNavbar() {
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const navbar = document.querySelector('.navbar');
+
+    if (hamburger) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+    }
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (hamburger) hamburger.classList.remove('active');
+            if (navMenu) navMenu.classList.remove('active');
+        });
+    });
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+        
+        updateActiveLink();
+    });
+}
+
+function updateActiveLink() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    let current = 'home';
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (window.scrollY >= (sectionTop - 100)) {
+            current = section.getAttribute('id');
+        }
+    });
+    
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+        }
+    });
+}
+
+// ── Language switch ──────────────────────
+function initLanguageSwitch() {
+    const langButtons = document.querySelectorAll('.lang-switch-btn');
+    const switchSlider = document.querySelector('.switch-slider');
+
+    langButtons.forEach((btn, index) => {
+        btn.addEventListener('click', () => {
+            langButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (switchSlider) {
+                switchSlider.style.transform = index === 0 ? 'translateX(0)' : 'translateX(100%)';
+            }
+        });
+    });
+}
+
+// ── Starfield ────────────────────────────
+function initStars() {
+    const container = document.getElementById('starsBg');
+    if (!container) return;
+
+    for (let i = 0; i < 180; i++) {
+        const star = document.createElement('div');
+        const size = Math.random() * 2.5 + 0.5;
+        star.style.cssText = `
+            position: absolute;
+            width: ${size}px;
+            height: ${size}px;
+            background: white;
+            border-radius: 50%;
+            top: ${Math.random() * 100}%;
+            left: ${Math.random() * 100}%;
+            opacity: ${Math.random() * 0.7 + 0.1};
+            animation: starTwinkle ${Math.random() * 4 + 2}s ease-in-out ${Math.random() * 4}s infinite;
+        `;
+        container.appendChild(star);
+    }
+
+    if (!document.getElementById('starStyle')) {
+        const style = document.createElement('style');
+        style.id = 'starStyle';
+        style.textContent = `
+            @keyframes starTwinkle {
+                0%,100% { opacity: 0.1; transform: scale(1); }
+                50% { opacity: 0.9; transform: scale(1.4); }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+}
+
+// ── World Map Interaction ────────────────
+function initMapInteraction() {
+    const continents = document.querySelectorAll('.continent');
+    const hotspots = document.querySelectorAll('.hotspot');
+    const tooltip = document.getElementById('mapTooltip');
+    const tooltipRegion = document.getElementById('tooltipRegion');
+    const tooltipCount = document.getElementById('tooltipCount');
+
+    const regionData = {
+        'North America': '4,200+ experiences',
+        'South America': '2,100+ experiences',
+        'Europe': '5,800+ experiences',
+        'Africa': '1,900+ experiences',
+        'Asia': '6,400+ experiences',
+        'Australia': '1,200+ experiences',
+        'New York, USA': '380+ experiences',
+        'Paris, France': '520+ experiences',
+        'Tokyo, Japan': '440+ experiences',
+        'Nairobi, Kenya': '210+ experiences',
+        'Sydney, Australia': '290+ experiences',
+        'Live: Climate Data': 'Real-time satellite feed',
+    };
+
+    const showTooltip = (el, name, e) => {
+        tooltipRegion.textContent = name;
+        tooltipCount.textContent = regionData[name] || '100+ experiences';
+        tooltip.classList.add('visible');
+        positionTooltip(e);
+    };
+
+    const positionTooltip = (e) => {
+        const mapRect = document.querySelector('.map-globe-visual').getBoundingClientRect();
+        const x = e.clientX - mapRect.left + 15;
+        const y = e.clientY - mapRect.top - 30;
+        tooltip.style.left = Math.min(x, mapRect.width - 200) + 'px';
+        tooltip.style.top = Math.max(y, 10) + 'px';
+    };
+
+    const hideTooltip = () => tooltip.classList.remove('visible');
+
+    continents.forEach(el => {
+        el.addEventListener('mouseenter', (e) => showTooltip(el, el.dataset.region, e));
+        el.addEventListener('mousemove', positionTooltip);
+        el.addEventListener('mouseleave', hideTooltip);
+        el.addEventListener('click', () => {
+            alert(`Launching ${el.dataset.region} experiences! (Coming soon)`);
+        });
+    });
+
+    hotspots.forEach(el => {
+        el.addEventListener('mouseenter', (e) => showTooltip(el, el.querySelector('title').textContent, e));
+        el.addEventListener('mousemove', positionTooltip);
+        el.addEventListener('mouseleave', hideTooltip);
+    });
+}
+
+// ── Map Filter Buttons ───────────────────
+function initMapFilters() {
+    const filters = document.querySelectorAll('.map-filter');
+    filters.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filters.forEach(f => f.classList.remove('active'));
+            btn.classList.add('active');
+        });
+    });
+}
+
+// ── Tour Tabs ────────────────────────────
+function initTourTabs() {
+    const tabs = document.querySelectorAll('.tour-tab');
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            const grid = document.getElementById('toursGrid');
+            grid.style.opacity = '0';
+            grid.style.transform = 'translateY(15px)';
+            setTimeout(() => {
+                grid.style.transition = 'all 0.4s ease';
+                grid.style.opacity = '1';
+                grid.style.transform = 'translateY(0)';
+            }, 50);
+        });
+    });
+}
+
+// ── Scroll-triggered Animations ──────────
+function initScrollAnimations() {
+    const targets = document.querySelectorAll(
+        '.cat-card, .tour-card, .lab-card, .personal-card, .space-feat, .data-layer'
+    );
+
+    targets.forEach((el, i) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = `opacity 0.6s ease ${(i % 4) * 0.1}s, transform 0.6s ease ${(i % 4) * 0.1}s`;
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    targets.forEach(el => observer.observe(el));
+}
+
+    </script>
+</body>
+</html>
