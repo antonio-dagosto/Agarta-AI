@@ -22,8 +22,13 @@ app.mount("/audio", StaticFiles(directory=AUDIO_DIR), name="audio")
 # --------------------
 # ENDPOINT
 # --------------------
+from fastapi import Form
+
 @app.post("/speech")
-async def speech(file: UploadFile = File(...)):
+async def speech(
+    file: UploadFile = File(...),
+    context: str = Form(...)
+):
     audio_id = str(uuid.uuid4())
     wav_path = os.path.join(AUDIO_DIR, f"{audio_id}.wav")
 
@@ -43,7 +48,7 @@ async def speech(file: UploadFile = File(...)):
     chat = openai_client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
-            {"role": "system", "content": "You are a helpful VR assistant."},
+            {"role": "system", "content": context}
             {"role": "user", "content": user_text}
         ]
     )
@@ -64,5 +69,9 @@ async def speech(file: UploadFile = File(...)):
 
     return JSONResponse({
         "text": reply,
-        "audio_url": f"/audio/{audio_id}.mp3"
+        "audio_url": f"https://aiserverpy.onrender.com/audio/{audio_id}.mp3"
     })
+
+@app.get("/")
+def health():
+    return {"status":"ok"}
