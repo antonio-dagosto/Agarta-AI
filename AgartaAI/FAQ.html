@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agarta AI | Frequently Asked Questions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* ══════════ VARIABLES ══════════ */
+        :root {
+            --green: #00a86b;
+            --green-dark: #00925d;
+            --green-deeper: #004d33;
+            --green-light: #d4f4dd;
+            --green-lighter: #eafaf0;
+            --black: #111;
+            --white: #fff;
+            --gray-50: #f8faf9;
+            --gray-100: #f0f4f2;
+            --gray-300: #ccc;
+            --gray-500: #777;
+            --gray-700: #444;
+            --font-display: 'Bebas Neue', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+            --font-mono: 'Space Mono', monospace;
+        }
+
+        html{scroll-behavior:smooth;scroll-padding-top:80px}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.6;
+            color: #333;
+            -webkit-font-smoothing: antialiased;
+            background: var(--white);
+        }
+
+        /* ══════════ NAVBAR ══════════ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
+        }
+        .navbar.scrolled {
+            background: rgba(0,0,0,0.97);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+        }
+        .nav-container {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 72px;
+        }
+        .nav-logo a { display: flex; align-items: center; text-decoration: none; }
+        .nav-logo img { height: 150px; width: auto; transition: transform 0.3s ease; }
+        .nav-logo img:hover { transform: scale(1.04); }
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+        .nav-link {
+            color: rgba(255,255,255,0.75);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            transition: color 0.3s ease;
+            padding: 6px 0;
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--green);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover, .nav-link.active { color: #fff; }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+        .nav-cta { display: flex; align-items: center; }
+        .nav-btn {
+            padding: 10px 24px;
+            background: var(--green);
+            color: #fff;
+            border: 2px solid var(--green);
+            border-radius: 6px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .nav-btn:hover { background: transparent; color: var(--green); }
+        .nav-language { display: flex; align-items: center; margin-left: 16px; }
+        .language-switch {
+            position: relative;
+            display: flex;
+            background: rgba(255,255,255,0.08);
+            border-radius: 50px;
+            padding: 3px;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        .lang-switch-btn {
+            position: relative;
+            padding: 6px 14px;
+            background: transparent;
+            border: none;
+            color: rgba(255,255,255,0.5);
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+            font-family: var(--font-mono);
+            transition: color 0.3s ease;
+            z-index: 2;
+            min-width: 40px;
+        }
+        .lang-switch-btn.active { color: #fff; }
+        .switch-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: calc(50% - 3px);
+            height: calc(100% - 6px);
+            background: var(--green);
+            border-radius: 50px;
+            transition: transform 0.3s ease;
+            z-index: 1;
+        }
+        .nav-auth-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 20px;
+            background: transparent;
+            color: rgba(255,255,255,0.85);
+            border: 1.5px solid rgba(255,255,255,0.25);
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            margin-left: 12px;
+        }
+        .nav-auth-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+        .nav-auth-btn:hover {
+            background: var(--green);
+            border-color: var(--green);
+            color: #fff;
+        }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
+        .hamburger .bar { width: 24px; height: 2px; background: #fff; transition: all 0.3s ease; border-radius: 2px; }
+        .hamburger.active .bar:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.active .bar:nth-child(2) { opacity: 0; }
+        .hamburger.active .bar:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        /* ══════════ HERO BANNER ══════════ */
+        .faq-hero {
+            padding: 160px 20px 80px;
+            background: linear-gradient(145deg, #007a4d 0%, #00a86b 40%, #00c77b 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .faq-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -30%;
+            width: 160%;
+            height: 200%;
+            background: radial-gradient(ellipse at 30% 50%, rgba(255,255,255,0.06) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .faq-hero::after {
+            content: '?';
+            position: absolute;
+            bottom: -40px;
+            right: 5%;
+            font-size: 28rem;
+            font-family: var(--font-display);
+            color: rgba(255,255,255,0.04);
+            line-height: 1;
+            pointer-events: none;
+        }
+        .faq-hero h1 {
+            font-family: var(--font-display);
+            font-size: 4.5rem;
+            letter-spacing: 3px;
+            color: var(--white);
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+        }
+        .faq-hero p {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.88);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ══════════ SEARCH BAR ══════════ */
+        .search-section {
+            max-width: 680px;
+            margin: -32px auto 0;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+        .search-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .search-icon {
+            position: absolute;
+            left: 22px;
+            width: 22px;
+            height: 22px;
+            color: var(--gray-500);
+            pointer-events: none;
+        }
+        .search-input {
+            width: 100%;
+            padding: 20px 24px 20px 56px;
+            border: none;
+            border-radius: 14px;
+            font-size: 1.05rem;
+            font-family: var(--font-body);
+            background: var(--white);
+            color: var(--black);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06);
+            outline: none;
+            transition: box-shadow 0.3s ease;
+        }
+        .search-input::placeholder { color: #bbb; }
+        .search-input:focus {
+            box-shadow: 0 8px 40px rgba(0,168,107,0.15), 0 0 0 3px rgba(0,168,107,0.12);
+        }
+        .search-count {
+            text-align: center;
+            margin-top: 14px;
+            font-size: 0.85rem;
+            color: var(--gray-500);
+            font-family: var(--font-mono);
+            min-height: 1.3em;
+        }
+
+        /* ══════════ QUICK LINKS ══════════ */
+        .quick-links {
+            max-width: 900px;
+            margin: 40px auto 10px;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        .quick-link {
+            padding: 8px 20px;
+            border: 1.5px solid #dce8e0;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--green-dark);
+            background: var(--white);
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-decoration: none;
+            font-family: var(--font-body);
+        }
+        .quick-link:hover, .quick-link.active {
+            background: var(--green);
+            color: var(--white);
+            border-color: var(--green);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,168,107,0.2);
+        }
+
+        /* ══════════ FAQ SECTIONS ══════════ */
+        .faq-container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 50px 20px 80px;
+        }
+        .faq-section {
+            margin-bottom: 48px;
+        }
+        .faq-section.hidden { display: none; }
+
+        .faq-section-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 24px;
+            padding-bottom: 14px;
+            border-bottom: 2px solid var(--green-light);
+        }
+        .faq-section-emoji {
+            font-size: 1.6rem;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--green-lighter);
+            border-radius: 12px;
+            flex-shrink: 0;
+        }
+        .faq-section-title {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            letter-spacing: 1.5px;
+            color: var(--green-dark);
+        }
+
+        /* ══════════ ACCORDION ITEMS ══════════ */
+        .faq-item {
+            background: var(--white);
+            border: 1.5px solid #e8efe9;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .faq-item.hidden { display: none; }
+        .faq-item:hover { border-color: #c0dfc8; }
+        .faq-item.open {
+            border-color: var(--green);
+            box-shadow: 0 4px 20px rgba(0,168,107,0.08);
+        }
+        .faq-question {
+            width: 100%;
+            padding: 20px 24px;
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 1.02rem;
+            font-weight: 600;
+            font-family: var(--font-body);
+            color: var(--black);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            transition: color 0.2s ease;
+        }
+        .faq-question:hover { color: var(--green-dark); }
+        .faq-item.open .faq-question { color: var(--green-dark); }
+
+        .faq-chevron {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: var(--gray-500);
+        }
+        .faq-item.open .faq-chevron {
+            transform: rotate(180deg);
+            color: var(--green);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), padding 0.35s ease;
+        }
+        .faq-item.open .faq-answer {
+            max-height: 600px;
+        }
+        .faq-answer-inner {
+            padding: 0 24px 22px;
+            font-size: 0.95rem;
+            color: var(--gray-700);
+            line-height: 1.75;
+        }
+        .faq-answer-inner ul {
+            margin: 10px 0;
+            padding-left: 22px;
+        }
+        .faq-answer-inner li {
+            margin-bottom: 6px;
+        }
+        .faq-answer-inner li::marker {
+            color: var(--green);
+        }
+        .faq-learn-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 12px;
+            padding: 7px 16px;
+            background: var(--green-lighter);
+            color: var(--green-dark);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+        .faq-learn-more:hover {
+            background: var(--green);
+            color: var(--white);
+        }
+        .faq-learn-more svg { width: 14px; height: 14px; }
+
+        /* No results */
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            display: none;
+        }
+        .no-results.visible { display: block; }
+        .no-results-icon {
+            font-size: 3.5rem;
+            margin-bottom: 16px;
+        }
+        .no-results h3 {
+            font-size: 1.3rem;
+            color: var(--black);
+            margin-bottom: 8px;
+        }
+        .no-results p {
+            color: var(--gray-500);
+            font-size: 0.95rem;
+        }
+
+        /* ══════════ CTA BANNER ══════════ */
+        .faq-cta {
+            background: linear-gradient(135deg, var(--green-deeper) 0%, var(--green-dark) 100%);
+            padding: 70px 20px;
+            text-align: center;
+            color: var(--white);
+        }
+        .faq-cta h2 {
+            font-family: var(--font-display);
+            font-size: 2.6rem;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+        .faq-cta p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 32px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .faq-cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .faq-cta-btn {
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .faq-cta-btn-primary {
+            background: var(--white);
+            color: var(--green-dark);
+            border: 2px solid var(--white);
+        }
+        .faq-cta-btn-primary:hover {
+            background: transparent;
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+        .faq-cta-btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255,255,255,0.4);
+        }
+        .faq-cta-btn-secondary:hover {
+            border-color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* ══════════ FOOTER ══════════ */
+        .footer {
+            background: #000000;
+            color: var(--white);
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .footer-copyright {
+            font-size: 0.95rem;
+            opacity: 0.85;
+            line-height: 1.6;
+        }
+
+        /* ══════════ RESPONSIVE ══════════ */
+        @media (max-width: 768px) {
+            .nav-container { padding: 0 20px; }
+            .nav-menu {
+                position: fixed; left: -100%; top: 72px; flex-direction: column;
+                background: rgba(0,0,0,0.98); width: 100%; text-align: center;
+                transition: left 0.3s ease; gap: 0; padding: 24px 0;
+            }
+            .nav-menu.active { left: 0; }
+            .nav-item { width: 100%; padding: 14px 0; }
+            .nav-link { font-size: 1.1rem; }
+            .nav-cta { display: none; }
+            .nav-language {
+                position: fixed; bottom: 20px; right: 20px;
+                background: rgba(0,0,0,0.95); padding: 6px; border-radius: 50px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.5); z-index: 1001; margin-left: 0;
+            }
+            .nav-auth-btn { display: none; }
+            .hamburger { display: flex; }
+
+            .faq-hero { padding: 130px 20px 60px; }
+            .faq-hero h1 { font-size: 3rem; }
+            .faq-hero p { font-size: 1rem; }
+            .faq-hero::after { font-size: 16rem; right: -5%; bottom: -30px; }
+
+            .search-section { margin-top: -26px; }
+            .search-input { padding: 16px 20px 16px 50px; font-size: 0.95rem; }
+
+            .quick-links { gap: 8px; }
+            .quick-link { padding: 6px 14px; font-size: 0.8rem; }
+
+            .faq-section-title { font-size: 1.5rem; }
+            .faq-question { padding: 16px 18px; font-size: 0.95rem; }
+            .faq-answer-inner { padding: 0 18px 18px; font-size: 0.9rem; }
+
+            .faq-cta h2 { font-size: 2rem; }
+            .faq-cta-buttons { flex-direction: column; align-items: center; }
+            .faq-cta-btn { width: 80%; justify-content: center; }
+        }
+    
+/* PAGES DROPDOWN */
+.pages-dropdown{position:relative;margin-left:12px}
+.pages-dd-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 20px;background:var(--green);color:#fff;border:none;border-radius:50px;font-size:.82rem;font-weight:600;font-family:inherit;cursor:pointer;transition:all .3s ease;white-space:nowrap}
+.pages-dd-btn:hover{background:var(--green-dark);transform:translateY(-1px)}
+.pages-dd-btn svg{width:16px;height:16px;transition:transform .3s ease}
+.pages-dropdown.open .pages-dd-btn svg{transform:rotate(180deg)}
+.pages-dd-menu{position:absolute;top:calc(100% + 10px);right:0;min-width:220px;background:rgba(10,26,18,0.97);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:8px;opacity:0;visibility:hidden;transform:translateY(-8px);transition:all .3s ease;z-index:2000;box-shadow:0 16px 50px rgba(0,0,0,0.5)}
+.pages-dropdown.open .pages-dd-menu{opacity:1;visibility:visible;transform:translateY(0)}
+.pages-dd-menu a{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;font-size:.85rem;font-weight:500;color:rgba(255,255,255,0.75);transition:all .2s ease;text-decoration:none}
+.pages-dd-menu a:hover{background:rgba(0,168,107,0.12);color:#fff}
+.pages-dd-menu a.dd-active{color:var(--green-light);background:rgba(0,168,107,0.08)}
+.pages-dd-menu a span{font-size:1rem}
+@media(max-width:768px){.pages-dropdown{display:none}}
+
+    </style>
+</head>
+<body>
+
+    <!-- ══════════ NAVBAR ══════════ -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo"><a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;"><img src="Media/LOGO 3.png" alt="Agarta AI Logo"></a></div>
+            <ul class="nav-menu" id="navMenu">
+            <li class="nav-item"><a href="#faq-general" class="nav-link">General</a></li>
+            <li class="nav-item"><a href="#faq-technology" class="nav-link">Tech</a></li>
+            <li class="nav-item"><a href="#faq-education" class="nav-link">Education</a></li>
+            <li class="nav-item"><a href="#faq-pricing" class="nav-link">Pricing</a></li>
+            <li class="nav-item"><a href="#faq-support" class="nav-link">Support</a></li>
+            <li class="nav-item"><a href="#faq-security" class="nav-link">Security</a></li>
+            <li class="nav-item"><a href="#faq-integrations" class="nav-link">Integrations</a></li>
+        </ul>
+            <div class="nav-cta">
+                <button class="nav-btn" onclick="window.location.href='index.html#contact'">Get Started</button>
+            </div>
+            <div class="nav-language">
+                <div class="language-switch">
+                    <button class="lang-switch-btn active" data-lang="en">EN</button>
+                    <button class="lang-switch-btn" data-lang="fr">FR</button>
+                    <div class="switch-slider"></div>
+                </div>
+            </div>
+            <button class="nav-auth-btn">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                Sign Up / Login
+            </button>
+            <div class="pages-dropdown" id="pagesDropdown">
+            <button class="pages-dd-btn" id="pagesBtn">Features <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <div class="pages-dd-menu">
+                <a href="index.html"><span>🏠</span>Home</a>
+                <a href="explore.html"><span>🌍</span>Explore</a>
+                <a href="play_games.html"><span>🎮</span>Play & Games</a>
+                <a href="Virtual_campus.html"><span>🎓</span>Virtual Campus</a>
+                <a href="events.html"><span>🎟</span>Events</a>
+                <a href="marketplace.html"><span>🛒</span>Marketplace</a>
+                <a href="technologies.html"><span>⚙️</span>Technologies</a>
+                <a href="lab_tours.html"><span>🎬</span>Lab Tours</a>
+                <a href="about.html"><span>ℹ️</span>About</a>
+                <a href="help_support.html"><span>🆘</span>Help</a>
+                <a href="contact.html"><span>📞</span>Contact</a>
+            </div>
+        </div>
+        <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ══════════ HERO ══════════ -->
+    <section class="faq-hero">
+        <h1>FREQUENTLY ASKED QUESTIONS</h1>
+        <p>Find answers to the most common questions about Agarta AI — the platform, features, pricing, and more.</p>
+    </section>
+
+    <!-- ══════════ SEARCH ══════════ -->
+    <div class="search-section">
+        <div class="search-wrapper">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" class="search-input" id="searchInput" placeholder="Search for a question...">
+        </div>
+        <p class="search-count" id="searchCount"></p>
+    </div>
+
+    <!-- ══════════ QUICK LINKS ══════════ -->
+    <div class="quick-links" id="quickLinks">
+        <button class="quick-link active" data-filter="all">All</button>
+        <button class="quick-link" data-filter="general">General</button>
+        <button class="quick-link" data-filter="education">Education</button>
+        <button class="quick-link" data-filter="technology">Technology</button>
+        <button class="quick-link" data-filter="integrations">Integrations</button>
+        <button class="quick-link" data-filter="pricing">Pricing</button>
+        <button class="quick-link" data-filter="security">Security</button>
+        <button class="quick-link" data-filter="support">Support</button>
+    </div>
+
+    <!-- ══════════ FAQ CONTENT ══════════ -->
+    <div class="faq-container" id="faqContainer">
+
+        <!-- GENERAL -->
+        <div class="faq-section" id="faq-general" data-category="general">
+            <div class="faq-section-header">
+                <div class="faq-section-emoji">🧭</div>
+                <h2 class="faq-section-title">GENERAL QUESTIONS</h2>
+            </div>
+
+            <div class="faq-item" data-keywords="what is agarta ai platform">
+                <button class="faq-question">
+                    What is Agarta AI?
+                    <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Agarta AI is a next-generation immersive platform that combines artificial intelligence, 3D environments, virtual reality, and interactive media to help people explore the world, learn across disciplines, and experience knowledge in new ways. It brings together virtual tours, a virtual campus, games, media streaming, and real-time data into one unified experience.
+                    <br><a href="index.html#about" class="faq-learn-more">Learn more: About Agarta <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+                </div></div>
+            </div>
+
+            <div class="faq-item" data-keywords="who can use users audience students teachers">
+                <button class="faq-question">
+                    Who can use Agarta AI?
+                    <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Agarta AI is designed for everyone, including:
+                    <ul>
+                        <li>Individual users &amp; students (K–12, higher education)</li>
+                        <li>Teachers and educational institutions</li>
+                        <li>Researchers and academics</li>
+                        <li>Professionals and companies</li>
+                        <li>Museums, NGOs, and government organizations</li>
+                        <li>Content creators and trainers</li>
+                        <li>Lifelong learners worldwide</li>
+                    </ul>
+                    The platform adapts its experience based on user profile and needs.
+                </div></div>
+            </div>
+
+            <div class="faq-item" data-keywords="technical skills easy beginner friendly">
+                <button class="faq-question">
+                    Do I need technical skills to use Agarta?
+                    <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    No. Agarta is built to be intuitive and user-friendly. Users can explore, learn, and interact without technical knowledge. Advanced tools are available for educators, researchers, and professionals who need deeper functionality.
+                </div></div>
+            </div>
+
+            <div class="faq-item" data-keywords="worldwide global available countries languages">
+                <button class="faq-question">
+                    Is Agarta available worldwide?
+                    <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Yes. Agarta is designed as a global platform with multilingual support and cloud-based access, making it usable anywhere in the world with an internet connection.
+                </div></div>
+            </div>
+        </div>
+
+        <!-- EDUCATION -->
+        <div class="faq-section" id="faq-education" data-category="education">
+            <div class="faq-section-header">
+                <div class="faq-section-emoji">🎓</div>
+                <h2 class="faq-section-title">EDUCATION & LEARNING</h2>
+            </div>
+
+            <div class="faq-item" data-keywords="virtual campus learning environment classroom">
+                <button class="faq-question">
+                    What is Agarta Virtual Campus?
+                    <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    The Virtual Campus is Agarta's immersive learning environment where users can:
+                    <ul>
+                        <li>Attend virtual classrooms</li>
+                        <li>Explore XR labs and simulations</li>
+                        <li>Join workshops, seminars, and events</li>
+                        <li>Learn subjects such as science, arts, technology, agriculture, and more</li>
+                    </ul>
+                    It supports formal education, professional training, and self-learning.
+                    <br><a href="Virtual_campus.html" class="faq-learn-more">Learn more: Virtual Campus <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+                </div></div>
+            </div>
+
+            <div class="faq-item" data-keywords="schools universities institutions curriculum">
+                <button class="faq-question">
+                    Is Agarta suitable for schools and universities?
+                    <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Yes. Agarta is designed for educational institutions and supports:
+                    <ul>
+                        <li>Curriculum integration</li>
+                        <li>Virtual field trips</li>
+                        <li>Remote and hybrid learning</li>
+                        <li>Teacher-led and self-paced experiences</li>
+                        <li>Safe learning environments for students</li>
+                    </ul>
+                    Educational licensing options are available.
+                </div></div>
+            </div>
+
+            <div class="faq-item" data-keywords="kids children safe parental controls age">
+                <button class="faq-question">
+                    Is Agarta safe for kids?
+                    <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Yes. Agarta includes child-safe design principles such as age-appropriate content, controlled access to media and web content, moderated experiences, and parental and institutional controls. Agarta follows responsible digital learning standards.
+                </div></div>
+            </div>
+
+            <div class="faq-item" data-keywords="research academic 3d data collaborate">
+                <button class="faq-question">
+                    Can Agarta be used for research and academic work?
+                    <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Yes. Researchers and academics can use Agarta to visualize data in 3D, explore satellite and environmental data, simulate environments and systems, and collaborate virtually across institutions.
+                </div></div>
+            </div>
+        </div>
+
+        <!-- TECHNOLOGY -->
+        <div class="faq-section" id="faq-technology" data-category="technology">
+            <div class="faq-section-header">
+                <div class="faq-section-emoji">🧠</div>
+                <h2 class="faq-section-title">TECHNOLOGY & FEATURES</h2>
+            </div>
+
+            <div class="faq-item" data-keywords="technologies ai machine learning 3d engine unreal unity">
+                <button class="faq-question">
+                    What technologies power Agarta AI?
+                    <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Agarta uses a combination of:
+                    <ul>
+                        <li>Artificial Intelligence &amp; Machine Learning</li>
+                        <li>3D engines (Unreal Engine, Unity)</li>
+                        <li>WebXR &amp; immersive web technologies</li>
+                        <li>Satellite &amp; geospatial data</li>
+                        <li>Cloud computing &amp; APIs</li>
+                    </ul>
+                    <a href="#" class="faq-learn-more">Learn more: Technologies <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+                </div></div>
+            </div>
+
+            <div class="faq-item" data-keywords="vr ar mr virtual augmented mixed reality headset">
+                <button class="faq-question">
+                    Does Agarta support VR, AR, and MR?
+                    <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Yes. Agarta supports web (desktop &amp; mobile), VR headsets, and AR/MR devices. The experience automatically adapts based on the device you're using.
+                </div></div>
+            </div>
+
+            <div class="faq-item" data-keywords="devices compatible desktop mobile phone tablet quest">
+                <button class="faq-question">
+                    What devices are compatible with Agarta?
+                    <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Agarta works on desktop &amp; laptop computers, smartphones &amp; tablets (iOS &amp; Android), VR headsets (Meta Quest, HTC, Pico, etc.), and AR/MR devices where supported. No special hardware is required for basic access.
+                </div></div>
+            </div>
+        </div>
+
+        <!-- INTEGRATIONS -->
+        <div class="faq-section" id="faq-integrations" data-category="integrations">
+            <div class="faq-section-header">
+                <div class="faq-section-emoji">🔗</div>
+                <h2 class="faq-section-title">INTEGRATIONS & CONTENT</h2>
+            </div>
+
+            <div class="faq-item" data-keywords="integrate platforms mapping satellite media streaming">
+                <button class="faq-question">
+                    Does Agarta integrate with other platforms?
+                    <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Yes. Agarta integrates with mapping and satellite services, media and streaming platforms, educational and research data sources, and VR cameras and drones.
+                    <br><a href="#" class="faq-learn-more">Learn more: Integrations <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+                </div></div>
+            </div>
+
+            <div class="faq-item" data-keywords="content create original tours 360 video 3d simulation">
+                <button class="faq-question">
+                    Does Agarta create its own content?
+                    <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Yes. Agarta produces original virtual tours, 360° videos, 3D simulations, and interactive environments. Content can be created using professional cameras, drones, and 3D engines.
+                </div></div>
+            </div>
+        </div>
+
+        <!-- PRICING -->
+        <div class="faq-section" id="faq-pricing" data-category="pricing">
+            <div class="faq-section-header">
+                <div class="faq-section-emoji">💰</div>
+                <h2 class="faq-section-title">PRICING & ACCESS</h2>
+            </div>
+
+            <div class="faq-item" data-keywords="free price cost subscription paid plan">
+                <button class="faq-question">
+                    Is Agarta free to use?
+                    <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Agarta offers free access to selected experiences, paid subscriptions for advanced features, institutional licensing for schools and organizations, and enterprise solutions for professional use. Pricing depends on user type and features.
+                    <br><a href="#" class="faq-learn-more">Learn more: Pricing <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+                </div></div>
+            </div>
+
+            <div class="faq-item" data-keywords="demo trial pilot request institution">
+                <button class="faq-question">
+                    Can institutions request a demo?
+                    <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Yes. Schools, universities, companies, NGOs, and governments can request demos and pilot programs tailored to their needs.
+                    <br><a href="index.html#contact" class="faq-learn-more">Contact Us <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+                </div></div>
+            </div>
+        </div>
+
+        <!-- SECURITY -->
+        <div class="faq-section" id="faq-security" data-category="security">
+            <div class="faq-section-header">
+                <div class="faq-section-emoji">🔐</div>
+                <h2 class="faq-section-title">SECURITY & PRIVACY</h2>
+            </div>
+
+            <div class="faq-item" data-keywords="data secure encryption cloud privacy protection">
+                <button class="faq-question">
+                    Is my data secure on Agarta?
+                    <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    Yes. Agarta prioritizes data protection through secure cloud infrastructure, encrypted communications, access control and permissions, and compliance with international privacy standards.
+                </div></div>
+            </div>
+
+            <div class="faq-item" data-keywords="share sell data personal privacy policy">
+                <button class="faq-question">
+                    Does Agarta share user data?
+                    <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    No personal data is sold. Data is used only to improve the platform experience and provide services, in accordance with privacy policies.
+                    <br><a href="#" class="faq-learn-more">Learn more: Privacy Policy <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+                </div></div>
+            </div>
+        </div>
+
+        <!-- SUPPORT -->
+        <div class="faq-section" id="faq-support" data-category="support">
+            <div class="faq-section-header">
+                <div class="faq-section-emoji">🆘</div>
+                <h2 class="faq-section-title">SUPPORT & HELP</h2>
+            </div>
+
+            <div class="faq-item" data-keywords="help problem support center tutorials guides customer">
+                <button class="faq-question">
+                    How can I get help if I have a problem?
+                    <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    You can visit the Help Center, browse tutorials and guides, or contact customer support directly.
+                    <br><a href="#" class="faq-learn-more">Get help: Help &amp; Support <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+                </div></div>
+            </div>
+
+            <div class="faq-item" data-keywords="contact reach email form inquiry partnership">
+                <button class="faq-question">
+                    How can I contact Agarta?
+                    <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    You can reach us through the contact form on the website, institutional or partnership inquiries, and support channels.
+                    <br><a href="index.html#contact" class="faq-learn-more">Contact page <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+                </div></div>
+            </div>
+        </div>
+
+        <!-- No results message -->
+        <div class="no-results" id="noResults">
+            <div class="no-results-icon">🔍</div>
+            <h3>No matching questions found</h3>
+            <p>Try different keywords or browse all categories above.</p>
+        </div>
+    </div>
+
+    <!-- ══════════ CTA ══════════ -->
+    <section class="faq-cta">
+        <h2>STILL HAVE QUESTIONS?</h2>
+        <p>Our team is ready to help you explore Agarta AI and find the right solution for your needs.</p>
+        <div class="faq-cta-buttons">
+            <a href="index.html#contact" class="faq-cta-btn faq-cta-btn-primary">Contact Us</a>
+            <a href="#" class="faq-cta-btn faq-cta-btn-secondary">Request a Demo</a>
+        </div>
+    </section>
+
+    <!-- ══════════ FOOTER ══════════ -->
+    <footer class="footer">
+        <p class="footer-copyright">© 2025 Agartha AI | A Hope Land Canada Inc. Innovation<br>All rights reserved. | Designed with purpose and powered by Kimuntu Power Inc.</p>
+    </footer>
+
+    <!-- ══════════ JAVASCRIPT ══════════ -->
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // ── Navbar scroll & hamburger ──
+        const navbar = document.getElementById('navbar');
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        if (hamburger) {
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+        }
+
+        // ── Language switch ──
+        const langBtns = document.querySelectorAll('.lang-switch-btn');
+        const slider = document.querySelector('.switch-slider');
+        langBtns.forEach((btn, i) => {
+            btn.addEventListener('click', () => {
+                langBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                if (slider) slider.style.transform = i === 0 ? 'translateX(0)' : 'translateX(100%)';
+            });
+        });
+
+        // ── Accordion ──
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.parentElement;
+                const wasOpen = item.classList.contains('open');
+                // Close all in same section
+                item.closest('.faq-section').querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+                if (!wasOpen) item.classList.add('open');
+            });
+        });
+
+        // ── Category filter ──
+        const quickLinks = document.querySelectorAll('.quick-link');
+        const sections = document.querySelectorAll('.faq-section');
+
+        quickLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                quickLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                const filter = link.dataset.filter;
+
+                // Clear search
+                searchInput.value = '';
+                searchCount.textContent = '';
+                noResults.classList.remove('visible');
+
+                sections.forEach(sec => {
+                    sec.classList.remove('hidden');
+                    sec.querySelectorAll('.faq-item').forEach(item => item.classList.remove('hidden'));
+                });
+
+                if (filter !== 'all') {
+                    sections.forEach(sec => {
+                        sec.classList.toggle('hidden', sec.dataset.category !== filter);
+                    });
+                }
+            });
+        });
+
+        // ── Search ──
+        const searchInput = document.getElementById('searchInput');
+        const searchCount = document.getElementById('searchCount');
+        const noResults = document.getElementById('noResults');
+        const allItems = document.querySelectorAll('.faq-item');
+
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.toLowerCase().trim();
+
+            // Reset category filter to 'all'
+            quickLinks.forEach(l => l.classList.remove('active'));
+            document.querySelector('.quick-link[data-filter="all"]').classList.add('active');
+            sections.forEach(sec => sec.classList.remove('hidden'));
+
+            if (!query) {
+                allItems.forEach(item => item.classList.remove('hidden'));
+                searchCount.textContent = '';
+                noResults.classList.remove('visible');
+                // Show all sections
+                sections.forEach(sec => sec.classList.remove('hidden'));
+                return;
+            }
+
+            let visibleCount = 0;
+
+            allItems.forEach(item => {
+                const questionText = item.querySelector('.faq-question').textContent.toLowerCase();
+                const answerText = item.querySelector('.faq-answer-inner').textContent.toLowerCase();
+                const keywords = (item.dataset.keywords || '').toLowerCase();
+                const match = questionText.includes(query) || answerText.includes(query) || keywords.includes(query);
+                item.classList.toggle('hidden', !match);
+                if (match) visibleCount++;
+            });
+
+            // Hide sections with no visible items
+            sections.forEach(sec => {
+                const hasVisible = sec.querySelector('.faq-item:not(.hidden)');
+                sec.classList.toggle('hidden', !hasVisible);
+            });
+
+            searchCount.textContent = visibleCount > 0 ? `${visibleCount} result${visibleCount !== 1 ? 's' : ''} found` : '';
+            noResults.classList.toggle('visible', visibleCount === 0);
+        });
+    });
+    
+// Pages dropdown
+const pagesBtn=document.getElementById('pagesBtn');const pagesDd=document.getElementById('pagesDropdown');
+if(pagesBtn){pagesBtn.addEventListener('click',(e)=>{e.stopPropagation();pagesDd.classList.toggle('open')});}
+document.addEventListener('click',(e)=>{if(pagesDd&&!pagesDd.contains(e.target))pagesDd.classList.remove('open');});
+</script>
+</body>
+</html>

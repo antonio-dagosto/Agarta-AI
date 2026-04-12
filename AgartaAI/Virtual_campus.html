@@ -3,11 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Virtual Campus — Agarta AI</title>
+    <title>Virtual Campus | Agarta AI</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
+/* ═══════════════════════════════════════
+   AGARTA VIRTUAL CAMPUS PAGE
+   Dark theme + green accents
+   Fonts: Bebas Neue + DM Sans + Space Mono
+═══════════════════════════════════════ */
 
+html{scroll-behavior:smooth;scroll-padding-top:80px}
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
@@ -44,13 +50,15 @@ a { text-decoration: none; color: inherit; }
     padding: 0 20px;
 }
 
-/*NAVBAR*/
+/* ═══════════════════════════════════════
+   NAVBAR
+═══════════════════════════════════════ */
 .navbar {
     position: fixed;
     top: 0;
     width: 100%;
     height: 72px;
-    background: rgba(0, 0, 0, 0.92);
+    background: #000000;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     z-index: 1000;
@@ -73,10 +81,15 @@ a { text-decoration: none; color: inherit; }
     height: 100%;
 }
 
+.nav-logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
 .nav-logo img {
-    height: 42px;
+    height: 150px;
     width: auto;
-    filter: brightness(0) invert(1);
     transition: transform 0.3s ease;
 }
 
@@ -174,7 +187,9 @@ a { text-decoration: none; color: inherit; }
     border-radius: 2px;
 }
 
-/*COMMON*/
+/* ═══════════════════════════════════════
+   COMMON
+═══════════════════════════════════════ */
 section { padding: 100px 0; position: relative; }
 
 .section-badge {
@@ -272,7 +287,9 @@ section { padding: 100px 0; position: relative; }
 
 .btn-ghost:hover { color: var(--green-light); }
 
-/*1. HERO — CAMPUS OVERVIEW*/
+/* ═══════════════════════════════════════
+   1. HERO — CAMPUS OVERVIEW
+═══════════════════════════════════════ */
 .hero {
     position: relative;
     min-height: 100vh;
@@ -298,6 +315,23 @@ section { padding: 100px 0; position: relative; }
         linear-gradient(90deg, rgba(0, 168, 107, 0.06) 1px, transparent 1px);
     background-size: 50px 50px;
     mask-image: linear-gradient(to top, rgba(0,0,0,0.5), transparent 80%);
+}
+
+.hero-glow {
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 168, 107, 0.1), transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulseGlow 6s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+    50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
 }
 
 /* Floating campus buildings silhouettes */
@@ -409,7 +443,9 @@ section { padding: 100px 0; position: relative; }
     margin-top: 4px;
 }
 
-/*2. VIRTUAL CLASSROOMS*/
+/* ═══════════════════════════════════════
+   2. VIRTUAL CLASSROOMS
+═══════════════════════════════════════ */
 .classrooms {
     background: var(--bg-primary);
     border-top: 1px solid var(--border);
@@ -626,7 +662,9 @@ section { padding: 100px 0; position: relative; }
     letter-spacing: 1px;
 }
 
-/*3. XR LABS*/
+/* ═══════════════════════════════════════
+   3. XR LABS
+═══════════════════════════════════════ */
 .xr-labs {
     background: linear-gradient(180deg, var(--bg-primary), #081610, var(--bg-primary));
 }
@@ -716,7 +754,9 @@ section { padding: 100px 0; position: relative; }
     color: var(--text-secondary);
 }
 
-/*4. VIRTUAL ACADEMY*/
+/* ═══════════════════════════════════════
+   4. VIRTUAL ACADEMY
+═══════════════════════════════════════ */
 .academy {
     background: var(--bg-primary);
     border-top: 1px solid var(--border);
@@ -844,7 +884,9 @@ section { padding: 100px 0; position: relative; }
     font-family: var(--font-mono);
 }
 
-/*5. AI TUTORS*/
+/* ═══════════════════════════════════════
+   5. AI TUTORS
+═══════════════════════════════════════ */
 .ai-tutors {
     background: linear-gradient(180deg, var(--bg-primary), #081610, var(--bg-primary));
 }
@@ -1053,7 +1095,9 @@ section { padding: 100px 0; position: relative; }
     letter-spacing: 2px;
 }
 
-/*6. COLLABORATIVE LEARNING*/
+/* ═══════════════════════════════════════
+   6. COLLABORATIVE LEARNING
+═══════════════════════════════════════ */
 .collab {
     background: var(--bg-primary);
     border-top: 1px solid var(--border);
@@ -1188,7 +1232,9 @@ section { padding: 100px 0; position: relative; }
     text-transform: uppercase;
 }
 
-/*7. EVENTS & SEMINARS*/
+/* ═══════════════════════════════════════
+   7. EVENTS & SEMINARS
+═══════════════════════════════════════ */
 .events {
     background: linear-gradient(180deg, var(--bg-primary), #081610, var(--bg-primary));
 }
@@ -1290,7 +1336,9 @@ section { padding: 100px 0; position: relative; }
     gap: 20px;
 }
 
-/*8. WHO IS IT FOR*/
+/* ═══════════════════════════════════════
+   8. WHO IS IT FOR
+═══════════════════════════════════════ */
 .audience {
     background: var(--bg-primary);
     border-top: 1px solid var(--border);
@@ -1344,7 +1392,9 @@ section { padding: 100px 0; position: relative; }
     line-height: 1.5;
 }
 
-/*9. CTA*/
+/* ═══════════════════════════════════════
+   9. CTA
+═══════════════════════════════════════ */
 .cta-section {
     padding: 120px 0;
     text-align: center;
@@ -1352,6 +1402,26 @@ section { padding: 100px 0; position: relative; }
     overflow: hidden;
     background: linear-gradient(160deg, #050f0a 0%, #0a2818 50%, #050f0a 100%);
 }
+
+.cta-rings {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+}
+
+.cta-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 168, 107, 0.08);
+}
+
+.cta-ring:nth-child(1) { inset: 0; animation: ctaSpin 30s linear infinite; }
+.cta-ring:nth-child(2) { inset: 50px; animation: ctaSpin 25s linear infinite reverse; }
+.cta-ring:nth-child(3) { inset: 100px; animation: ctaSpin 20s linear infinite; }
+.cta-ring:nth-child(4) { inset: 150px; animation: ctaSpin 15s linear infinite reverse; }
 
 @keyframes ctaSpin {
     from { transform: rotate(0deg); }
@@ -1382,9 +1452,11 @@ section { padding: 100px 0; position: relative; }
     flex-wrap: wrap;
 }
 
-/*FOOTER*/
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
 .footer {
-    background: #020805;
+    background: #000000;
     border-top: 1px solid var(--border);
     padding: 60px 0 30px;
 }
@@ -1442,7 +1514,9 @@ section { padding: 100px 0; position: relative; }
     font-family: var(--font-mono);
 }
 
-/*SCROLL ANIMATIONS*/
+/* ═══════════════════════════════════════
+   SCROLL ANIMATIONS
+═══════════════════════════════════════ */
 .fade-in {
     opacity: 0;
     transform: translateY(30px);
@@ -1454,7 +1528,9 @@ section { padding: 100px 0; position: relative; }
     transform: translateY(0);
 }
 
-/*RESPONSIVE*/
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
 @media (max-width: 1024px) {
     .classrooms-layout { grid-template-columns: 1fr; }
     .xr-categories { grid-template-columns: repeat(3, 1fr); }
@@ -1515,6 +1591,21 @@ section { padding: 100px 0; position: relative; }
     .learning-exp { grid-template-columns: 1fr; }
     .collab-tools { grid-template-columns: 1fr; }
 }
+    
+/* PAGES DROPDOWN */
+.pages-dropdown{position:relative;margin-left:12px}
+.pages-dd-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 20px;background:var(--green-primary);color:#fff;border:none;border-radius:50px;font-size:.82rem;font-weight:600;font-family:inherit;cursor:pointer;transition:all .3s ease;white-space:nowrap}
+.pages-dd-btn:hover{background:var(--green-dark);transform:translateY(-1px)}
+.pages-dd-btn svg{width:16px;height:16px;transition:transform .3s ease}
+.pages-dropdown.open .pages-dd-btn svg{transform:rotate(180deg)}
+.pages-dd-menu{position:absolute;top:calc(100% + 10px);right:0;min-width:220px;background:rgba(10,26,18,0.97);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:8px;opacity:0;visibility:hidden;transform:translateY(-8px);transition:all .3s ease;z-index:2000;box-shadow:0 16px 50px rgba(0,0,0,0.5)}
+.pages-dropdown.open .pages-dd-menu{opacity:1;visibility:visible;transform:translateY(0)}
+.pages-dd-menu a{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;font-size:.85rem;font-weight:500;color:rgba(255,255,255,0.75);transition:all .2s ease;text-decoration:none}
+.pages-dd-menu a:hover{background:rgba(0,168,107,0.12);color:#fff}
+.pages-dd-menu a.dd-active{color:var(--green-light);background:rgba(0,168,107,0.08)}
+.pages-dd-menu a span{font-size:1rem}
+@media(max-width:768px){.pages-dropdown{display:none}}
+
     </style>
 </head>
 <body>
@@ -1522,16 +1613,16 @@ section { padding: 100px 0; position: relative; }
 <!-- ═══════════ NAVBAR ═══════════ -->
 <nav class="navbar" id="navbar">
     <div class="nav-container">
-        <a href="index.html" class="nav-logo">
-            <img src="Media/LOGO 3.png" alt="Agarta AI">
-        </a>
+        <div class="nav-logo"><a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;"><img src="Media/LOGO 3.png" alt="Agarta AI Logo"></a></div>
 
         <ul class="nav-menu" id="navMenu">
-            <li><a href="index.html" class="nav-link">Home</a></li>
-            <li><a href="explore.html" class="nav-link">Explore</a></li>
-            <li><a href="play-games.html" class="nav-link">Play & Games</a></li>
-            <li><a href="virtual-campus.html" class="nav-link active">Virtual Campus</a></li>
-            <li><a href="#" class="nav-link">Community</a></li>
+            <li><a href="#classrooms" class="nav-link">Classrooms</a></li>
+            <li><a href="#xr-labs" class="nav-link">XR Labs</a></li>
+            <li><a href="#academy" class="nav-link">Academy</a></li>
+            <li><a href="#ai-tutors" class="nav-link">AI Tutors</a></li>
+            <li><a href="#collab" class="nav-link">Collaborate</a></li>
+            <li><a href="#events" class="nav-link">Events</a></li>
+            <li><a href="#audience" class="nav-link">Who For</a></li>
         </ul>
 
         <div class="nav-right">
@@ -1540,7 +1631,22 @@ section { padding: 100px 0; position: relative; }
                 <button class="lang-btn active" data-lang="en">EN</button>
                 <button class="lang-btn" data-lang="es">FR</button>
             </div>
-            <div class="hamburger" id="hamburger">
+            <div class="pages-dropdown" id="pagesDropdown">
+            <button class="pages-dd-btn" id="pagesBtn">Features <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <div class="pages-dd-menu">
+                <a href="index.html"><span>🏠</span>Home</a>
+                <a href="explore.html"><span>🌍</span>Explore</a>
+                <a href="play_games.html"><span>🎮</span>Play & Games</a>
+                <a href="events.html"><span>🎟</span>Events</a>
+                <a href="marketplace.html"><span>🛒</span>Marketplace</a>
+                <a href="technologies.html"><span>⚙️</span>Technologies</a>
+                <a href="lab_tours.html"><span>🎬</span>Lab Tours</a>
+                <a href="about.html"><span>ℹ️</span>About</a>
+                <a href="help_support.html"><span>🆘</span>Help</a>
+                <a href="contact.html"><span>📞</span>Contact</a>
+            </div>
+        </div>
+        <div class="hamburger" id="hamburger">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -1564,6 +1670,7 @@ section { padding: 100px 0; position: relative; }
     </div>
 
     <div class="hero-content fade-in">
+        <div class="section-badge">🎓 Virtual Campus</div>
         <h1 class="hero-title">
             <span class="line">A NEW DIMENSION</span>
             <span class="line">OF <span class="text-accent">LEARNING</span></span>
@@ -1605,6 +1712,7 @@ section { padding: 100px 0; position: relative; }
     <div class="container">
         <div class="classrooms-layout">
             <div class="classrooms-left fade-in">
+                <div class="section-badge">📚 Classrooms</div>
                 <h2 class="section-title">INTERACTIVE VIRTUAL <span class="text-accent">CLASSROOMS</span></h2>
                 <p class="section-sub">
                     Agarta Virtual Classrooms recreate real learning spaces in 3D, allowing teachers and students to meet, interact, and learn together regardless of location.
@@ -1686,7 +1794,8 @@ section { padding: 100px 0; position: relative; }
 <section class="xr-labs" id="xr-labs">
     <div class="container">
         <div class="xr-header fade-in">
-            <h2 class="section-title">XR LABS - <span class="text-accent">LEARN BY DOING</span></h2>
+            <div class="section-badge">🔬 XR Labs</div>
+            <h2 class="section-title">XR LABS — <span class="text-accent">LEARN BY DOING</span></h2>
             <p class="section-sub">
                 XR Labs provide immersive, hands-on experimentation through virtual and mixed reality. Learners can explore complex systems safely, visually, and interactively.
             </p>
@@ -1745,6 +1854,7 @@ section { padding: 100px 0; position: relative; }
 <section class="academy" id="academy">
     <div class="container">
         <div class="academy-header fade-in">
+            <div class="section-badge">🏫 Academy</div>
             <h2 class="section-title">AGARTA VIRTUAL <span class="text-accent">ACADEMY</span></h2>
             <p class="section-sub">
                 The Virtual Academy offers structured learning paths across diverse fields, adapted for kids, students, professionals, and lifelong learners.
@@ -1843,6 +1953,7 @@ section { padding: 100px 0; position: relative; }
     <div class="container">
         <div class="ai-layout">
             <div class="ai-left fade-in">
+                <div class="section-badge">🧠 AI Tutors</div>
                 <h2 class="section-title">YOUR AI LEARNING <span class="text-accent">COMPANION</span></h2>
                 <p class="section-sub">
                     Agarta's AI tutors adapt to each learner's level, pace, and interests — offering explanations, feedback, and guidance in real time.
@@ -1931,6 +2042,7 @@ section { padding: 100px 0; position: relative; }
 <section class="collab" id="collab">
     <div class="container">
         <div class="collab-header fade-in">
+            <div class="section-badge">🤝 Collaboration</div>
             <h2 class="section-title">LEARN TOGETHER, <span class="text-accent">FROM ANYWHERE</span></h2>
             <p class="section-sub">
                 Agarta enables collaborative learning through shared virtual spaces where learners work together, exchange ideas, and build knowledge collectively.
@@ -1995,6 +2107,7 @@ section { padding: 100px 0; position: relative; }
 <section class="events" id="events">
     <div class="container">
         <div class="events-header fade-in">
+            <div class="section-badge">📅 Events</div>
             <h2 class="section-title">LIVE LEARNING & <span class="text-accent">GLOBAL EVENTS</span></h2>
             <p class="section-sub">
                 Agarta hosts live seminars, expert talks, workshops, and academic events inside immersive virtual venues.
@@ -2068,6 +2181,7 @@ section { padding: 100px 0; position: relative; }
 <section class="audience" id="audience">
     <div class="container">
         <div class="audience-header fade-in">
+            <div class="section-badge">👥 Audience</div>
             <h2 class="section-title">WHO IS THE VIRTUAL <span class="text-accent">CAMPUS FOR?</span></h2>
             <p class="section-sub">
                 Designed for every type of learner, educator, and institution around the world.
@@ -2118,9 +2232,10 @@ section { padding: 100px 0; position: relative; }
         <div class="cta-ring"></div>
     </div>
     <div class="cta-content fade-in">
-        <h2 class="cta-title"><span class="text-accent">BUILD THE FUTURE OF LEARNING WITH AGARTA</span></h2>
+        <div class="section-badge">🚀 Get Started</div>
+        <h2 class="cta-title">BUILD THE FUTURE OF <span class="text-accent">LEARNING</span> WITH AGARTA</h2>
         <p class="cta-sub">
-            <span class="text-accent">Join the next generation of education. Whether you're a student, educator, or institution - your virtual campus awaits.</span>
+            Join the next generation of education. Whether you're a student, educator, or institution — your virtual campus awaits.
         </p>
         <div class="cta-buttons">
             <button class="btn-primary">🎓 Join the Virtual Campus</button>
@@ -2142,8 +2257,8 @@ section { padding: 100px 0; position: relative; }
                 <h4>Platform</h4>
                 <ul>
                     <li><a href="explore.html">Explore</a></li>
-                    <li><a href="play-games.html">Play & Games</a></li>
-                    <li><a href="virtual-campus.html">Virtual Campus</a></li>
+                    <li><a href="play_games.html">Play & Games</a></li>
+                    <li><a href="Virtual_campus.html">Virtual Campus</a></li>
                     <li><a href="#">Community</a></li>
                 </ul>
             </div>
@@ -2166,7 +2281,8 @@ section { padding: 100px 0; position: relative; }
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025   Agarta AI. All rights reserved.</p>
+            <p>&copy; 2026 Agarta AI. All rights reserved.</p>
+            <p>Made with 🌍 for the future of learning</p>
         </div>
     </div>
 </footer>
@@ -2205,6 +2321,12 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Pages dropdown
+const pagesBtn=document.getElementById('pagesBtn');const pagesDd=document.getElementById('pagesDropdown');
+if(pagesBtn){pagesBtn.addEventListener('click',(e)=>{e.stopPropagation();pagesDd.classList.toggle('open')});}
+document.addEventListener('click',(e)=>{if(pagesDd&&!pagesDd.contains(e.target))pagesDd.classList.remove('open');});
 </script>
+
 </body>
 </html>

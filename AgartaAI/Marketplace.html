@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace Agarta AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+:root{--g:#00a86b;--gd:#00925d;--gp:#004d33;--gl:#00d485;--bk:#050f0a;--dk:#0a1a12;--cd:#0d1f15;--ch:#122a1d;--bd:rgba(255,255,255,0.07);--t1:rgba(255,255,255,0.88);--t2:rgba(255,255,255,0.55);--t3:rgba(255,255,255,0.3);--fd:'Bebas Neue',sans-serif;--fb:'DM Sans',sans-serif;--fm:'Space Mono',monospace}
+html{scroll-behavior:smooth;scroll-padding-top:80px}*{margin:0;padding:0;box-sizing:border-box}body{font-family:var(--fb);background:var(--bk);color:#fff;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}a{text-decoration:none;color:inherit}.ctn{max-width:1200px;margin:0 auto;padding:0 20px}
+
+/* NAVBAR */
+.nb{position:fixed;top:0;width:100%;height:72px;background:#000;backdrop-filter:blur(20px);z-index:1000;border-bottom:1px solid var(--bd);transition:all .3s ease}.nb.sc{box-shadow:0 4px 30px rgba(0,0,0,.5)}
+.nc{max-width:1320px;margin:0 auto;padding:0 40px;display:flex;justify-content:space-between;align-items:center;height:100%}
+.nl a{display:flex;align-items:center}.nl img{height:150px;width:auto;transition:transform .3s ease}.nl img:hover{transform:scale(1.04)}
+.nm{display:flex;list-style:none;gap:32px;align-items:center}.nk{color:rgba(255,255,255,.7);font-size:.9rem;font-weight:500;transition:color .3s ease;padding:6px 0;position:relative}.nk::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:2px;background:var(--g);transition:width .3s ease}.nk:hover,.nk.ac{color:#fff}.nk:hover::after,.nk.ac::after{width:100%}
+.nv{display:flex;align-items:center}.nb-btn{padding:10px 24px;background:var(--g);color:#fff;border:2px solid var(--g);border-radius:6px;font-size:.88rem;font-weight:600;font-family:inherit;cursor:pointer;transition:all .3s ease}.nb-btn:hover{background:transparent;color:var(--g)}
+.nlg{display:flex;align-items:center;margin-left:16px}.ls{position:relative;display:flex;background:rgba(255,255,255,.08);border-radius:50px;padding:3px;border:1px solid rgba(255,255,255,.15)}.lb{position:relative;padding:6px 14px;background:transparent;border:none;color:rgba(255,255,255,.5);border-radius:50px;cursor:pointer;font-size:.8rem;font-weight:600;font-family:var(--fm);transition:color .3s ease;z-index:2;min-width:40px}.lb.ac{color:#fff}.sl{position:absolute;top:3px;left:3px;width:calc(50% - 3px);height:calc(100% - 6px);background:var(--g);border-radius:50px;transition:transform .3s ease;z-index:1}
+.na{display:inline-flex;align-items:center;gap:8px;padding:9px 20px;background:transparent;color:rgba(255,255,255,.85);border:1.5px solid rgba(255,255,255,.25);border-radius:50px;font-size:.82rem;font-weight:600;font-family:inherit;cursor:pointer;transition:all .3s ease;white-space:nowrap;margin-left:12px}.na svg{width:18px;height:18px}.na:hover{background:var(--g);border-color:var(--g);color:#fff}
+.hb{display:none;flex-direction:column;cursor:pointer;gap:5px}.hb .br{width:24px;height:2px;background:#fff;transition:all .3s ease;border-radius:2px}.hb.ac .br:nth-child(1){transform:rotate(45deg) translate(5px,5px)}.hb.ac .br:nth-child(2){opacity:0}.hb.ac .br:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+/* SHARED */
+.bdg{display:inline-flex;align-items:center;gap:6px;background:rgba(0,168,107,.1);border:1px solid rgba(0,168,107,.25);padding:7px 16px;border-radius:30px;font-family:var(--fm);font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--gl);margin-bottom:18px}
+.st{font-family:var(--fd);font-size:clamp(2.4rem,5vw,3.8rem);letter-spacing:2px;line-height:1.1;margin-bottom:16px}.ss{font-size:1.05rem;color:#fff;max-width:600px;line-height:1.7}.ac2{color:var(--gl)}
+.bp{padding:14px 28px;background:var(--g);color:#fff;border:2px solid var(--g);border-radius:8px;font-family:inherit;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .3s ease;display:inline-flex;align-items:center;gap:10px}.bp:hover{background:var(--gd);transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,168,107,.3)}
+.bo{padding:14px 28px;background:transparent;color:#fff;border:2px solid rgba(255,255,255,.2);border-radius:8px;font-family:inherit;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .3s ease;display:inline-flex;align-items:center;gap:10px}.bo:hover{border-color:var(--g);color:var(--gl);transform:translateY(-2px)}
+.fi{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}.fi.vi{opacity:1;transform:translateY(0)}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:150px 20px 100px;overflow:hidden;background:linear-gradient(160deg,#001a0e 0%,var(--gp) 35%,#00704a 100%)}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 40% 60%,rgba(0,212,133,.06) 0%,transparent 55%),radial-gradient(ellipse at 75% 30%,rgba(0,168,107,.05) 0%,transparent 50%);pointer-events:none}
+.hero-g{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);background-size:70px 70px;mask-image:radial-gradient(ellipse 55% 50% at 50% 55%,black,transparent);pointer-events:none}
+.hc{position:relative;z-index:2;max-width:850px}
+.hero h1{font-family:var(--fd);font-size:clamp(3rem,7vw,5.5rem);letter-spacing:4px;line-height:1.05;margin-bottom:20px}
+.hero p{font-size:1.12rem;color:#fff;max-width:660px;margin:0 auto 40px;line-height:1.7}
+.hbs{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:50px}
+.hsts{display:flex;justify-content:center;gap:48px;flex-wrap:wrap}
+.hs{text-align:center}.hsn{font-family:var(--fd);font-size:2.4rem;color:var(--gl);letter-spacing:2px}.hsl{font-family:var(--fm);font-size:.68rem;color:#fff;letter-spacing:2px;text-transform:uppercase;margin-top:4px}
+
+/* SEARCH BAR */
+.search-sec{max-width:700px;margin:-30px auto 0;position:relative;z-index:10;padding:0 20px}
+.search-bar{display:flex;background:var(--cd);border:1px solid var(--bd);border-radius:14px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.3)}
+.search-bar input{flex:1;padding:18px 24px;background:transparent;border:none;color:#fff;font-size:.95rem;font-family:var(--fb);outline:none}
+.search-bar input::placeholder{color:var(--t3)}
+.search-bar button{padding:0 24px;background:var(--g);border:none;color:#fff;font-size:1rem;cursor:pointer;transition:background .3s ease;font-family:var(--fm);font-weight:700;letter-spacing:1px}
+.search-bar button:hover{background:var(--gd)}
+.filter-pills{display:flex;justify-content:center;gap:8px;margin-top:16px;flex-wrap:wrap}
+.fp{padding:7px 16px;background:rgba(255,255,255,.04);border:1px solid var(--bd);border-radius:50px;color:var(--t2);font-size:.78rem;font-family:var(--fm);cursor:pointer;transition:all .3s ease;letter-spacing:.5px}
+.fp:hover,.fp.ac{background:rgba(0,168,107,.15);border-color:rgba(0,168,107,.3);color:var(--gl)}
+
+/* SECTIONS */
+section{padding:100px 0;position:relative}
+.s-head{text-align:center;margin-bottom:50px}.s-head .ss{margin:0 auto}
+
+/* FEATURED PRODUCTS */
+.featured{background:var(--bk);border-top:1px solid var(--bd)}
+.feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.feat-card{background:var(--cd);border:1px solid var(--bd);border-radius:16px;overflow:hidden;transition:all .4s ease;cursor:pointer}
+.feat-card:hover{border-color:rgba(0,168,107,.3);transform:translateY(-5px);box-shadow:0 14px 45px rgba(0,168,107,.1)}
+.feat-img{height:140px;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative}
+.feat-tag{position:absolute;top:10px;left:10px;padding:4px 10px;border-radius:8px;font-family:var(--fm);font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.tag-trend{background:var(--g);color:#fff}
+.tag-new{background:rgba(255,180,0,.85);color:#1a1a1a}
+.tag-hot{background:rgba(255,68,68,.85);color:#fff}
+.tag-exc{background:rgba(138,68,204,.85);color:#fff}
+.feat-rating{position:absolute;top:10px;right:10px;font-family:var(--fm);font-size:.7rem;color:#ffcc00;background:rgba(0,0,0,.5);padding:3px 8px;border-radius:6px}
+.feat-body{padding:16px}
+.feat-body h4{font-size:.92rem;font-weight:600;margin-bottom:4px;line-height:1.3}
+.feat-body p{font-size:.78rem;color:var(--t3);margin-bottom:10px}
+.feat-price{display:flex;justify-content:space-between;align-items:center}
+.feat-price span{font-family:var(--fd);font-size:1.3rem;color:var(--gl);letter-spacing:1px}
+.feat-buy{padding:6px 16px;background:rgba(0,168,107,.12);border:1px solid rgba(0,168,107,.25);border-radius:8px;color:var(--gl);font-size:.75rem;font-weight:600;font-family:inherit;cursor:pointer;transition:all .3s ease}
+.feat-buy:hover{background:var(--g);color:#fff;border-color:var(--g)}
+
+/* COURSES */
+.courses{background:linear-gradient(180deg,var(--bk),#081610,var(--bk))}
+.course-cats{display:flex;justify-content:center;gap:8px;margin-bottom:40px;flex-wrap:wrap}
+.cc{padding:9px 20px;background:rgba(255,255,255,.04);border:1px solid var(--bd);border-radius:50px;color:var(--t2);font-size:.82rem;font-family:var(--fm);cursor:pointer;transition:all .3s ease}.cc:hover,.cc.ac{background:rgba(0,168,107,.15);border-color:rgba(0,168,107,.3);color:var(--gl)}
+.course-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.c-card{background:var(--cd);border:1px solid var(--bd);border-radius:18px;overflow:hidden;transition:all .4s ease;cursor:pointer}
+.c-card:hover{border-color:rgba(0,168,107,.3);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,168,107,.1)}
+.c-banner{height:120px;display:flex;align-items:center;justify-content:center;font-size:2.8rem;position:relative}
+.c-level{position:absolute;bottom:10px;left:10px;padding:4px 10px;background:rgba(0,0,0,.6);border-radius:6px;font-family:var(--fm);font-size:.6rem;letter-spacing:1px;color:var(--gl)}
+.c-lessons{position:absolute;bottom:10px;right:10px;padding:4px 10px;background:rgba(0,0,0,.6);border-radius:6px;font-family:var(--fm);font-size:.6rem;color:var(--t3)}
+.c-body{padding:20px}
+.c-body h4{font-size:1rem;font-weight:600;margin-bottom:6px}
+.c-body p{font-size:.85rem;color:var(--t2);line-height:1.5;margin-bottom:14px}
+.c-footer{display:flex;justify-content:space-between;align-items:center}
+.c-price{font-family:var(--fd);font-size:1.2rem;color:var(--gl);letter-spacing:1px}
+.c-price .c-old{font-size:.85rem;color:var(--t3);text-decoration:line-through;margin-left:8px;font-family:var(--fb)}
+.c-enroll{padding:8px 18px;background:var(--g);border:none;border-radius:8px;color:#fff;font-size:.8rem;font-weight:600;font-family:inherit;cursor:pointer;transition:all .3s ease}
+.c-enroll:hover{background:var(--gd);transform:translateY(-1px)}
+
+/* VIRTUAL ITEMS */
+.items{background:var(--bk);border-top:1px solid var(--bd)}
+.items-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.item-card{background:var(--cd);border:1px solid var(--bd);border-radius:16px;padding:24px 16px;text-align:center;transition:all .4s ease;cursor:pointer;position:relative;overflow:hidden}
+.item-card:hover{border-color:rgba(0,168,107,.3);transform:translateY(-5px);box-shadow:0 12px 40px rgba(0,168,107,.1)}
+.item-card.limited::before{content:'LIMITED';position:absolute;top:10px;right:-24px;background:rgba(255,68,68,.85);color:#fff;font-family:var(--fm);font-size:.55rem;font-weight:700;letter-spacing:1.5px;padding:3px 30px;transform:rotate(35deg)}
+.item-icon{font-size:2.8rem;margin-bottom:14px;display:block}
+.item-card h4{font-size:.88rem;font-weight:600;margin-bottom:4px}
+.item-card p{font-size:.72rem;color:var(--t3);font-family:var(--fm);margin-bottom:10px}
+.item-price{font-family:var(--fd);font-size:1.1rem;color:var(--gl);letter-spacing:1px}
+
+/* TOOLS */
+.tools{background:linear-gradient(180deg,var(--bk),#081610,var(--bk))}
+.tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.tool-card{background:var(--cd);border:1px solid var(--bd);border-radius:18px;padding:32px 26px;transition:all .4s ease;cursor:pointer;position:relative;overflow:hidden}
+.tool-card:hover{border-color:rgba(0,168,107,.3);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,168,107,.1)}
+.tool-card::after{content:'';position:absolute;top:0;left:0;width:4px;height:0;background:var(--g);transition:height .4s ease}.tool-card:hover::after{height:100%}
+.tool-icon{font-size:2rem;margin-bottom:16px;display:block}
+.tool-card h4{font-family:var(--fd);font-size:1.4rem;letter-spacing:1px;margin-bottom:8px}
+.tool-card>p{font-size:.88rem;color:var(--t2);line-height:1.6;margin-bottom:16px}
+.tool-tiers{display:flex;gap:8px;margin-bottom:16px}
+.tool-tier{padding:5px 14px;border-radius:20px;font-family:var(--fm);font-size:.68rem;letter-spacing:.5px}
+.tier-free{background:rgba(0,168,107,.1);border:1px solid rgba(0,168,107,.2);color:var(--gl)}
+.tier-basic{background:rgba(100,100,255,.1);border:1px solid rgba(100,100,255,.2);color:#8888ff}
+.tier-prem{background:rgba(255,180,0,.1);border:1px solid rgba(255,180,0,.2);color:#ffb400}
+.tool-price{font-family:var(--fd);font-size:1.2rem;color:var(--gl);letter-spacing:1px}
+
+/* GAMES */
+.games{background:var(--bk);border-top:1px solid var(--bd)}
+.games-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.game-card{background:var(--cd);border:1px solid var(--bd);border-radius:18px;overflow:hidden;transition:all .4s ease;cursor:pointer}
+.game-card:hover{border-color:rgba(0,168,107,.3);transform:translateY(-5px);box-shadow:0 14px 45px rgba(0,168,107,.1)}
+.game-thumb{height:160px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;position:relative}
+.game-play{position:absolute;width:48px;height:48px;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;border:1px solid rgba(255,255,255,.2);opacity:0;transition:all .3s ease}
+.game-card:hover .game-play{opacity:1;transform:scale(1.05)}
+.game-vr{position:absolute;top:10px;right:10px;padding:4px 10px;background:rgba(0,0,0,.6);border-radius:50px;font-family:var(--fm);font-size:.65rem;font-weight:700;color:#fff}
+.game-type{position:absolute;top:10px;left:10px;padding:4px 10px;border-radius:8px;font-family:var(--fm);font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.game-body{padding:20px}
+.game-body h4{font-size:1rem;font-weight:600;margin-bottom:6px}
+.game-body p{font-size:.85rem;color:var(--t2);line-height:1.5;margin-bottom:14px}
+.game-footer{display:flex;justify-content:space-between;align-items:center}
+.game-price{font-family:var(--fd);font-size:1.2rem;color:var(--gl);letter-spacing:1px}
+.game-opts{display:flex;gap:6px}
+.game-opt{padding:6px 14px;border-radius:8px;font-size:.72rem;font-weight:600;font-family:inherit;cursor:pointer;transition:all .3s ease;border:none}
+.opt-buy{background:var(--g);color:#fff}.opt-buy:hover{background:var(--gd)}
+.opt-rent{background:rgba(255,255,255,.06);color:var(--t2);border:1px solid var(--bd)}.opt-rent:hover{border-color:var(--g);color:var(--gl)}
+
+/* SUBSCRIPTIONS */
+.subs{background:linear-gradient(180deg,var(--bk),#081610,var(--bk))}
+.subs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1000px;margin:0 auto}
+.sub-card{background:var(--cd);border:1px solid var(--bd);border-radius:22px;padding:40px 30px;text-align:center;transition:all .4s ease;position:relative}
+.sub-card:hover{transform:translateY(-6px);box-shadow:0 16px 50px rgba(0,168,107,.12)}
+.sub-card.pop{border-color:var(--g);background:linear-gradient(160deg,#0d2a1a,#1a4030)}
+.sub-pop-tag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);padding:5px 18px;background:var(--g);border-radius:20px;font-family:var(--fm);font-size:.65rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#fff;white-space:nowrap}
+.sub-icon{font-size:2.5rem;margin-bottom:14px;display:block}
+.sub-card h3{font-family:var(--fd);font-size:1.8rem;letter-spacing:2px;margin-bottom:6px}
+.sub-price{font-family:var(--fd);font-size:2.5rem;color:var(--gl);letter-spacing:2px;margin-bottom:4px}.sub-price span{font-size:.9rem;color:var(--t3);font-family:var(--fm);letter-spacing:0}
+.sub-desc{font-size:.85rem;color:var(--t2);margin-bottom:24px}
+.sub-features{list-style:none;text-align:left;margin-bottom:28px}
+.sub-features li{padding:8px 0;font-size:.88rem;color:var(--t2);border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:10px}
+.sub-features li::before{content:'✓';color:var(--gl);font-weight:700;font-size:.8rem}
+.sub-btn{width:100%;padding:14px;background:var(--g);border:none;border-radius:10px;color:#fff;font-size:.95rem;font-weight:600;font-family:inherit;cursor:pointer;transition:all .3s ease}
+.sub-btn:hover{background:var(--gd);transform:translateY(-1px)}
+.sub-card:not(.pop) .sub-btn{background:rgba(0,168,107,.15);color:var(--gl);border:1px solid rgba(0,168,107,.3)}
+.sub-card:not(.pop) .sub-btn:hover{background:var(--g);color:#fff}
+
+/* PARTNER SERVICES */
+.partners{background:var(--bk);border-top:1px solid var(--bd)}
+.partner-layout{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.partner-left .ss{margin-bottom:28px}
+.partner-items{display:flex;flex-direction:column;gap:12px}
+.p-item{display:flex;align-items:center;gap:14px;padding:16px 20px;background:var(--cd);border:1px solid var(--bd);border-radius:12px;transition:all .3s ease}
+.p-item:hover{border-color:rgba(0,168,107,.3);background:var(--ch);transform:translateX(4px)}
+.p-dot{width:8px;height:8px;border-radius:50%;background:var(--g);flex-shrink:0;box-shadow:0 0 8px rgba(0,168,107,.3)}
+.p-item span{font-size:.95rem;color:var(--t2)}
+.partner-btns{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+.partner-visual{display:flex;align-items:center;justify-content:center}
+.pv-card{width:100%;max-width:420px;background:var(--cd);border:1px solid var(--bd);border-radius:20px;padding:40px 30px;text-align:center;position:relative;overflow:hidden}
+.pv-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 30%,rgba(0,168,107,.06),transparent 60%);pointer-events:none}
+.pv-icon{font-size:4rem;margin-bottom:20px;display:block;position:relative;z-index:1}
+.pv-card h3{font-family:var(--fd);font-size:1.6rem;letter-spacing:1.5px;margin-bottom:8px;position:relative;z-index:1}
+.pv-card p{font-size:.88rem;color:var(--t2);line-height:1.6;position:relative;z-index:1;margin-bottom:20px}
+.pv-stats{display:flex;justify-content:center;gap:30px;position:relative;z-index:1}
+.pv-stat{text-align:center}
+.pv-stat-num{font-family:var(--fd);font-size:1.5rem;color:var(--gl);letter-spacing:1px}
+.pv-stat-lbl{font-family:var(--fm);font-size:.6rem;color:var(--t3);letter-spacing:1.5px;text-transform:uppercase}
+
+/* REVIEWS */
+.reviews{background:linear-gradient(180deg,var(--bk),#081610,var(--bk))}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.rev-card{background:var(--cd);border:1px solid var(--bd);border-radius:16px;padding:28px 24px;transition:all .3s ease}
+.rev-card:hover{border-color:rgba(0,168,107,.2);transform:translateY(-3px)}
+.rev-stars{color:#ffcc00;font-size:.9rem;margin-bottom:12px;letter-spacing:2px}
+.rev-text{font-size:.9rem;color:var(--t2);line-height:1.6;margin-bottom:16px;font-style:italic}
+.rev-user{display:flex;align-items:center;gap:10px}
+.rev-avatar{width:36px;height:36px;border-radius:50%;background:rgba(0,168,107,.12);display:flex;align-items:center;justify-content:center;font-size:.9rem}
+.rev-name{font-size:.85rem;font-weight:600}
+.rev-role{font-size:.72rem;color:var(--t3);font-family:var(--fm)}
+
+/* AI SUGGESTIONS */
+.ai-suggest{background:var(--bk);border-top:1px solid var(--bd)}
+.ai-rows{display:flex;flex-direction:column;gap:40px}
+.ai-row-title{font-family:var(--fm);font-size:.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--t3);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.ai-row-title::after{content:'';flex:1;height:1px;background:var(--bd)}
+.ai-scroll{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.ai-card{background:var(--cd);border:1px solid var(--bd);border-radius:14px;padding:20px 16px;text-align:center;transition:all .4s ease;cursor:pointer}
+.ai-card:hover{border-color:rgba(0,168,107,.25);transform:translateY(-3px)}
+.ai-card-icon{font-size:2rem;margin-bottom:10px;display:block}
+.ai-card h5{font-size:.85rem;font-weight:600;margin-bottom:4px}
+.ai-card p{font-size:.72rem;color:var(--t3);font-family:var(--fm)}
+.ai-card .ai-price{font-family:var(--fd);font-size:1rem;color:var(--gl);letter-spacing:1px;margin-top:8px}
+
+/* CTA */
+.cta{background:linear-gradient(160deg,var(--gp),var(--gd));padding:100px 20px;text-align:center}
+.cta h2{font-family:var(--fd);font-size:clamp(2.4rem,5vw,3.6rem);letter-spacing:2px;margin-bottom:14px}
+.cta p{font-size:1.05rem;color:#fff;max-width:550px;margin:0 auto 36px;line-height:1.7}
+.cta-bs{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* FOOTER */
+.ft{background:#000;color:#fff;padding:40px 20px;text-align:center;border-top:1px solid var(--bd)}.ft p{font-size:.95rem;opacity:.6;line-height:1.7}
+
+/* RESPONSIVE */
+@media(max-width:1024px){.feat-grid{grid-template-columns:repeat(2,1fr)}.items-grid{grid-template-columns:repeat(3,1fr)}.subs-grid{grid-template-columns:1fr}.partner-layout{grid-template-columns:1fr}}
+@media(max-width:768px){
+.nc{padding:0 20px}.nm{position:fixed;left:-100%;top:72px;flex-direction:column;background:rgba(0,0,0,.98);width:100%;text-align:center;transition:left .3s ease;gap:0;padding:24px 0}.nm.ac{left:0}.nm li{width:100%;padding:14px 0}.nk{font-size:1.1rem}.nv{display:none}.nlg{position:fixed;bottom:20px;right:20px;background:rgba(0,0,0,.95);padding:6px;border-radius:50px;box-shadow:0 4px 20px rgba(0,0,0,.5);z-index:1001;margin-left:0}.na{display:none}.hb{display:flex}
+.hero{padding:130px 20px 80px;min-height:80vh}.hero h1{font-size:clamp(2.5rem,10vw,4rem)}.hero p{font-size:1rem}
+.feat-grid,.course-grid,.games-grid,.rev-grid,.ai-scroll{grid-template-columns:1fr 1fr}.items-grid{grid-template-columns:repeat(2,1fr)}.tools-grid{grid-template-columns:1fr}
+.hbs,.cta-bs{flex-direction:column;align-items:center}.bp,.bo{width:80%;justify-content:center}
+}
+@media(max-width:480px){.feat-grid,.course-grid,.games-grid,.rev-grid,.ai-scroll,.items-grid{grid-template-columns:1fr}.hsts{gap:28px}.partner-btns{flex-direction:column}}
+    
+/* PAGES DROPDOWN */
+.pages-dropdown{position:relative;margin-left:12px}
+.pages-dd-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 20px;background:var(--g);color:#fff;border:none;border-radius:50px;font-size:.82rem;font-weight:600;font-family:inherit;cursor:pointer;transition:all .3s ease;white-space:nowrap}
+.pages-dd-btn:hover{background:var(--gd);transform:translateY(-1px)}
+.pages-dd-btn svg{width:16px;height:16px;transition:transform .3s ease}
+.pages-dropdown.open .pages-dd-btn svg{transform:rotate(180deg)}
+.pages-dd-menu{position:absolute;top:calc(100% + 10px);right:0;min-width:220px;background:rgba(10,26,18,0.97);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:8px;opacity:0;visibility:hidden;transform:translateY(-8px);transition:all .3s ease;z-index:2000;box-shadow:0 16px 50px rgba(0,0,0,0.5)}
+.pages-dropdown.open .pages-dd-menu{opacity:1;visibility:visible;transform:translateY(0)}
+.pages-dd-menu a{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;font-size:.85rem;font-weight:500;color:rgba(255,255,255,0.75);transition:all .2s ease;text-decoration:none}
+.pages-dd-menu a:hover{background:rgba(0,168,107,0.12);color:#fff}
+.pages-dd-menu a.dd-active{color:var(--gl);background:rgba(0,168,107,0.08)}
+.pages-dd-menu a span{font-size:1rem}
+@media(max-width:768px){.pages-dropdown{display:none}}
+
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="nb" id="navbar">
+    <div class="nc">
+        <div class="nl"><a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;"><img src="Media/LOGO 3.png" alt="Agarta AI Logo"></a></div>
+        <ul class="nm" id="navMenu">
+            <li><a href="#featured" class="nk">Featured</a></li>
+            <li><a href="#courses" class="nk">Courses</a></li>
+            <li><a href="#items" class="nk">Items</a></li>
+            <li><a href="#tools" class="nk">Tools</a></li>
+            <li><a href="#games" class="nk">Games</a></li>
+            <li><a href="#subs" class="nk">Subscriptions</a></li>
+            <li><a href="#partners-svc" class="nk">Partners</a></li>
+        </ul>
+        <div class="nv"><button class="nb-btn" onclick="window.location.href='index.html#contact'">Get Started</button></div>
+        <div class="nlg"><div class="ls"><button class="lb ac" data-lang="en">EN</button><button class="lb" data-lang="fr">FR</button><div class="sl"></div></div></div>
+        <button class="na"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>Sign Up / Login</button>
+        <div class="pages-dropdown" id="pagesDropdown">
+            <button class="pages-dd-btn" id="pagesBtn">Features <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <div class="pages-dd-menu">
+                <a href="index.html"><span>🏠</span>Home</a>
+                <a href="explore.html"><span>🌍</span>Explore</a>
+                <a href="play_games.html"><span>🎮</span>Play & Games</a>
+                <a href="Virtual_campus.html"><span>🎓</span>Virtual Campus</a>
+                <a href="events.html"><span>🎟</span>Events</a>
+                <a href="technologies.html"><span>⚙️</span>Technologies</a>
+                <a href="lab_tours.html"><span>🎬</span>Lab Tours</a>
+                <a href="about.html"><span>ℹ️</span>About</a>
+                <a href="help_support.html"><span>🆘</span>Help</a>
+                <a href="contact.html"><span>📞</span>Contact</a>
+            </div>
+        </div>
+        <div class="hb" id="hamburger"><span class="br"></span><span class="br"></span><span class="br"></span></div>
+    </div>
+</nav>
+
+<!-- 1. HERO -->
+<section class="hero">
+    <div class="hero-g"></div>
+    <div class="hc fi">
+        <div class="bdg">🛒 Marketplace</div>
+        <h1>UNLOCK KNOWLEDGE, PLAY, AND <span class="ac2">INNOVATION</span></h1>
+        <p>Explore VR assets, courses, tools, games, and partner services all in one place. Your gateway to immersive learning and digital discovery.</p>
+        <div class="hbs"><button class="bp">🛒 Browse Marketplace</button><button class="bo">⭐ Subscribe Now</button></div>
+        <div class="hsts">
+            <div class="hs"><div class="hsn">1,200+</div><div class="hsl">Products</div></div>
+            <div class="hs"><div class="hsn">500+</div><div class="hsl">Courses</div></div>
+            <div class="hs"><div class="hsn">50K+</div><div class="hsl">Users</div></div>
+            <div class="hs"><div class="hsn">VR</div><div class="hsl">Ready</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- SEARCH -->
+<div class="search-sec fi">
+    <div class="search-bar"><input type="text" placeholder="Search courses, games, tools, VR assets..."><button>SEARCH</button></div>
+    <div class="filter-pills">
+        <button class="fp ac">All</button><button class="fp">VR-Ready</button><button class="fp">Interactive</button><button class="fp">Educational</button><button class="fp">Free</button><button class="fp">Premium</button>
+    </div>
+</div>
+
+<!-- 2. FEATURED PRODUCTS -->
+<section class="featured" id="featured" style="padding-top:80px">
+    <div class="ctn">
+        <div class="s-head fi"><div class="bdg">🔥 Trending</div><h2 class="st">FEATURED <span class="ac2">PRODUCTS</span></h2><p class="ss">Top-selling and trending items hand-picked for you</p></div>
+        <div class="feat-grid fi">
+            <div class="feat-card"><div class="feat-img" style="background:linear-gradient(135deg,rgba(0,168,107,.12),rgba(0,77,51,.25))">🌍<span class="feat-tag tag-trend">Trending</span><span class="feat-rating">⭐ 4.9</span></div><div class="feat-body"><h4>EcoWorld Builder Pro</h4><p>Build sustainable ecosystems in VR</p><div class="feat-price"><span>CAD29</span><button class="feat-buy">Buy Now</button></div></div></div>
+            <div class="feat-card"><div class="feat-img" style="background:linear-gradient(135deg,rgba(100,100,255,.1),rgba(60,60,180,.2))">🧬<span class="feat-tag tag-new">New</span><span class="feat-rating">⭐ 5.0</span></div><div class="feat-body"><h4>DNA Explorer Course</h4><p>Interactive molecular biology</p><div class="feat-price"><span>CAD19</span><button class="feat-buy">Enroll</button></div></div></div>
+            <div class="feat-card"><div class="feat-img" style="background:linear-gradient(135deg,rgba(255,100,50,.1),rgba(200,50,30,.18))">🤖<span class="feat-tag tag-hot">Hot</span><span class="feat-rating">⭐ 4.8</span></div><div class="feat-body"><h4>AI Avatar Pack</h4><p>20 custom avatars & skins</p><div class="feat-price"><span>CAD12</span><button class="feat-buy">Buy Now</button></div></div></div>
+            <div class="feat-card"><div class="feat-img" style="background:linear-gradient(135deg,rgba(138,68,204,.1),rgba(100,30,150,.2))">🌌<span class="feat-tag tag-exc">Exclusive</span><span class="feat-rating">⭐ 4.9</span></div><div class="feat-body"><h4>Mars Mission VR</h4><p>Complete space exploration game</p><div class="feat-price"><span>CAD35</span><button class="feat-buy">Buy Now</button></div></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- 3. COURSES -->
+<section class="courses" id="courses">
+    <div class="ctn">
+        <div class="s-head fi"><div class="bdg">🎓 Courses</div><h2 class="st">PURCHASE <span class="ac2">COURSES</span></h2><p class="ss">Structured learning paths with interactive demos and guided simulations</p></div>
+        <div class="course-cats fi"><button class="cc ac">All</button><button class="cc">🔬 Science</button><button class="cc">🎨 Arts</button><button class="cc">🌾 Agriculture</button><button class="cc">💻 Tech</button><button class="cc">🌍 Environment</button><button class="cc">🏛 History</button></div>
+        <div class="course-grid fi">
+            <div class="c-card"><div class="c-banner" style="background:linear-gradient(135deg,rgba(0,168,107,.12),rgba(0,77,51,.25))">🔬<span class="c-level">Beginner</span><span class="c-lessons">24 lessons</span></div><div class="c-body"><h4>Introduction to Climate Science</h4><p>Understand climate systems, data analysis, and environmental modeling through interactive VR labs.</p><div class="c-footer"><span class="c-price">CAD24<span class="c-old">CAD39</span></span><button class="c-enroll">Enroll</button></div></div></div>
+            <div class="c-card"><div class="c-banner" style="background:linear-gradient(135deg,rgba(255,180,50,.1),rgba(200,120,30,.18))">🎨<span class="c-level">All Levels</span><span class="c-lessons">18 lessons</span></div><div class="c-body"><h4>Digital Art in Virtual Worlds</h4><p>Create immersive art installations and learn 3D sculpting in VR environments.</p><div class="c-footer"><span class="c-price">CAD32</span><button class="c-enroll">Enroll</button></div></div></div>
+            <div class="c-card"><div class="c-banner" style="background:linear-gradient(135deg,rgba(100,100,255,.1),rgba(60,60,180,.2))">💻<span class="c-level">Advanced</span><span class="c-lessons">36 lessons</span></div><div class="c-body"><h4>AI & Machine Learning Foundations</h4><p>Build, train, and deploy AI models with hands-on interactive simulations.</p><div class="c-footer"><span class="c-price">CAD49</span><button class="c-enroll">Enroll</button></div></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- 4. VIRTUAL ITEMS -->
+<section class="items" id="items">
+    <div class="ctn">
+        <div class="s-head fi"><div class="bdg">🎭 Virtual Items</div><h2 class="st">PURCHASE <span class="ac2">VIRTUAL ITEMS</span></h2><p class="ss">Avatars, skins, badges, and collectibles personalize your experience</p></div>
+        <div class="items-grid fi">
+            <div class="item-card"><span class="item-icon">🧑‍🚀</span><h4>Space Explorer Avatar</h4><p>Premium skin</p><span class="item-price">CAD8</span></div>
+            <div class="item-card limited"><span class="item-icon">🐉</span><h4>Dragon Guardian</h4><p>Limited edition</p><span class="item-price">CAD15</span></div>
+            <div class="item-card"><span class="item-icon">🏅</span><h4>Achievement Pack</h4><p>12 unique badges</p><span class="item-price">CAD5</span></div>
+            <div class="item-card"><span class="item-icon">🌈</span><h4>Neon Glow Set</h4><p>Seasonal skins</p><span class="item-price">CAD10</span></div>
+            <div class="item-card limited"><span class="item-icon">👑</span><h4>Royal Crown</h4><p>Ultra rare collectible</p><span class="item-price">CAD22</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- 5. TOOLS -->
+<section class="tools" id="tools">
+    <div class="ctn">
+        <div class="s-head fi"><div class="bdg">🔧 Tools</div><h2 class="st">PURCHASE <span class="ac2">VIRTUAL TOOLS</span></h2><p class="ss">Simulation tools, lab kits, and AI-assisted environments for research and learning</p></div>
+        <div class="tools-grid fi">
+            <div class="tool-card"><span class="tool-icon">⚗️</span><h4>VIRTUAL LAB KIT</h4><p>Complete science laboratory with 50+ experiments across physics, chemistry, and biology.</p><div class="tool-tiers"><span class="tool-tier tier-free">Free tier</span><span class="tool-tier tier-basic">Basic CAD15</span><span class="tool-tier tier-prem">Premium CAD39</span></div></div>
+            <div class="tool-card"><span class="tool-icon">🤖</span><h4>AI RESEARCH ASSISTANT</h4><p>AI-powered tool for data visualization, analysis, and automated research summaries.</p><div class="tool-tiers"><span class="tool-tier tier-basic">Basic CAD25</span><span class="tool-tier tier-prem">Premium CAD59</span></div></div>
+            <div class="tool-card"><span class="tool-icon">🏗️</span><h4>3D ENVIRONMENT BUILDER</h4><p>Create custom interactive environments for education, training, or exploration.</p><div class="tool-tiers"><span class="tool-tier tier-free">Free tier</span><span class="tool-tier tier-prem">Premium CAD49</span></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- 6. GAMES -->
+<section class="games" id="games">
+    <div class="ctn">
+        <div class="s-head fi"><div class="bdg">🎮 Games</div><h2 class="st">PURCHASE OR RENT <span class="ac2">GAMES</span></h2><p class="ss">Educational games, VR adventures, and AI-driven challenges buy or rent</p></div>
+        <div class="games-grid fi">
+            <div class="game-card"><div class="game-thumb" style="background:linear-gradient(135deg,rgba(0,168,107,.12),rgba(0,77,51,.25))">🌿<div class="game-play">▶</div><span class="game-vr">VR • 360°</span><span class="game-type tag-trend">Educational</span></div><div class="game-body"><h4>Amazon Ecosystem Challenge</h4><p>Navigate the rainforest, restore biodiversity, and learn ecological balance.</p><div class="game-footer"><span class="game-price">CAD18</span><div class="game-opts"><button class="game-opt opt-buy">Buy</button><button class="game-opt opt-rent">Rent CAD5/wk</button></div></div></div></div>
+            <div class="game-card"><div class="game-thumb" style="background:linear-gradient(135deg,rgba(138,68,204,.1),rgba(100,30,150,.2))">🌌<div class="game-play">▶</div><span class="game-vr">VR</span><span class="game-type tag-exc">Adventure</span></div><div class="game-body"><h4>Galaxy Explorer: Deep Space</h4><p>Pilot through star systems with real NASA data and AI-narrated missions.</p><div class="game-footer"><span class="game-price">CAD28</span><div class="game-opts"><button class="game-opt opt-buy">Buy</button><button class="game-opt opt-rent">Rent CAD8/wk</button></div></div></div></div>
+            <div class="game-card"><div class="game-thumb" style="background:linear-gradient(135deg,rgba(255,180,50,.1),rgba(200,120,30,.18))">🏛<div class="game-play">▶</div><span class="game-vr">3D</span><span class="game-type tag-new">AI Challenge</span></div><div class="game-body"><h4>Civilization Builder AI</h4><p>Build ancient civilizations with AI opponents that adapt to your strategy.</p><div class="game-footer"><span class="game-price">CAD22</span><div class="game-opts"><button class="game-opt opt-buy">Buy</button><button class="game-opt opt-rent">Rent CAD6/wk</button></div></div></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- 7. SUBSCRIPTIONS -->
+<section class="subs" id="subs">
+    <div class="ctn">
+        <div class="s-head fi"><div class="bdg">⭐ Subscriptions</div><h2 class="st">MEMBERSHIP <span class="ac2">TIERS</span></h2><p class="ss">Unlock exclusive VR content, AI tutoring, and live experiences</p></div>
+        <div class="subs-grid fi">
+            <div class="sub-card"><span class="sub-icon">🌱</span><h3>BASIC</h3><div class="sub-price">CAD9<span>/mo</span></div><p class="sub-desc">Essential access for casual learners</p><ul class="sub-features"><li>Access to 100+ free experiences</li><li>Basic AI tutor assistance</li><li>Community forums access</li><li>Monthly newsletter</li></ul><button class="sub-btn">Get Basic</button></div>
+            <div class="sub-card pop"><span class="sub-pop-tag">Most Popular</span><span class="sub-icon">🚀</span><h3>PREMIUM</h3><div class="sub-price">CAD29<span>/mo</span></div><p class="sub-desc">Full access for serious explorers</p><ul class="sub-features"><li>Unlimited VR content access</li><li>Advanced AI tutoring</li><li>Live event priority access</li><li>Exclusive games & courses</li><li>Custom avatar creation</li><li>Progress certificates</li></ul><button class="sub-btn">Get Premium</button></div>
+            <div class="sub-card"><span class="sub-icon">🏢</span><h3>ENTERPRISE</h3><div class="sub-price">Custom</div><p class="sub-desc">Tailored for institutions & teams</p><ul class="sub-features"><li>Institutional bulk licensing</li><li>Custom VR environments</li><li>Dedicated support & training</li><li>Analytics dashboard</li><li>API access & integrations</li></ul><button class="sub-btn">Contact Sales</button></div>
+        </div>
+    </div>
+</section>
+
+<!-- 8. PARTNER SERVICES -->
+<section class="partners" id="partners-svc">
+    <div class="ctn">
+        <div class="partner-layout fi">
+            <div class="partner-left">
+                <div class="bdg">🤝 Partners</div>
+                <h2 class="st">PARTNER <span class="ac2">SERVICES</span></h2>
+                <p class="ss">Integration services for institutions schools, museums, labs, and organizations seeking custom immersive solutions.</p>
+                <div class="partner-items">
+                    <div class="p-item"><div class="p-dot"></div><span>Custom VR experience creation</span></div>
+                    <div class="p-item"><div class="p-dot"></div><span>Institutional integration & consulting</span></div>
+                    <div class="p-item"><div class="p-dot"></div><span>Specialized content development</span></div>
+                    <div class="p-item"><div class="p-dot"></div><span>White-label solutions for organizations</span></div>
+                </div>
+                <div class="partner-btns"><button class="bp">🤝 Become a Partner</button><button class="bo">📋 Request a Demo</button></div>
+            </div>
+            <div class="partner-visual">
+                <div class="pv-card">
+                    <span class="pv-icon">🏛</span>
+                    <h3>INSTITUTIONAL ACCESS</h3>
+                    <p>Schools, universities, museums, and research labs unlock scalable, immersive digital infrastructure.</p>
+                    <div class="pv-stats">
+                        <div class="pv-stat"><div class="pv-stat-num">35+</div><div class="pv-stat-lbl">Partners</div></div>
+                        <div class="pv-stat"><div class="pv-stat-num">8+</div><div class="pv-stat-lbl">Countries</div></div>
+                        <div class="pv-stat"><div class="pv-stat-num">100+</div><div class="pv-stat-lbl">Deployments</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 10. REVIEWS -->
+<section class="reviews" id="reviews">
+    <div class="ctn">
+        <div class="s-head fi"><div class="bdg">💬 Reviews</div><h2 class="st">TRUSTED BY <span class="ac2">LEARNERS</span></h2><p class="ss">What our community says about the Marketplace</p></div>
+        <div class="rev-grid fi">
+            <div class="rev-card"><div class="rev-stars">★★★★★</div><p class="rev-text">"The VR courses transformed how my students engage with science. The interactive labs are incredible."</p><div class="rev-user"><div class="rev-avatar">👩‍🏫</div><div><div class="rev-name">Sarah M.</div><div class="rev-role">Science Teacher</div></div></div></div>
+            <div class="rev-card"><div class="rev-stars">★★★★★</div><p class="rev-text">"Galaxy Explorer is the best educational game I've ever played. I learned more about space in a week than a semester."</p><div class="rev-user"><div class="rev-avatar">🧑‍🎓</div><div><div class="rev-name">Alex T.</div><div class="rev-role">University Student</div></div></div></div>
+            <div class="rev-card"><div class="rev-stars">★★★★☆</div><p class="rev-text">"The institutional partnership has given our museum a completely new way to engage visitors. Highly recommend."</p><div class="rev-user"><div class="rev-avatar">🏛</div><div><div class="rev-name">Dr. Chen</div><div class="rev-role">Museum Director</div></div></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- 11. AI SUGGESTIONS -->
+<section class="ai-suggest" id="suggestions">
+    <div class="ctn">
+        <div class="s-head fi"><div class="bdg">🤖 AI Picks</div><h2 class="st">RECOMMENDED <span class="ac2">FOR YOU</span></h2><p class="ss">Personalized recommendations based on your activity and interests</p></div>
+        <div class="ai-rows fi">
+            <div>
+                <div class="ai-row-title">🔥 Trending Now</div>
+                <div class="ai-scroll">
+                    <div class="ai-card"><span class="ai-card-icon">🌊</span><h5>Ocean VR Explorer</h5><p>VR Adventure</p><div class="ai-price">CAD22</div></div>
+                    <div class="ai-card"><span class="ai-card-icon">🧪</span><h5>Chemistry Lab Pro</h5><p>Tool</p><div class="ai-price">CAD15</div></div>
+                    <div class="ai-card"><span class="ai-card-icon">🎭</span><h5>Avatar Bundle</h5><p>10 skins</p><div class="ai-price">CAD9</div></div>
+                    <div class="ai-card"><span class="ai-card-icon">📐</span><h5>Math Puzzler AI</h5><p>Game</p><div class="ai-price">CAD12</div></div>
+                </div>
+            </div>
+            <div>
+                <div class="ai-row-title">🆕 New Releases</div>
+                <div class="ai-scroll">
+                    <div class="ai-card"><span class="ai-card-icon">🦕</span><h5>Dinosaur World</h5><p>VR Experience</p><div class="ai-price">CAD18</div></div>
+                    <div class="ai-card"><span class="ai-card-icon">🎵</span><h5>Music Theory XR</h5><p>Course</p><div class="ai-price">CAD25</div></div>
+                    <div class="ai-card"><span class="ai-card-icon">🏔</span><h5>Everest Climb</h5><p>360° Tour</p><div class="ai-price">CAD14</div></div>
+                    <div class="ai-card"><span class="ai-card-icon">🔭</span><h5>Telescope Sim</h5><p>Tool</p><div class="ai-price">Free</div></div>
+                </div>
+            </div>
+            <div>
+                <div class="ai-row-title">⭐ Staff Picks</div>
+                <div class="ai-scroll">
+                    <div class="ai-card"><span class="ai-card-icon">🌋</span><h5>Volcano Lab</h5><p>Interactive Sim</p><div class="ai-price">CAD16</div></div>
+                    <div class="ai-card"><span class="ai-card-icon">🐋</span><h5>Deep Sea Dive</h5><p>VR Game</p><div class="ai-price">CAD20</div></div>
+                    <div class="ai-card"><span class="ai-card-icon">📊</span><h5>Data Viz Studio</h5><p>Pro Tool</p><div class="ai-price">CAD35</div></div>
+                    <div class="ai-card"><span class="ai-card-icon">🏛</span><h5>Ancient Rome</h5><p>History Course</p><div class="ai-price">CAD28</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+    <div class="ctn">
+        <h2>START EXPLORING THE <span class="ac2">MARKETPLACE</span></h2>
+        <p>Thousands of courses, games, tools, and VR experiences await. Your next discovery is one click away.</p>
+        <div class="cta-bs"><button class="bp">🛒 Browse All Products</button><button class="bo">⭐ View Subscription Plans</button></div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="ft"><p>© 2026 Agartha AI | Designed with purpose and powered by Kimuntu Power Inc. A Kimuntu Power Inc. Innovation<br>All rights reserved.</p></footer>
+
+<script>
+const nb=document.getElementById('navbar');window.addEventListener('scroll',()=>nb.classList.toggle('sc',window.scrollY>50));
+const hb=document.getElementById('hamburger'),nm=document.getElementById('navMenu');if(hb)hb.addEventListener('click',()=>{hb.classList.toggle('ac');nm.classList.toggle('ac')});
+document.querySelectorAll('.lb').forEach((b,i)=>{b.addEventListener('click',()=>{document.querySelectorAll('.lb').forEach(x=>x.classList.remove('ac'));b.classList.add('ac');const s=document.querySelector('.sl');if(s)s.style.transform=i===0?'translateX(0)':'translateX(100%)'})});
+document.querySelectorAll('.fp,.cc,.ev-filter').forEach(f=>{f.addEventListener('click',()=>{f.closest('.filter-pills,.course-cats,.event-filters')?.querySelectorAll('button').forEach(x=>x.classList.remove('ac'));f.classList.add('ac')})});
+const obs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting){en.target.classList.add('vi');obs.unobserve(en.target)}})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
+
+// Pages dropdown
+const pagesBtn=document.getElementById('pagesBtn');const pagesDd=document.getElementById('pagesDropdown');
+if(pagesBtn){pagesBtn.addEventListener('click',(e)=>{e.stopPropagation();pagesDd.classList.toggle('open')});}
+document.addEventListener('click',(e)=>{if(pagesDd&&!pagesDd.contains(e.target))pagesDd.classList.remove('open');});
+</script>
+</body>
+</html>
