@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5daf9eb23b33e954cb0561db92516cf7, type: 3}
   m_Name: PLOT_Garden
   m_EditorClassIdentifier: 
-  plotName: Japanese Friendship Garden
+  plotName: Japanese Garden
   latitude: 33.46108
   longitude: -112.07682
   heightMeters: 400
