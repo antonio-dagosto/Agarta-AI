@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Integrations | Agarta</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="Media/LOGO 3.png" alt="Agarta AI Logo">
+                </a>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="index.html#solutions" class="nav-link">Solutions</a></li>
+                <li class="nav-item"><a href="index.html#playlab" class="nav-link">PlayLab</a></li>
+                <li class="nav-item"><a href="index.html#partners" class="nav-link">Partners</a></li>
+                <li class="nav-item"><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+
+            <div class="nav-cta">
+                <button class="nav-btn" onclick="document.getElementById('integrations-intro').scrollIntoView({behavior:'smooth'})">
+                    Explore Integrations
+                </button>
+            </div>
+
+            <div class="nav-language">
+                <div class="language-switch">
+                    <button class="lang-switch-btn active" data-lang="en">EN</button>
+                    <button class="lang-switch-btn" data-lang="fr">FR</button>
+                    <div class="switch-slider"></div>
+                </div>
+            </div>
+
+            <button class="nav-auth-btn" id="authOpenBtn">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+                Sign Up / Login
+            </button>
+
+            <div class="pages-dropdown" id="pagesDropdown">
+                <button class="pages-dd-btn" id="pagesBtn">Features
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                        <polyline points="6 9 12 15 18 9"/>
+                    </svg>
+                </button>
+                <div class="pages-dd-menu">
+                    <a href="explore.html"><span>🌍</span>Explore</a>
+                    <a href="play_games.html"><span>🎮</span>Play & Games</a>
+                    <a href="Virtual_campus.html"><span>🎓</span>Virtual Campus</a>
+                    <a href="events.html"><span>🎟</span>Events</a>
+                    <a href="marketplace.html"><span>🛒</span>Marketplace</a>
+                    <a href="integrations.html"><span>🔗</span>Integrations</a>
+                    <a href="technologies.html"><span>⚙️</span>Technologies</a>
+                    <a href="lab_tours.html"><span>🎬</span>Lab Tours</a>
+                    <a href="help_support.html"><span>🆘</span>Help</a>
+                    <a href="contact.html"><span>📞</span>Contact</a>
+                </div>
+            </div>
+
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="integrations-intro">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <img src="Media/LOGOS 1.png" alt="Agarta Logo" class="logo">
+            <h1><b>Integrations</b></h1>
+            <h2>An Open Ecosystem Built for Infinite Possibilities</h2>
+            <p>
+                Agarta connects satellite data, media, and APIs to deliver immersive, real-time experiences across education, exploration, and innovation.
+            </p>
+            <div class="cta-buttons">
+                <button class="btn" onclick="document.getElementById('integrations-grid').scrollIntoView({behavior:'smooth'})">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    Explore Platforms
+                </button>
+                <a href="contact.html" class="btn">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
+                    Become a Partner
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Integrations Matter -->
+    <section class="about">
+        <div class="container">
+            <h2>Why Integrations Matter</h2>
+            <p style="max-width: 900px; margin: 0 auto; text-align: center;">
+                Agarta is built as a modular platform, which means it can connect to trusted technologies without locking you into one system.
+            </p>
+            <div class="features-grid">
+                <div class="feature-card-container">
+                    <div class="feature-card">
+                        <div class="feature-card-front">
+                            <h3>Real-Time Data</h3>
+                        </div>
+                        <div class="feature-card-back">
+                            <p>Connect live data for more accurate immersive experiences.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-card-container">
+                    <div class="feature-card">
+                        <div class="feature-card-front">
+                            <h3>Cross-Platform</h3>
+                        </div>
+                        <div class="feature-card-back">
+                            <p>Works across web, mobile, VR, AR, and MR experiences.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-card-container">
+                    <div class="feature-card">
+                        <div class="feature-card-front">
+                            <h3>Scalable</h3>
+                        </div>
+                        <div class="feature-card-back">
+                            <p>Built for schools, institutions, and partner organizations.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Integration Grid -->
+    <section class="solutions" id="integrations-grid">
+        <div class="container">
+            <h2>Integrated Platforms</h2>
+            <div class="solutions-grid">
+
+                <div class="solution-card-container">
+                    <div class="solution-card">
+                        <div class="solution-card-front">
+                            <h3>Satellite Data</h3>
+                        </div>
+                        <div class="solution-card-back">
+                            <p>NASA EarthData and Sentinel Hub for environmental and scientific visualization.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="solution-card-container">
+                    <div class="solution-card">
+                        <div class="solution-card-front">
+                            <h3>Media & Streaming</h3>
+                        </div>
+                        <div class="solution-card-back">
+                            <p>YouTube, 360° video, and live streaming for immersive content delivery.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="solution-card-container">
+                    <div class="solution-card">
+                        <div class="solution-card-front">
+                            <h3>APIs & Developer Tools</h3>
+                        </div>
+                        <div class="solution-card-back">
+                            <p>REST APIs, WebXR, and cloud services for scalable and customizable integrations.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Future Integrations -->
+    <section class="innovation">
+        <div class="container">
+            <h2>Future Integrations</h2>
+            <div class="carousel-wrapper">
+                <div class="carousel-container">
+                    <div class="carousel-track">
+                        <div class="carousel-slide active">
+                            <h3>Drone Exploration</h3>
+                            <p>Live 360° drone integration for immersive fly-through experiences.</p>
+                        </div>
+                        <div class="carousel-slide">
+                            <h3>Agarta Glass API</h3>
+                            <p>Smart glasses and wearable XR overlays for hands-free exploration.</p>
+                        </div>
+                        <div class="carousel-slide">
+                            <h3>AI Expansion</h3>
+                            <p>New AI models and smarter personalization across the platform.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Build the Future with Agarta</h2>
+            <p class="cta-subtitle">Connect with us to explore partnerships, documentation, and technical collaboration.</p>
+            <div class="cta-buttons-group">
+                <a href="contact.html" class="cta-btn cta-btn-primary">Request Technical Documentation</a>
+                <a href="contact.html" class="cta-btn cta-btn-secondary">Become an Integration Partner</a>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
