@@ -19,6 +19,10 @@ eleven_client = ElevenLabs(api_key=os.getenv("ELEVENLABS_API_KEY"))
 app = FastAPI()
 app.mount("/audio", StaticFiles(directory=AUDIO_DIR), name="audio")
 
+# ===== VOICE CONFIG =====
+FEMALE_VOICE_ID =  "EXAVITQu4vr4xnSDxMaL"
+MALE_VOICE_ID = "JBFqnCBsd6RMkjVDRZzb"
+
 # --------------------
 # ENDPOINT
 # --------------------
@@ -27,7 +31,8 @@ from fastapi import Form
 @app.post("/speech")
 async def speech(
     file: UploadFile = File(...),
-    context: str = Form(...)
+    context: str = Form(...),
+    voice: str = Form("male")
 ):
     audio_id = str(uuid.uuid4())
     wav_path = os.path.join(AUDIO_DIR, f"{audio_id}.wav")
@@ -48,17 +53,22 @@ async def speech(
     chat = openai_client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
-            {"role": "system", "content": context}
+            {"role": "system", "content": context},
             {"role": "user", "content": user_text}
         ]
     )
     reply = chat.choices[0].message.content.strip()
 
+    if voice == "female":
+        voice_id = FEMALE_VOICE_ID
+    else:
+        voice_id = MALE_VOICE_ID
+
     # ElevenLabs
     mp3_path = os.path.join(AUDIO_DIR, f"{audio_id}.mp3")
     audio_stream = eleven_client.text_to_speech.convert(
         text=reply,
-        voice_id="JBFqnCBsd6RMkjVDRZzb",
+        voice_id=voice_id,
         model_id="eleven_multilingual_v2",
         output_format="mp3_44100_128"
     )
