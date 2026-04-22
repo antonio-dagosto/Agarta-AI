@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollAnimations();
     initNewsletter();
     initAuthPopup();
+    initMetrics();
 });
 
 // ── Smooth Scrolling ────────────────────
@@ -411,4 +412,62 @@ function initAuthPopup() {
             signupForm.reset();
         });
     }
+}
+
+// ── Metrics Count-Up Animation ──────────
+function initMetrics() {
+    const numbers = document.querySelectorAll('.metric-number[data-target]');
+    if (!numbers.length) return;
+
+    const animateCount = (el) => {
+        const target = parseInt(el.dataset.target);
+        const duration = 1800;
+        const start = performance.now();
+
+        const update = (now) => {
+            const elapsed = now - start;
+            const progress = Math.min(elapsed / duration, 1);
+            // Ease out cubic
+            const ease = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.round(target * ease);
+            if (progress < 1) requestAnimationFrame(update);
+        };
+        requestAnimationFrame(update);
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCount(entry.target);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.3 });
+
+    numbers.forEach(el => observer.observe(el));
+}
+
+// ── Pages Dropdown ──────────────────────
+function initPagesDropdown() {
+    const pagesBtn = document.getElementById('pagesBtn');
+    const pagesDd = document.getElementById('pagesDropdown');
+    if (!pagesBtn || !pagesDd) return;
+
+    pagesBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        pagesDd.classList.toggle('open');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!pagesDd.contains(e.target)) {
+            pagesDd.classList.remove('open');
+        }
+    });
+}
+
+// Initialize on DOM ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPagesDropdown);
+} else {
+    initPagesDropdown();
 }
