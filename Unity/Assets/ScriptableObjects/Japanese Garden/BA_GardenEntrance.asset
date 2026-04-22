@@ -18,8 +18,14 @@ MonoBehaviour:
   nextArea: {fileID: 11400000, guid: 2a148f6876c0f8e47ba6fabe3f6cf8fd, type: 2}
   prevArea: {fileID: 11400000, guid: cc8d0a812cd905d4bb3e91f80210d65f, type: 2}
   hotspots:
-  - title: Test Info
-    body: Hello from inside the bubble
+  - title: Entrance / Garden Overview
+    body: "Welcome to Rohoen, the Japanese Friendship Garden of Phoenix, an authentic
+      3.5-acre Japanese stroll garden created through the sister-city relationship
+      between Phoenix and Himeji, Japan. The garden includes a tea garden, tea house,
+      flowing streams, a waterfall, stone bridges, lanterns, and a koi pond, all
+      designed to create a peaceful space for reflection, education, and cultural
+      connection. Even the name \u201CRohoen\u201D tells a story: Ro refers to the
+      heron, a symbol of Himeji, Ho refers to the phoenix, and En means garden."
     yaw: 0
     pitch: 0
-    icon: {fileID: 21300000, guid: b73f9c4eacfd43b41acf6dea20699b69, type: 3}
+    icon: {fileID: 21300000, guid: 7d2865e2b884e1a46be7144719039f15, type: 2}

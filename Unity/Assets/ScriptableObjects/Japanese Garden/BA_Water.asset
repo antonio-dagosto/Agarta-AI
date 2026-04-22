@@ -17,4 +17,15 @@ MonoBehaviour:
   description: 
   nextArea: {fileID: 11400000, guid: 900b38322ef1dbb4fa136861b3a7dbf7, type: 2}
   prevArea: {fileID: 11400000, guid: 2a148f6876c0f8e47ba6fabe3f6cf8fd, type: 2}
-  hotspots: []
+  hotspots:
+  - title: Main Lake Area
+    body: This lake is one of the central features of the garden and helps define
+      the peaceful character of Rohoen. The garden contains more than 1,500 tons
+      of hand-picked rock, more than 85 varieties of plants, a 14-foot waterfall,
+      and a koi pond with over 300 colorful koi, all arranged to create a balanced
+      and natural-looking landscape in the middle of downtown Phoenix. A useful thing
+      to notice here is how Japanese gardens use water not just for beauty, but also
+      for reflection, motion, and a feeling of calm.
+    yaw: 0
+    pitch: 0
+    icon: {fileID: 21300000, guid: 7d2865e2b884e1a46be7144719039f15, type: 2}

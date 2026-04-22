@@ -17,4 +17,14 @@ MonoBehaviour:
   description: 
   nextArea: {fileID: 11400000, guid: 408e6b83fe46ead428562b4b0265e36f, type: 2}
   prevArea: {fileID: 11400000, guid: 4b5f4ee9677289b448bbe853b313791c, type: 2}
-  hotspots: []
+  hotspots:
+  - title: The Rohen Fish Statue
+    body: "This fish statue is a great introduction to one of Rohoen\u2019s main
+      themes: water, movement, and quiet observation. Throughout the Japanese Friendship
+      Garden, water appears in streams, the main pond, and the waterfall, helping
+      create a calm atmosphere that encourages visitors to slow down and notice details.
+      It also connects nicely to the garden\u2019s koi, which in Japanese culture
+      are often associated with love, friendship, perseverance, and ambition."
+    yaw: 0
+    pitch: 0
+    icon: {fileID: 21300000, guid: 7d2865e2b884e1a46be7144719039f15, type: 2}

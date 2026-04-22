@@ -21,4 +21,12 @@ public class LoginController : MonoBehaviour
     {
         Application.Quit();
     }
+    public void ExitApplication()
+    {
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
+}
 }
