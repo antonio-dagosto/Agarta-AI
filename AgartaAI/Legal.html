@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Documentation | Agarta AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+/* ═══════════════════════════════════════
+   AGARTA AI — LEGAL DOCUMENTATION PAGE
+═══════════════════════════════════════ */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+    --bg-primary: #050f0a;
+    --bg-card: #0a1a12;
+    --bg-card-hover: #0f2419;
+    --green-primary: #00a86b;
+    --green-light: #00d485;
+    --green-pale: #d4f4dd;
+    --green-dark: #00925d;
+    --green-glow: rgba(0, 168, 107, 0.3);
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --text-muted: rgba(255, 255, 255, 0.4);
+    --border: rgba(255, 255, 255, 0.08);
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+}
+
+body {
+    font-family: var(--font-body);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.7;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+a { text-decoration: none; color: inherit; }
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* ══════════ NAVBAR ══════════ */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    z-index: 1000;
+    padding: 0 32px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+}
+
+.nav-container {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-logo a { display: flex; align-items: center; }
+.nav-logo img { height: 40px; width: auto; }
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 8px;
+    align-items: center;
+}
+
+.nav-item .nav-link {
+    padding: 8px 16px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+    transition: color 0.3s;
+    border-radius: 8px;
+}
+
+.nav-item .nav-link:hover,
+.nav-item .nav-link.active {
+    color: #fff;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.nav-language .language-switch {
+    display: flex;
+    background: rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 3px;
+    position: relative;
+}
+
+.lang-switch-btn {
+    padding: 5px 14px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: none;
+    background: none;
+    color: rgba(255,255,255,0.5);
+    cursor: pointer;
+    border-radius: 18px;
+    transition: all 0.3s;
+    font-family: var(--font-body);
+    z-index: 1;
+}
+
+.lang-switch-btn.active {
+    color: #fff;
+    background: var(--green-primary);
+}
+
+.nav-auth-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 20px;
+    background: transparent;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.8);
+    border-radius: 50px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: var(--font-body);
+    white-space: nowrap;
+}
+
+.nav-auth-btn:hover {
+    border-color: var(--green-primary);
+    color: #fff;
+    background: rgba(0,168,107,0.1);
+}
+
+.nav-auth-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* Pages Dropdown */
+.pages-dropdown { position: relative; margin-left: 4px; }
+.pages-dd-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 20px;
+    background: var(--green-primary);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    font-family: var(--font-body);
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+.pages-dd-btn:hover { background: var(--green-dark); transform: translateY(-1px); }
+.pages-dd-btn svg { width: 16px; height: 16px; transition: transform 0.3s; }
+.pages-dropdown.open .pages-dd-btn svg { transform: rotate(180deg); }
+.pages-dd-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    min-width: 220px;
+    background: rgba(10,26,18,0.97);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all 0.3s;
+    z-index: 2000;
+    box-shadow: 0 16px 50px rgba(0,0,0,0.5);
+}
+.pages-dropdown.open .pages-dd-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.pages-dd-menu a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.75);
+    transition: all 0.2s;
+}
+.pages-dd-menu a:hover { background: rgba(0,168,107,0.12); color: #fff; }
+.pages-dd-menu a.active-page { color: var(--green-light); background: rgba(0,168,107,0.08); }
+.pages-dd-menu a span { font-size: 1rem; }
+
+/* Hamburger */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 8px;
+}
+.hamburger .bar {
+    width: 24px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: all 0.3s;
+}
+
+@media (max-width: 1024px) {
+    .nav-menu { display: none; }
+    .nav-auth-btn { display: none; }
+    .hamburger { display: flex; }
+}
+
+@media (max-width: 768px) {
+    .pages-dropdown { display: none; }
+    .nav-language { display: none; }
+}
+
+/* ══════════ HERO ══════════ */
+.hero {
+    padding: 160px 0 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(0,168,107,0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.hero .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    background: rgba(0,168,107,0.1);
+    border: 1px solid rgba(0,168,107,0.25);
+    border-radius: 50px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--green-light);
+    font-family: var(--font-mono);
+    letter-spacing: 0.05em;
+    margin-bottom: 24px;
+}
+
+.hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.hero h1 .accent {
+    color: var(--green-primary);
+}
+
+.hero p {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    max-width: 640px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+}
+
+/* ══════════ TABLE OF CONTENTS ══════════ */
+.toc {
+    padding: 60px 0;
+}
+
+.toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.toc-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.toc-card:hover {
+    background: var(--bg-card-hover);
+    border-color: rgba(0,168,107,0.3);
+    transform: translateY(-2px);
+}
+
+.toc-num {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    color: var(--green-primary);
+    min-width: 32px;
+}
+
+.toc-label {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.toc-card:hover .toc-label { color: #fff; }
+
+/* ══════════ LEGAL SECTIONS ══════════ */
+.legal-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+}
+
+.section-header {
+    margin-bottom: 48px;
+}
+
+.section-num {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--green-primary);
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+}
+
+.section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    letter-spacing: 0.03em;
+    margin-bottom: 8px;
+}
+
+.section-date {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+.legal-content {
+    max-width: 800px;
+}
+
+.legal-content h3 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    letter-spacing: 0.03em;
+    margin: 40px 0 16px;
+    color: var(--green-light);
+}
+
+.legal-content h3:first-child {
+    margin-top: 0;
+}
+
+.legal-content p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    line-height: 1.8;
+}
+
+.legal-content ul {
+    list-style: none;
+    margin: 0 0 20px 0;
+    padding: 0;
+}
+
+.legal-content ul li {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 10px;
+    font-size: 0.93rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+.legal-content ul li::before {
+    content: '›';
+    position: absolute;
+    left: 4px;
+    color: var(--green-primary);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.legal-content a {
+    color: var(--green-light);
+    border-bottom: 1px solid rgba(0,212,133,0.3);
+    transition: all 0.2s;
+}
+
+.legal-content a:hover {
+    color: #fff;
+    border-bottom-color: #fff;
+}
+
+/* Info table style */
+.legal-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0 28px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.legal-table tr {
+    border-bottom: 1px solid var(--border);
+}
+
+.legal-table tr:last-child { border-bottom: none; }
+
+.legal-table td {
+    padding: 14px 20px;
+    font-size: 0.9rem;
+    vertical-align: top;
+}
+
+.legal-table td:first-child {
+    font-weight: 600;
+    color: var(--green-light);
+    white-space: nowrap;
+    width: 200px;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+}
+
+.legal-table td:last-child {
+    color: var(--text-secondary);
+}
+
+.legal-table tr:nth-child(odd) {
+    background: rgba(0,168,107,0.04);
+}
+
+.legal-table tr:nth-child(even) {
+    background: rgba(255,255,255,0.02);
+}
+
+/* Highlight box */
+.legal-highlight {
+    background: rgba(0,168,107,0.06);
+    border-left: 3px solid var(--green-primary);
+    border-radius: 0 12px 12px 0;
+    padding: 20px 24px;
+    margin: 24px 0;
+}
+
+.legal-highlight p {
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 0;
+}
+
+/* FAQ accordion within legal */
+.faq-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: all 0.3s;
+}
+
+.faq-item:hover {
+    border-color: rgba(0,168,107,0.2);
+}
+
+.faq-question {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+    gap: 16px;
+}
+
+.faq-question svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: var(--green-primary);
+    transition: transform 0.3s;
+}
+
+.faq-item.open .faq-question svg {
+    transform: rotate(45deg);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+}
+
+.faq-item.open .faq-answer {
+    max-height: 600px;
+}
+
+.faq-answer-inner {
+    padding: 0 24px 20px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+}
+
+.faq-answer-inner ul {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0;
+}
+
+.faq-answer-inner ul li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 6px;
+}
+
+.faq-answer-inner ul li::before {
+    content: '›';
+    position: absolute;
+    left: 2px;
+    color: var(--green-primary);
+    font-weight: 700;
+}
+
+/* ══════════ BACK TO TOP ══════════ */
+.back-top {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 48px;
+    height: 48px;
+    background: var(--green-primary);
+    border: none;
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+    z-index: 900;
+    box-shadow: 0 4px 20px rgba(0,168,107,0.3);
+}
+
+.back-top.visible { opacity: 1; visibility: visible; }
+.back-top:hover { background: var(--green-dark); transform: translateY(-3px); }
+.back-top svg { width: 22px; height: 22px; }
+
+/* ══════════ FOOTER ══════════ */
+.footer {
+    background: #000;
+    border-top: 1px solid var(--border);
+    padding: 60px 0 30px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 40px;
+}
+
+.footer-brand img {
+    height: 36px;
+    margin-bottom: 16px;
+}
+
+.footer-brand p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 280px;
+}
+
+.footer-col h4 {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+}
+
+.footer-col a {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    padding: 4px 0;
+    transition: color 0.2s;
+}
+
+.footer-col a:hover { color: var(--green-light); }
+
+.footer-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.footer-bottom p {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+}
+
+.footer-bottom-links {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-bottom-links a {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    transition: color 0.2s;
+}
+
+.footer-bottom-links a:hover { color: var(--green-light); }
+
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+    }
+    .toc-grid {
+        grid-template-columns: 1fr;
+    }
+    .legal-table td:first-child {
+        width: auto;
+        white-space: normal;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* ══════════ ANIMATIONS ══════════ */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+    
+
+/* ══════════════════════════════════════
+   UNIFIED NAVBAR - Constructor Style
+   ══════════════════════════════════════ */
+.navbar{position:fixed;top:0;width:100%;height:72px;background:#000;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:1000;border-bottom:1px solid rgba(255,255,255,0.07);transition:all 0.3s ease}
+.navbar.scrolled{box-shadow:0 4px 30px rgba(0,0,0,0.5)}
+.nav-container{max-width:1320px;margin:0 auto;padding:0 40px;display:flex;justify-content:space-between;align-items:center;height:100%}
+.nav-logo a{display:flex;align-items:center;text-decoration:none}
+.nav-logo img{height:150px;width:auto;transition:transform 0.3s ease}
+.nav-logo img:hover{transform:scale(1.04)}
+.nav-menu{display:flex;list-style:none;gap:6px;align-items:center;margin:0;padding:0}
+.nav-item{position:relative}
+.nav-link{color:rgba(255,255,255,0.7);font-size:0.9rem;font-weight:500;transition:all 0.3s ease;padding:8px 16px;border-radius:8px;display:inline-flex;align-items:center;gap:6px;text-decoration:none;cursor:pointer}
+.nav-link:hover{color:#fff;background:rgba(255,255,255,0.06)}
+.nav-link svg{transition:transform 0.3s ease;stroke:currentColor;fill:none;stroke-width:2}
+.nav-dropdown:hover .nav-link svg{transform:rotate(180deg)}
+
+/* Mega dropdown */
+.nav-mega{position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(8px);min-width:200px;background:rgba(10,26,18,0.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:10px;opacity:0;visibility:hidden;transition:all 0.25s ease;z-index:2000;box-shadow:0 20px 60px rgba(0,0,0,0.5);pointer-events:none}
+.nav-dropdown:hover .nav-mega{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);pointer-events:auto}
+.nav-mega a{display:block;padding:11px 16px;border-radius:10px;font-size:0.88rem;font-weight:500;color:rgba(255,255,255,0.75);transition:all 0.2s ease;text-decoration:none;white-space:nowrap}
+.nav-mega a:hover{background:rgba(0,168,107,0.12);color:#fff}
+
+/* Right side group */
+.nav-right-group{display:flex;align-items:center;gap:10px}
+.nav-language{display:flex;align-items:center}
+.language-switch{position:relative;display:flex;background:rgba(255,255,255,0.08);border-radius:50px;padding:3px;border:1px solid rgba(255,255,255,0.15)}
+.lang-switch-btn{position:relative;padding:6px 14px;background:transparent;border:none;color:rgba(255,255,255,0.5);border-radius:50px;cursor:pointer;font-size:0.8rem;font-weight:600;font-family:var(--fm,'Space Mono',monospace);transition:color 0.3s ease;z-index:2;min-width:40px}
+.lang-switch-btn.active{color:#fff}
+.switch-slider{position:absolute;top:3px;left:3px;width:calc(50% - 3px);height:calc(100% - 6px);background:var(--green,#00a86b);border-radius:50px;transition:transform 0.3s ease;z-index:1}
+.nav-auth-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 20px;background:transparent;color:rgba(255,255,255,0.85);border:1.5px solid rgba(255,255,255,0.25);border-radius:50px;font-size:0.82rem;font-weight:600;font-family:inherit;cursor:pointer;transition:all 0.3s ease;white-space:nowrap}
+.nav-auth-btn svg{width:18px;height:18px;flex-shrink:0}
+.nav-auth-btn:hover{background:var(--green,#00a86b);border-color:var(--green,#00a86b);color:#fff}
+.hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px;padding:8px}
+.hamburger .bar{width:24px;height:2px;background:#fff;transition:all 0.3s ease;border-radius:2px}
+
+/* Mobile navbar */
+@media(max-width:768px){
+.nav-container{padding:0 20px}
+.nav-menu{position:fixed;left:-100%;top:72px;flex-direction:column;background:rgba(0,0,0,0.98);backdrop-filter:blur(20px);width:100%;height:calc(100vh - 72px);text-align:left;transition:left 0.3s ease;gap:0;padding:24px 20px;overflow-y:auto;z-index:999}
+.nav-menu.active{left:0}
+.nav-item{width:100%;border-bottom:1px solid rgba(255,255,255,0.06)}
+.nav-link{font-size:1.05rem;padding:16px 0;width:100%;border-radius:0}
+.nav-mega{position:static;transform:none;opacity:1;visibility:visible;pointer-events:auto;background:transparent;border:none;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;padding:0 0 8px 16px;min-width:auto;display:none}
+.nav-dropdown.mob-open .nav-mega{display:block}
+.nav-mega a{padding:10px 0;font-size:0.95rem;border-radius:0}
+.nav-right-group{display:none}
+.hamburger{display:flex}
+}
+
+/* ══════════════════════════════════════
+   UNIFIED FOOTER
+   ══════════════════════════════════════ */
+.footer-nav{background:#000;color:#fff;padding:80px 0 40px;border-top:1px solid rgba(255,255,255,0.07)}
+.footer-nav-logo-section{text-align:center;margin-bottom:30px}
+.footer-logo{height:80px;width:auto;opacity:0.9}
+.footer-nav-top{display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:40px;padding-bottom:30px;border-bottom:1px solid rgba(0,168,107,0.2)}
+.footer-connect{font-size:0.9rem;color:rgba(255,255,255,0.6);white-space:nowrap}
+.footer-social-icons{display:flex;gap:14px}
+.footer-social-icons a{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:8px;transition:all 0.3s ease}
+.footer-social-icons a:hover{background:rgba(0,168,107,0.15);transform:translateY(-2px)}
+.footer-social-icons img{width:24px;height:24px;filter:brightness(0) invert(1);opacity:0.7;transition:opacity 0.3s ease}
+.footer-social-icons a:hover img{opacity:1}
+.footer-nav-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1.5fr;gap:40px}
+.footer-nav-column h3{font-family:var(--fb,'DM Sans',sans-serif);font-size:0.92rem;font-weight:600;color:var(--green-light,#00d485);margin-bottom:18px;letter-spacing:0.5px}
+.footer-nav-column ul{list-style:none;padding:0;margin:0}
+.footer-nav-column li{margin-bottom:10px}
+.footer-nav-column a{color:rgba(255,255,255,0.7);font-size:0.88rem;transition:color 0.2s ease;text-decoration:none}
+.footer-nav-column a:hover{color:#fff}
+.footer-nav-double{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.footer-nav-subcolumn h3{font-family:var(--fb,'DM Sans',sans-serif);font-size:0.92rem;font-weight:600;color:var(--green-light,#00d485);margin-bottom:18px;letter-spacing:0.5px}
+.footer-nav-subcolumn ul{list-style:none;padding:0;margin:0}
+.footer-nav-subcolumn li{margin-bottom:10px}
+.footer-nav-subcolumn a{color:rgba(255,255,255,0.7);font-size:0.88rem;transition:color 0.2s ease;text-decoration:none}
+.footer-nav-subcolumn a:hover{color:#fff}
+.footer{background:#000;color:#fff;padding:20px;text-align:center;border-top:1px solid rgba(255,255,255,0.05)}
+.footer-copyright{font-size:0.85rem;opacity:0.5;line-height:1.7}
+
+@media(max-width:1024px){.footer-nav-grid{grid-template-columns:1fr 1fr;gap:30px}}
+@media(max-width:768px){.footer-nav-grid{grid-template-columns:1fr}.footer-nav-double{grid-template-columns:1fr}.footer-nav-top{flex-direction:column;gap:12px}}
+
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+    <div class="nav-container">
+        <div class="nav-logo"><a href="index.html"><img src="Media/LOGO 3.png" alt="Agarta AI Logo"></a></div>
+                <ul class="nav-menu" id="navMenu">
+            <li class="nav-item">
+                <a href="About.html" class="nav-link" data-i18n="nav.about">About</a>
+            </li>
+            <li class="nav-item">
+                <a href="Integrations.html" class="nav-link" data-i18n="nav.integrations">Integrations</a>
+            </li>
+            <li class="nav-item nav-dropdown">
+                <a href="#" class="nav-link nav-dd-trigger" data-i18n="nav.features">Features <svg width="10" height="6" viewBox="0 0 10 6" fill="currentColor"><path d="M1 1l4 4 4-4"/></svg></a>
+                <div class="nav-mega">
+                    <a href="explore.html" data-i18n="nav.f.explore">Explore</a>
+                    <a href="play_games.html" data-i18n="nav.f.games">Play & Games</a>
+                    <a href="Virtual_campus.html" data-i18n="nav.f.campus">Virtual Campus</a>
+                    <a href="Events.html" data-i18n="nav.f.events">Events</a>
+                    <a href="Marketplace.html" data-i18n="nav.f.marketplace">Marketplace</a>
+                    <a href="lab_tours.html" data-i18n="nav.f.labs">Lab Tours</a>
+                    <a href="Media_Streaming.html" data-i18n="nav.f.media">Media Hub</a>
+                    <a href="Web_Navigator.html" data-i18n="nav.f.webnav">Web Navigator</a>
+                </div>
+            </li>
+            <li class="nav-item nav-dropdown">
+                <a href="#" class="nav-link nav-dd-trigger" data-i18n="nav.resources">Resources <svg width="10" height="6" viewBox="0 0 10 6" fill="currentColor"><path d="M1 1l4 4 4-4"/></svg></a>
+                <div class="nav-mega">
+                    <a href="Technologies.html" data-i18n="nav.r.tech">Technologies</a>
+                    <a href="FAQ.html" data-i18n="nav.r.faq">FAQs</a>
+                </div>
+            </li>
+            <li class="nav-item nav-dropdown">
+                <a href="#" class="nav-link nav-dd-trigger" data-i18n="nav.support">Support <svg width="10" height="6" viewBox="0 0 10 6" fill="currentColor"><path d="M1 1l4 4 4-4"/></svg></a>
+                <div class="nav-mega">
+                    <a href="Help_support.html" data-i18n="nav.s.help">Help Center</a>
+                    <a href="Contact.html" data-i18n="nav.s.contact">Contact Us</a>
+                    <a href="Legal.html" data-i18n="nav.s.legal">Legal</a>
+                </div>
+            </li>
+        </ul>
+        <div class="nav-right-group">
+            <div class="nav-language"><div class="language-switch"><button class="lang-switch-btn active" data-lang="en">EN</button><button class="lang-switch-btn" data-lang="fr">FR</button><div class="switch-slider"></div></div></div>
+            <button class="nav-auth-btn" id="authOpenBtn"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>Sign Up / Login</button>
+            <a href="Contact.html#contact-main" class="nav-get-started">Get Started</a>
+        </div>
+        <div class="hamburger" id="hamburger"><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+    <div class="container fade-in">
+        <div class="badge">📜 Legal &amp; Compliance</div>
+        <h1>LEGAL <span class="accent">DOCUMENTATION</span></h1>
+        <p>Transparency, privacy, and trust are at the heart of the Agarta platform. Review our policies, terms, and compliance standards below.</p>
+    </div>
+</section>
+
+<!-- TABLE OF CONTENTS -->
+<section class="toc">
+    <div class="container">
+        <div class="toc-grid fade-in">
+            <a href="#privacy" class="toc-card"><div class="toc-num">01</div><div class="toc-label">Privacy Policy</div></a>
+            <a href="#terms" class="toc-card"><div class="toc-num">02</div><div class="toc-label">Terms &amp; Conditions</div></a>
+            <a href="#cookies" class="toc-card"><div class="toc-num">03</div><div class="toc-label">Cookie Policy</div></a>
+            <a href="#faq" class="toc-card"><div class="toc-num">04</div><div class="toc-label">Frequently Asked Questions</div></a>
+            <a href="#children" class="toc-card"><div class="toc-num">05</div><div class="toc-label">Children's Privacy Notice</div></a>
+            <a href="#accessibility" class="toc-card"><div class="toc-num">06</div><div class="toc-label">Accessibility Statement</div></a>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════ 1. PRIVACY POLICY ══════════ -->
+<section class="legal-section" id="privacy">
+    <div class="container">
+        <div class="section-header fade-in">
+            <div class="section-num">SECTION 01</div>
+            <h2 class="section-title" data-i18n="lg.pp.title">PRIVACY POLICY</h2>
+            <div class="section-date">Last Updated: May 1, 2025</div>
+        </div>
+        <div class="legal-content fade-in">
+
+            <h3>1.1 Introduction</h3>
+            <p>Agarta ("we", "our", "the Platform") is an immersive educational and training platform operated by Hope Land Canada Inc. and developed with the technical support of Kimuntu Power Inc. We are committed to protecting the privacy, security, and integrity of your personal data.</p>
+            <p>This Privacy Policy applies to all users of the Agarta platform, including the website at <a href="https://agarta.ai">agarta.ai</a>, mobile applications, and VR/XR experiences. By accessing or using Agarta, you agree to this Privacy Policy.</p>
+
+            <div class="legal-highlight">
+                <p><strong>Applicable Legal Frameworks:</strong> PIPEDA (Canada), applicable provincial privacy laws (Ontario, Quebec Law 25), COPPA (U.S. users), FERPA (U.S. educational institutions), CCPA (California users), and ISO/IEC 27001 &amp; 27701 aligned security practices.</p>
+            </div>
+
+            <h3>1.2 Information We Collect</h3>
+
+            <p><strong>1.2.1 Personal Information:</strong></p>
+            <ul>
+                <li>Full name and display name</li>
+                <li>Email address</li>
+                <li>Account credentials (hashed passwords only — never stored in plain text)</li>
+                <li>Educational or institutional affiliation</li>
+                <li>User role (student, teacher, administrator, trainer, partner)</li>
+                <li>Communication preferences and language settings</li>
+            </ul>
+
+            <p><strong>1.2.2 Technical and Usage Data:</strong></p>
+            <ul>
+                <li>IP address (anonymized after 30 days)</li>
+                <li>Device type, operating system, browser type and version</li>
+                <li>Log files, analytics events, crash reports</li>
+                <li>Session activity, navigation behavior, feature usage</li>
+                <li>VR interaction metrics (headset type, session duration, interaction events — if applicable)</li>
+            </ul>
+
+            <p><strong>1.2.3 Educational and Performance Data:</strong></p>
+            <ul>
+                <li>Assessment results and quiz scores</li>
+                <li>Learning progress and milestone tracking</li>
+                <li>Interaction logs within learning modules</li>
+                <li>Engagement time and content completion rates</li>
+            </ul>
+
+            <p><strong>1.2.4 Data We Do NOT Collect:</strong></p>
+            <ul>
+                <li>Financial information or payment card details (processed exclusively by third-party payment providers)</li>
+                <li>Biometric identifiers (facial recognition, fingerprints, voice prints)</li>
+                <li>Health or medical records</li>
+                <li>Precise geolocation without explicit user consent</li>
+                <li>Sensitive personal data unless legally required and institutionally authorized</li>
+            </ul>
+
+            <h3>1.3 How We Use Your Information</h3>
+            <ul>
+                <li>Provide, operate, and personalize the Agarta platform experience</li>
+                <li>Manage user authentication and access permissions</li>
+                <li>Deliver learning analytics, progress reports, and educational insights</li>
+                <li>Improve content accuracy, platform performance, and AI recommendations</li>
+                <li>Ensure platform security, fraud detection, and abuse prevention</li>
+                <li>Communicate service updates, new features, and technical support</li>
+                <li>Comply with applicable legal obligations and audit requirements</li>
+                <li>Generate anonymized, aggregated analytics for platform improvement</li>
+            </ul>
+
+            <h3>1.4 Legal Basis for Processing</h3>
+            <table class="legal-table">
+                <tr><td>Consent</td><td>Explicit user consent for non-essential data collection, marketing communications, and optional features</td></tr>
+                <tr><td>Contract</td><td>Processing necessary to provide the services described in the Terms &amp; Conditions</td></tr>
+                <tr><td>Legitimate Interest</td><td>Security monitoring, performance optimization, fraud prevention, and platform improvement</td></tr>
+                <tr><td>Legal Compliance</td><td>Audit trails, safety requirements, and regulatory reporting obligations</td></tr>
+            </table>
+
+            <h3>1.5 Data Sharing and Disclosure</h3>
+            <div class="legal-highlight">
+                <p><strong>Agarta does not sell personal data.</strong> We share data only in limited circumstances outlined below.</p>
+            </div>
+
+            <p><strong>Approved Service Providers:</strong></p>
+            <ul>
+                <li>Secure cloud hosting providers (with data processing agreements)</li>
+                <li>Analytics providers (anonymized/aggregated data only)</li>
+                <li>Technical integration partners (limited to data necessary for the integration)</li>
+            </ul>
+
+            <p><strong>Educational Institutions:</strong></p>
+            <p>If you access Agarta through a school, university, or organization, authorized administrators within that institution may access learner data relevant to their educational programs, subject to institutional agreements.</p>
+
+            <p><strong>Legal Compliance:</strong></p>
+            <p>We may disclose information when required by law, court order, government request, or to protect the safety of users or prevent unlawful activities.</p>
+
+            <h3>1.6 Data Security</h3>
+            <table class="legal-table">
+                <tr><td>Encryption in Transit</td><td>TLS 1.3</td></tr>
+                <tr><td>Encryption at Rest</td><td>AES-256</td></tr>
+                <tr><td>Password Hashing</td><td>Argon2/Bcrypt</td></tr>
+                <tr><td>Access Control</td><td>Role-based access control (RBAC)</td></tr>
+                <tr><td>Admin Auth</td><td>Multi-factor authentication (MFA)</td></tr>
+                <tr><td>Monitoring</td><td>Continuous security monitoring and anomaly detection</td></tr>
+                <tr><td>Testing</td><td>Regular penetration testing and third-party security audits</td></tr>
+                <tr><td>Incident Response</td><td>72-hour breach notification protocol</td></tr>
+            </table>
+
+            <h3>1.7 Data Retention</h3>
+            <p>We retain personal data only for as long as necessary to provide services, meet legal obligations, or maintain user accounts. Inactive accounts may be anonymized after 24 months of inactivity. Users may request deletion at any time (see Section 1.8).</p>
+
+            <h3>1.8 Your Rights</h3>
+            <ul>
+                <li><strong>Right of Access</strong> — Request a copy of your personal data</li>
+                <li><strong>Right of Rectification</strong> — Correct inaccurate or incomplete data</li>
+                <li><strong>Right of Erasure</strong> — Request deletion of your personal data</li>
+                <li><strong>Right to Withdraw Consent</strong> — Withdraw previously granted consent</li>
+                <li><strong>Right to Data Portability</strong> — Receive your data in a machine-readable format</li>
+                <li><strong>Right to Restrict Processing</strong> — Limit how we use your data</li>
+                <li><strong>Right to Object</strong> — Object to processing based on legitimate interests</li>
+            </ul>
+            <p>To exercise any of these rights, contact us at: <a href="mailto:contact@agarta.ai">contact@agarta.ai</a></p>
+
+            <h3>1.9 International Data Transfers</h3>
+            <p>Data may be processed and stored in Canada and, where required by infrastructure, in the United States. We implement appropriate safeguards including Standard Contractual Clauses (SCCs) and data processing agreements compliant with applicable privacy frameworks.</p>
+
+        </div>
+    </div>
+</section>
+
+<!-- ══════════ 2. TERMS & CONDITIONS ══════════ -->
+<section class="legal-section" id="terms">
+    <div class="container">
+        <div class="section-header fade-in">
+            <div class="section-num">SECTION 02</div>
+            <h2 class="section-title">TERMS &amp; CONDITIONS</h2>
+            <div class="section-date">Last Updated: May 1, 2025</div>
+        </div>
+        <div class="legal-content fade-in">
+
+            <h3>2.1 Acceptance of Terms</h3>
+            <p>By accessing or using the Agarta platform in any capacity — including but not limited to browsing the website, creating an account, participating in virtual experiences, or using any API or integration — you acknowledge that you have read, understood, and agree to be bound by these Terms &amp; Conditions and our Privacy Policy.</p>
+            <p>If you are accessing Agarta on behalf of an organization, you represent and warrant that you have the authority to bind that organization to these Terms.</p>
+
+            <h3>2.2 Platform Description</h3>
+            <p>Agarta is an immersive AI-powered training and education platform offering:</p>
+            <ul>
+                <li>Virtual and augmented reality learning environments</li>
+                <li>3D content simulation and interactive experiences</li>
+                <li>Online training modules and virtual classrooms</li>
+                <li>AI-powered tutoring, assessment, and personalization tools</li>
+                <li>Data-driven learning dashboards and analytics</li>
+                <li>Virtual marketplace for educational content and digital assets</li>
+                <li>Institutional and enterprise administrative tools</li>
+            </ul>
+
+            <h3>2.3 Eligibility</h3>
+            <ul>
+                <li>Users must be at least 13 years of age (or the minimum age defined by applicable law in your jurisdiction)</li>
+                <li>Users under 18 must have verifiable parental or institutional consent</li>
+                <li>All users must provide accurate and complete account information</li>
+                <li>Users must not be prohibited from accessing digital services under applicable law</li>
+                <li>Institutional accounts require a valid organizational agreement</li>
+            </ul>
+
+            <h3>2.4 User Responsibilities and Acceptable Use</h3>
+            <p>Users are strictly prohibited from:</p>
+            <ul>
+                <li>Attempting unauthorized access, reverse engineering, or decompilation of the platform</li>
+                <li>Interfering with platform functions, servers, networks, or security systems</li>
+                <li>Uploading malicious code, viruses, or harmful content</li>
+                <li>Sharing, reselling, sublicensing, or duplicating platform content without authorization</li>
+                <li>Harassing, threatening, or engaging in harmful behavior toward other users</li>
+                <li>Misrepresenting identity or impersonating others</li>
+                <li>Using the platform for any unlawful purpose</li>
+                <li>Circumventing access controls, parental controls, or content restrictions</li>
+            </ul>
+            <div class="legal-highlight">
+                <p>Violations may result in immediate account suspension or permanent termination without refund.</p>
+            </div>
+
+            <h3>2.5 Intellectual Property</h3>
+            <p>All content on the Agarta platform, including but not limited to software, VR/XR experiences, 3D environments, learning modules, AI models, interfaces, logos, trademarks, and proprietary content, is the exclusive intellectual property of Hope Land Canada Inc. or its licensors.</p>
+            <p>Users are granted a limited, non-exclusive, non-transferable, revocable license to access and use content solely for authorized educational and personal purposes. This license does not include the right to copy, modify, distribute, sell, or exploit any platform content.</p>
+
+            <h3>2.6 Subscription and Payment Terms</h3>
+            <table class="legal-table">
+                <tr><td>Free Tier</td><td>Access to selected experiences with limited features</td></tr>
+                <tr><td>Premium</td><td>Billed monthly or annually in advance</td></tr>
+                <tr><td>Institutional</td><td>Governed by separate institutional agreements</td></tr>
+                <tr><td>Refunds</td><td>Available within 7 days of purchase for digital goods, subject to usage conditions</td></tr>
+                <tr><td>Price Changes</td><td>Users will be notified at least 30 days in advance</td></tr>
+            </table>
+
+            <h3>2.7 Limitation of Liability</h3>
+            <p>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, AGARTA AND ITS AFFILIATES SHALL NOT BE LIABLE FOR: indirect, incidental, special, consequential, or punitive damages; loss of profits, data, or business opportunities; interruption or loss of service; user misuse of the platform; third-party service failures; or VR/XR-related discomfort or health effects.</p>
+            <p>Maximum aggregate liability is limited to amounts paid by the user in the 12 months preceding the claim.</p>
+
+            <h3>2.8 Governing Law</h3>
+            <table class="legal-table">
+                <tr><td>Canadian Users</td><td>Governed by the laws of the Province of Ontario, Canada</td></tr>
+                <tr><td>U.S. Institutional</td><td>Governed by applicable U.S. federal and state law</td></tr>
+                <tr><td>International</td><td>Subject to applicable local law, with Ontario law as default</td></tr>
+            </table>
+
+        </div>
+    </div>
+</section>
+
+<!-- ══════════ 3. COOKIE POLICY ══════════ -->
+<section class="legal-section" id="cookies">
+    <div class="container">
+        <div class="section-header fade-in">
+            <div class="section-num">SECTION 03</div>
+            <h2 class="section-title">COOKIE POLICY</h2>
+            <div class="section-date">Last Updated: May 1, 2025</div>
+        </div>
+        <div class="legal-content fade-in">
+
+            <h3>3.1 What Are Cookies?</h3>
+            <p>Cookies are small text files stored on your device when you visit Agarta. They help us provide a secure, functional, and personalized experience. We also use similar technologies such as local storage, session storage, and web beacons.</p>
+
+            <h3>3.2 Types of Cookies We Use</h3>
+            <table class="legal-table">
+                <tr><td>Essential</td><td>Required for login, security, session management, and navigation. Cannot be disabled without affecting core functionality.</td></tr>
+                <tr><td>Functional</td><td>Remember user preferences, language settings, and accessibility options. Improve personalization without tracking behavior.</td></tr>
+                <tr><td>Analytics</td><td>Understand platform performance and user behavior to improve features. Anonymized and do not identify individuals.</td></tr>
+                <tr><td>Advertising</td><td>Agarta does NOT use marketing cookies, advertising trackers, or third-party ad networks. Our platform is advertising-free.</td></tr>
+            </table>
+
+            <h3>3.3 Cookie Consent &amp; Control</h3>
+            <ul>
+                <li>First-visit banner allows you to accept all, reject non-essential, or customize preferences</li>
+                <li>Preferences can be modified at any time through the Agarta cookie settings panel</li>
+                <li>Browser-level cookie controls are also effective</li>
+            </ul>
+            <div class="legal-highlight">
+                <p><strong>Note:</strong> Disabling essential cookies will limit or prevent access to core platform features.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ══════════ 4. FAQ ══════════ -->
+<section class="legal-section" id="faq">
+    <div class="container">
+        <div class="section-header fade-in">
+            <div class="section-num">SECTION 04</div>
+            <h2 class="section-title">FREQUENTLY ASKED QUESTIONS</h2>
+        </div>
+        <div class="legal-content fade-in">
+
+            <h3>4.1 General Questions</h3>
+
+            <div class="faq-item">
+                <button class="faq-question">What is Agarta AI? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Agarta AI is a next-generation immersive platform combining artificial intelligence, 3D environments, virtual reality, and interactive media to help people explore the world, learn across disciplines, and experience knowledge in new ways. It brings together virtual tours, a virtual campus, games, media streaming, and real-time satellite data into one unified experience.</div></div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">Who can use Agarta AI? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Agarta is designed for everyone:
+                    <ul>
+                        <li>Students (K-12 and higher education)</li>
+                        <li>Teachers, educators, and academic institutions</li>
+                        <li>Researchers and academics</li>
+                        <li>Professionals and enterprise training departments</li>
+                        <li>Museums, cultural centers, NGOs, and government organizations</li>
+                        <li>Content creators, trainers, and lifelong learners worldwide</li>
+                    </ul>
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">Do I need technical skills to use Agarta? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+                <div class="faq-answer"><div class="faq-answer-inner">No. Agarta is built to be intuitive and user-friendly. No technical knowledge is required for exploration and learning. Advanced tools are available for educators and developers who need deeper functionality.</div></div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">Is Agarta available worldwide? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Yes. Agarta is a global platform with multilingual support (English and French currently, with more languages planned) and cloud-based access from any internet-connected device.</div></div>
+            </div>
+
+            <h3>4.2 Education &amp; Learning</h3>
+
+            <div class="faq-item">
+                <button class="faq-question">What is Agarta Virtual Campus? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+                <div class="faq-answer"><div class="faq-answer-inner">The Virtual Campus is Agarta's immersive learning environment featuring virtual classrooms, XR labs, AI tutors, workshops, seminars, and events. It supports formal education, professional training, and self-paced learning across science, arts, technology, agriculture, medicine, and more.</div></div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">Is Agarta suitable for schools and universities? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Yes. Agarta supports curriculum integration, virtual field trips, remote and hybrid learning, teacher-led and self-paced experiences, and safe learning environments. Educational licensing options with institutional controls are available.</div></div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">Is Agarta safe for children? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Yes. Agarta follows child-safe design principles including age-appropriate content, controlled media access, moderated experiences, COPPA compliance, and parental/institutional controls. See Section 5 (Children's Privacy Notice) for full details.</div></div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">What subjects are covered? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Agarta covers a wide range of disciplines including science, technology, engineering, arts, mathematics, history, geography, environmental sciences, agriculture, medicine, architecture, and more through its Virtual Campus and Explore World features.</div></div>
+            </div>
+
+            <h3>4.3 Technology &amp; Features</h3>
+
+            <div class="faq-item">
+                <button class="faq-question">What technologies power Agarta? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    <ul>
+                        <li>Artificial Intelligence &amp; Machine Learning (adaptive learning, AI tutors, recommendations)</li>
+                        <li>3D Engines: Unreal Engine, Unity</li>
+                        <li>WebXR &amp; immersive web technologies</li>
+                        <li>Satellite &amp; geospatial data (Google Earth, NASA EarthData, ESA Sentinel)</li>
+                        <li>Cloud computing, REST APIs, and microservices infrastructure</li>
+                    </ul>
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">What devices are compatible with Agarta? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    <ul>
+                        <li>Desktop &amp; laptop computers (all major browsers)</li>
+                        <li>Smartphones &amp; tablets (iOS and Android)</li>
+                        <li>VR headsets (Meta Quest, HTC Vive, Pico, Valve Index)</li>
+                        <li>AR/MR devices (Magic Leap, Microsoft HoloLens — where supported)</li>
+                    </ul>
+                    No special hardware is required for basic access. VR headsets unlock the full immersive experience.
+                </div></div>
+            </div>
+
+            <h3>4.4 Pricing &amp; Access</h3>
+
+            <div class="faq-item">
+                <button class="faq-question">Is Agarta free to use? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+                <div class="faq-answer"><div class="faq-answer-inner">
+                    <ul>
+                        <li><strong>Free Tier:</strong> Access to selected tours, experiences, and basic features</li>
+                        <li><strong>Premium Subscription:</strong> Full access to all features, AI tutoring, and exclusive content</li>
+                        <li><strong>Institutional Licensing:</strong> Custom packages for schools, universities, and organizations</li>
+                        <li><strong>Enterprise Solutions:</strong> Custom deployments for corporations and government entities</li>
+                    </ul>
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">Can my institution request a demo? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Yes. Schools, universities, companies, NGOs, and government organizations can request tailored demos and pilot programs. Contact us at <a href="mailto:contact@agarta.ai">contact@agarta.ai</a> or visit the Contact page.</div></div>
+            </div>
+
+            <h3>4.5 Security &amp; Privacy</h3>
+
+            <div class="faq-item">
+                <button class="faq-question">Is my data secure on Agarta? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Yes. Agarta employs industry-leading security including TLS 1.3 encryption in transit, AES-256 encryption at rest, Argon2/Bcrypt password hashing, role-based access control, multi-factor authentication for admins, and regular penetration testing. See the Privacy Policy (Section 1) for full details.</div></div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">Does Agarta share or sell user data? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+                <div class="faq-answer"><div class="faq-answer-inner">No. Agarta never sells personal data. Data is shared only with approved service providers under strict data processing agreements, and with educational institutions for learners enrolled through those institutions. See Privacy Policy Section 1.5 for full details.</div></div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ══════════ 5. CHILDREN'S PRIVACY NOTICE ══════════ -->
+<section class="legal-section" id="children">
+    <div class="container">
+        <div class="section-header fade-in">
+            <div class="section-num">SECTION 05</div>
+            <h2 class="section-title">CHILDREN'S PRIVACY NOTICE</h2>
+        </div>
+        <div class="legal-content fade-in">
+
+            <p>This notice explains how Agarta handles data for users under the age of 13 (or under the minimum age defined by applicable local law).</p>
+
+            <h3>5.1 Parental and Institutional Consent</h3>
+            <p>Agarta requires verifiable parental consent (or consent through an educational institution) before collecting any personal data from children. Schools and institutions accessing Agarta on behalf of minor students serve as the authorized consent agents.</p>
+
+            <h3>5.2 Child-Safe Design Principles</h3>
+            <ul>
+                <li>Age-appropriate content across all platform sections</li>
+                <li>No advertising of any kind directed at minors</li>
+                <li>Minimized data collection — only what is necessary for the educational service</li>
+                <li>No behavioral tracking for profiling of minors</li>
+                <li>Parental access rights to review, correct, or delete their child's data</li>
+                <li>Moderated VR and community experiences</li>
+            </ul>
+
+            <h3>5.3 Data Use for Minors</h3>
+            <p>Data collected for minor users is used exclusively for educational purposes within the Agarta platform. It is never shared with third parties for commercial purposes, and never used for profiling or advertising.</p>
+
+        </div>
+    </div>
+</section>
+
+<!-- ══════════ 6. ACCESSIBILITY STATEMENT ══════════ -->
+<section class="legal-section" id="accessibility">
+    <div class="container">
+        <div class="section-header fade-in">
+            <div class="section-num">SECTION 06</div>
+            <h2 class="section-title">ACCESSIBILITY STATEMENT</h2>
+        </div>
+        <div class="legal-content fade-in">
+
+            <p>Agarta is committed to ensuring digital accessibility for people of all abilities. We strive to meet or exceed WCAG 2.1 Level AA accessibility standards.</p>
+
+            <h3>6.1 Accessibility Features</h3>
+            <ul>
+                <li>Voice navigation and screen reader compatibility</li>
+                <li>AI-generated subtitles and closed captioning</li>
+                <li>Text-to-speech functionality across the platform</li>
+                <li>High-contrast UI mode</li>
+                <li>Low-bandwidth mode for users with limited internet access</li>
+                <li>Cognitive learning support tools and simplified navigation options</li>
+                <li>Keyboard navigation throughout the platform</li>
+            </ul>
+
+            <h3>6.2 Feedback and Support</h3>
+            <p>If you experience accessibility barriers on our platform, please contact us at <a href="mailto:support@agarta.ai">support@agarta.ai</a>. We are committed to continuous improvement and welcome all accessibility feedback.</p>
+
+        </div>
+    </div>
+</section>
+
+<!-- BACK TO TOP -->
+<button class="back-top" id="backTop">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<!-- FOOTER -->
+<section class="footer-nav">
+    <div class="container">
+        <div class="footer-nav-logo-section"><img src="Media/Agarta logo.png" alt="Agarta Logo" class="footer-logo"></div>
+        <div class="footer-nav-top">
+            <p class="footer-connect" data-i18n="ft.connect">Connect with us:</p>
+            <div class="footer-social-icons">
+                <a href="https://www.facebook.com/agartaai" aria-label="Facebook"><img src="Media/icons8-facebook-50.png" alt="Facebook"></a>
+                <a href="https://www.linkedin.com/company/agarta_official" aria-label="LinkedIn"><img src="Media/icons8-linkedin-50.png" alt="LinkedIn"></a>
+                <a href="https://www.youtube.com/@Agartaai" aria-label="YouTube"><img src="Media/icons8-youtube-50.png" alt="YouTube"></a>
+                <a href="https://www.facebook.com/agartaai" aria-label="Instagram"><img src="Media/icons8-instagram-50.png" alt="Instagram"></a>
+            </div>
+        </div>
+        <div class="footer-nav-grid">
+            <div class="footer-nav-column"><h3 data-i18n="ft.company">Company</h3><ul><li><a href="About.html">About Us</a></li><li><a href="About.html#story">Our Story & Mission</a></li><li><a href="#">Ethics & Sustainability</a></li><li><a href="#">Careers</a></li><li><a href="#">Partnerships</a></li></ul></div>
+            <div class="footer-nav-column"><h3 data-i18n="ft.features">Features</h3><ul><li><a href="explore.html">Explore</a></li><li><a href="play_games.html">Play & Games</a></li><li><a href="Virtual_campus.html">Virtual Campus</a></li><li><a href="Events.html">Events</a></li><li><a href="#">Agarta AI PlayLab&trade;</a></li><li><a href="Marketplace.html">Marketplace</a></li><li><a href="#">AI Voice Assistant</a></li></ul></div>
+            <div class="footer-nav-column"><h3 data-i18n="ft.resources">Resources</h3><ul><li><a href="#">Blog</a></li><li><a href="#">Tutorials & Webinars</a></li><li><a href="#">Developer API Portal</a></li><li><a href="Technologies.html">Technologies</a></li><li><a href="#">AI Voice Assistant</a></li><li><a href="#">Integration Guides</a></li><li><a href="#">Community Forum</a></li><li><a href="FAQ.html">FAQs</a></li></ul></div>
+            <div class="footer-nav-column footer-nav-double">
+                <div class="footer-nav-subcolumn"><h3 data-i18n="ft.support">Support</h3><ul><li><a href="Contact.html">Contact Us</a></li><li><a href="Help_support.html">Help Center</a></li><li><a href="#">AI Assistant Chat (24/7)</a></li></ul></div>
+                <div class="footer-nav-subcolumn"><h3 data-i18n="ft.legal">Legal</h3><ul><li><a href="Legal.html">Privacy Policy</a></li><li><a href="Legal.html#terms">Terms of Service</a></li><li><a href="Legal.html#cookies">Data & AI Ethics Policy</a></li><li><a href="Legal.html#cookies">Copyrights & Trademarks</a></li><li><a href="Legal.html#cookies">Cookie Preferences</a></li><li><a href="#">Open Data Licensing</a></li><li><a href="#">Environmental Compliance</a></li></ul></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-top"><p class="footer-copyright">&copy; 2026 Agarta AI | All rights reserved. | Designed with purpose and powered by Kimuntu Power Inc.</p></div>
+    </div>
+</footer>
+
+
+<script>
+// ── Unified Navbar ──
+const navbar=document.getElementById('navbar');
+if(navbar)window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',window.scrollY>50));
+const hamburger=document.getElementById('hamburger');
+const navMenu=document.getElementById('navMenu');
+if(hamburger){
+    hamburger.addEventListener('click',()=>{
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        // Close all mobile dropdowns when closing menu
+        if(!navMenu.classList.contains('active')){
+            document.querySelectorAll('.nav-dropdown.mob-open').forEach(d=>d.classList.remove('mob-open'));
+        }
+    });
+}
+// Mobile dropdown toggles
+document.querySelectorAll('.nav-dd-trigger').forEach(trigger=>{
+    trigger.addEventListener('click',(e)=>{
+        if(window.innerWidth<=768){
+            e.preventDefault();
+            const parent=trigger.closest('.nav-dropdown');
+            const wasOpen=parent.classList.contains('mob-open');
+            document.querySelectorAll('.nav-dropdown.mob-open').forEach(d=>d.classList.remove('mob-open'));
+            if(!wasOpen)parent.classList.add('mob-open');
+        }
+    });
+});
+// Close mobile menu on link click
+document.querySelectorAll('.nav-mega a').forEach(link=>{
+    link.addEventListener('click',()=>{
+        if(hamburger)hamburger.classList.remove('active');
+        if(navMenu)navMenu.classList.remove('active');
+    });
+});
+// Language switch
+// Language switching handled by i18n-all.js
+
+// Scroll-reveal observer
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+</script>
+<script src="i18n-all.js"></script>
+</body>
+</html>
