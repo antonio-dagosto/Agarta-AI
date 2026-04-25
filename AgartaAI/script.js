@@ -3,7 +3,6 @@
 // ═══════════════════════════════════════
 
 document.addEventListener('DOMContentLoaded', () => {
-    initNavbar();
     initLanguageSwitch();
     initSmoothScroll();
     new Carousel();
@@ -29,70 +28,16 @@ function initSmoothScroll() {
     });
 }
 
-// ── Navbar ──────────────────────────────
-function initNavbar() {
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
-    const navLinks = document.querySelectorAll('.nav-link');
-    const navbar = document.querySelector('.navbar');
 
-    if (hamburger) {
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
-    }
-
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (hamburger) hamburger.classList.remove('active');
-            if (navMenu) navMenu.classList.remove('active');
-        });
-    });
-
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-        updateActiveLink();
-    });
-}
-
-function updateActiveLink() {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
-    let current = 'home';
-
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        if (window.scrollY >= (sectionTop - 100)) {
-            current = section.getAttribute('id');
-        }
-    });
-
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('active');
-        }
-    });
-}
 
 // ── Language Switch ─────────────────────
 function initLanguageSwitch() {
     const langButtons = document.querySelectorAll('.lang-switch-btn');
     const switchSlider = document.querySelector('.switch-slider');
 
+    // Language switching now handled by i18n-all.js
     langButtons.forEach((btn, index) => {
-        btn.addEventListener('click', () => {
-            langButtons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            if (switchSlider) {
-                switchSlider.style.transform = index === 0 ? 'translateX(0)' : 'translateX(100%)';
-            }
-        });
+        // Handler removed - i18n-all.js handles this
     });
 }
 
@@ -349,11 +294,11 @@ function initAuthPopup() {
 
     if (!popup || !openBtn) return;
 
-    // Open popup (default to signup view)
+    // Open popup - Sign Up/Login button opens login view
     openBtn.addEventListener('click', () => {
         popup.classList.add('active');
         document.body.style.overflow = 'hidden';
-        showView('signup');
+        showView('login');
     });
 
     // Close popup
@@ -447,27 +392,38 @@ function initMetrics() {
     numbers.forEach(el => observer.observe(el));
 }
 
-// ── Pages Dropdown ──────────────────────
-function initPagesDropdown() {
-    const pagesBtn = document.getElementById('pagesBtn');
-    const pagesDd = document.getElementById('pagesDropdown');
-    if (!pagesBtn || !pagesDd) return;
-
-    pagesBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        pagesDd.classList.toggle('open');
-    });
-
-    document.addEventListener('click', (e) => {
-        if (!pagesDd.contains(e.target)) {
-            pagesDd.classList.remove('open');
+// ── Unified Navbar ──
+const navbar=document.getElementById('navbar');
+if(navbar)window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',window.scrollY>50));
+const hamburger=document.getElementById('hamburger');
+const navMenu=document.getElementById('navMenu');
+if(hamburger){
+    hamburger.addEventListener('click',()=>{
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        // Close all mobile dropdowns when closing menu
+        if(!navMenu.classList.contains('active')){
+            document.querySelectorAll('.nav-dropdown.mob-open').forEach(d=>d.classList.remove('mob-open'));
         }
     });
 }
-
-// Initialize on DOM ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initPagesDropdown);
-} else {
-    initPagesDropdown();
-}
+// Mobile dropdown toggles
+document.querySelectorAll('.nav-dd-trigger').forEach(trigger=>{
+    trigger.addEventListener('click',(e)=>{
+        if(window.innerWidth<=768){
+            e.preventDefault();
+            const parent=trigger.closest('.nav-dropdown');
+            const wasOpen=parent.classList.contains('mob-open');
+            document.querySelectorAll('.nav-dropdown.mob-open').forEach(d=>d.classList.remove('mob-open'));
+            if(!wasOpen)parent.classList.add('mob-open');
+        }
+    });
+});
+// Close mobile menu on link click
+document.querySelectorAll('.nav-mega a').forEach(link=>{
+    link.addEventListener('click',()=>{
+        if(hamburger)hamburger.classList.remove('active');
+        if(navMenu)navMenu.classList.remove('active');
+    });
+});
+// Language switching handled by i18n-all.js
