@@ -3,15 +3,235 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agarta - AI-Powered Virtual Tours and Interactive Simulations</title>
+    <title>About | Agarta AI</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <style>
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+:root{--green:#00a86b;--green-dark:#00925d;--green-deeper:#004d33;--green-light:#00d485;--bk:#050f0a;--card:#0d1f15;--border:rgba(255,255,255,0.07);--fd:'Bebas Neue',sans-serif;--fb:'DM Sans',sans-serif;--fm:'Space Mono',monospace}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--fb);background:var(--bk);color:#fff;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+
+/* NAVBAR */
+.navbar{position:fixed;top:0;width:100%;height:72px;background:#000;backdrop-filter:blur(20px);z-index:1000;border-bottom:1px solid var(--border);transition:all 0.3s ease}
+.navbar.scrolled{box-shadow:0 4px 30px rgba(0,0,0,0.5)}
+.nav-container{max-width:1320px;margin:0 auto;padding:0 40px;display:flex;justify-content:space-between;align-items:center;height:100%}
+.nav-logo a{display:flex;align-items:center}
+.nav-logo img{height:150px;width:auto;transition:transform 0.3s ease}
+.nav-logo img:hover{transform:scale(1.04)}
+.nav-menu{display:flex;list-style:none;gap:32px;align-items:center}
+.nav-link{color:rgba(255,255,255,0.7);font-size:0.9rem;font-weight:500;transition:color 0.3s ease;padding:6px 0;position:relative}
+.nav-link::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:2px;background:var(--green);transition:width 0.3s ease}
+.nav-link:hover,.nav-link.active{color:#fff}
+.nav-link:hover::after,.nav-link.active::after{width:100%}
+.nav-language{display:flex;align-items:center;margin-left:16px}
+.language-switch{position:relative;display:flex;background:rgba(255,255,255,0.08);border-radius:50px;padding:3px;border:1px solid rgba(255,255,255,0.15)}
+.lang-switch-btn{position:relative;padding:6px 14px;background:transparent;border:none;color:rgba(255,255,255,0.5);border-radius:50px;cursor:pointer;font-size:0.8rem;font-weight:600;font-family:var(--fm);transition:color 0.3s ease;z-index:2;min-width:40px}
+.lang-switch-btn.active{color:#fff}
+.switch-slider{position:absolute;top:3px;left:3px;width:calc(50% - 3px);height:calc(100% - 6px);background:var(--green);border-radius:50px;transition:transform 0.3s ease;z-index:1}
+.nav-auth-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 20px;background:transparent;color:rgba(255,255,255,0.85);border:1.5px solid rgba(255,255,255,0.25);border-radius:50px;font-size:0.82rem;font-weight:600;font-family:inherit;cursor:pointer;transition:all 0.3s ease;white-space:nowrap;margin-left:12px}
+.nav-auth-btn svg{width:18px;height:18px;flex-shrink:0}
+.nav-auth-btn:hover{background:var(--green);border-color:var(--green);color:#fff}
+.hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px}
+.hamburger .bar{width:24px;height:2px;background:#fff;transition:all 0.3s ease;border-radius:2px}
+
+/* PAGES DROPDOWN */
+.pages-dropdown{position:relative;margin-left:12px}
+.pages-dd-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 20px;background:var(--green);color:#fff;border:none;border-radius:50px;font-size:.82rem;font-weight:600;font-family:inherit;cursor:pointer;transition:all .3s ease;white-space:nowrap}
+.pages-dd-btn:hover{background:var(--green-dark);transform:translateY(-1px)}
+.pages-dd-btn svg{width:16px;height:16px;transition:transform .3s ease}
+.pages-dropdown.open .pages-dd-btn svg{transform:rotate(180deg)}
+.pages-dd-menu{position:absolute;top:calc(100% + 10px);right:0;min-width:220px;background:rgba(10,26,18,0.97);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:8px;opacity:0;visibility:hidden;transform:translateY(-8px);transition:all .3s ease;z-index:2000;box-shadow:0 16px 50px rgba(0,0,0,0.5)}
+.pages-dropdown.open .pages-dd-menu{opacity:1;visibility:visible;transform:translateY(0)}
+.pages-dd-menu a{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;font-size:.85rem;font-weight:500;color:rgba(255,255,255,0.75);transition:all .2s ease;text-decoration:none}
+.pages-dd-menu a:hover{background:rgba(0,168,107,0.12);color:#fff}
+.pages-dd-menu a span{font-size:1rem}
+@media(max-width:768px){.pages-dropdown{display:none}}
+
+/* SHARED */
+.badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,168,107,0.1);border:1px solid rgba(0,168,107,0.25);padding:7px 16px;border-radius:30px;font-family:var(--fm);font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--green-light);margin-bottom:18px}
+.stitle{font-family:var(--fd);font-size:clamp(2.4rem,5vw,3.8rem);letter-spacing:2px;line-height:1.1;margin-bottom:16px}
+.ssub{font-size:1.05rem;color:#fff;max-width:700px;line-height:1.7}
+.accent{color:var(--green-light)}
+.btn-p{padding:14px 30px;background:var(--green);color:#fff;border:2px solid var(--green);border-radius:8px;font-family:inherit;font-size:0.95rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;display:inline-flex;align-items:center;gap:10px}
+.btn-p:hover{background:var(--green-dark);transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,168,107,0.3)}
+.btn-o{padding:14px 30px;background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.25);border-radius:8px;font-family:inherit;font-size:0.95rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;display:inline-flex;align-items:center;gap:10px}
+.btn-o:hover{border-color:var(--green);color:var(--green-light);transform:translateY(-2px)}
+.fade-in{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* HERO - Interactive Intro */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:150px 20px 100px;overflow:hidden;background:linear-gradient(160deg,#001a0e 0%,var(--green-deeper) 40%,#00704a 100%)}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 60%,rgba(0,212,133,0.1) 0%,transparent 55%),radial-gradient(ellipse at 70% 30%,rgba(0,168,107,0.08) 0%,transparent 50%);pointer-events:none}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 60% 50% at 50% 60%,black,transparent);pointer-events:none}
+.hero-content{position:relative;z-index:2;max-width:900px}
+.avatars-row{display:flex;justify-content:center;gap:20px;margin-bottom:30px;flex-wrap:wrap}
+.avatar-circle{width:68px;height:68px;border-radius:50%;background:rgba(255,255,255,0.1);border:2px solid rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center;font-size:2rem;backdrop-filter:blur(10px);animation:avatarBob 3s ease-in-out infinite}
+.avatar-circle:nth-child(2){animation-delay:0.4s}
+.avatar-circle:nth-child(3){animation-delay:0.8s}
+.avatar-circle:nth-child(4){animation-delay:1.2s}
+@keyframes avatarBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.hero h1{font-family:var(--fd);font-size:clamp(3rem,7vw,5.5rem);letter-spacing:4px;line-height:1.05;margin-bottom:20px}
+.hero-narrator{font-size:1.1rem;color:#fff;max-width:720px;margin:0 auto 24px;line-height:1.7;font-style:italic;opacity:0.95}
+.hero-narrator::before,.hero-narrator::after{content:'"';color:var(--green-light);font-size:1.3rem}
+.hero-desc{font-size:1rem;color:#fff;max-width:650px;margin:0 auto 44px;line-height:1.7;opacity:0.85}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* SECTIONS */
+section{padding:100px 0;position:relative}
+.s-head{text-align:center;margin-bottom:50px}
+.s-head .ssub{margin:0 auto}
+
+/* VISION & MISSION */
+.vision{background:var(--bk);border-top:1px solid var(--border)}
+.vm-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.vm-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:50px 40px;transition:all 0.4s ease}
+.vm-card:hover{border-color:rgba(0,168,107,0.3);transform:translateY(-4px);box-shadow:0 16px 50px rgba(0,168,107,0.1)}
+.vm-icon{width:64px;height:64px;border-radius:16px;background:rgba(0,168,107,0.12);border:1px solid rgba(0,168,107,0.25);display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin-bottom:20px}
+.vm-card h3{font-family:var(--fd);font-size:2rem;letter-spacing:2px;margin-bottom:14px}
+.vm-card p{font-size:0.95rem;color:#fff;line-height:1.75;opacity:0.85}
+
+/* TECHNOLOGY */
+.tech{background:linear-gradient(180deg,var(--bk),#081610,var(--bk))}
+.tech-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.tech-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px 28px;transition:all 0.4s ease;cursor:pointer;position:relative;overflow:hidden}
+.tech-card::after{content:'';position:absolute;top:0;left:0;width:4px;height:0;background:var(--green);transition:height 0.4s ease}
+.tech-card:hover{border-color:rgba(0,168,107,0.3);transform:translateY(-4px)}
+.tech-card:hover::after{height:100%}
+.tech-icon{font-size:2rem;margin-bottom:14px;display:block}
+.tech-card h4{font-family:var(--fd);font-size:1.5rem;letter-spacing:1.5px;margin-bottom:10px}
+.tech-card p{font-size:0.9rem;color:#fff;line-height:1.65;opacity:0.85}
+
+/* OUR STORY */
+.story{background:var(--bk);border-top:1px solid var(--border)}
+.story-content{max-width:900px;margin:0 auto;text-align:center}
+.story-content p{font-size:1.05rem;color:#fff;line-height:1.8;margin-bottom:24px;opacity:0.9}
+.story-partners{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin:40px 0}
+.partner-pill{padding:10px 22px;background:rgba(0,168,107,0.1);border:1px solid rgba(0,168,107,0.25);border-radius:50px;font-family:var(--fm);font-size:0.78rem;color:var(--green-light);letter-spacing:1px}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:50px}
+.team-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px 20px;text-align:center;transition:all 0.4s ease}
+.team-card:hover{border-color:rgba(0,168,107,0.3);transform:translateY(-4px)}
+.team-avatar{width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,rgba(0,168,107,0.2),rgba(0,212,133,0.1));display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 14px;border:2px solid rgba(0,168,107,0.3)}
+.team-card h4{font-size:0.95rem;font-weight:600;margin-bottom:4px}
+.team-card p{font-size:0.75rem;color:#fff;opacity:0.7;font-family:var(--fm)}
+
+/* FUTURE */
+.future{background:linear-gradient(180deg,var(--bk),#081610,var(--bk))}
+.future-card{max-width:900px;margin:0 auto;background:var(--card);border:1px solid var(--border);border-radius:24px;padding:60px 50px;text-align:center;position:relative;overflow:hidden}
+.future-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(0,168,107,0.1),transparent 60%);pointer-events:none}
+.future-icon{font-size:3rem;margin-bottom:20px;display:block;position:relative;z-index:1}
+.future-card h3{font-family:var(--fd);font-size:2.4rem;letter-spacing:2px;margin-bottom:16px;position:relative;z-index:1}
+.future-card p{font-size:1.05rem;color:#fff;line-height:1.75;max-width:700px;margin:0 auto;opacity:0.9;position:relative;z-index:1}
+
+/* CTA */
+.cta{background:linear-gradient(160deg,var(--green-deeper),var(--green-dark));padding:100px 20px;text-align:center}
+.cta-quote{font-size:1.4rem;color:#fff;max-width:700px;margin:0 auto 30px;line-height:1.6;font-style:italic;font-family:var(--fd);letter-spacing:1.5px}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+
+/* FOOTER */
+.footer{background:#000;color:#fff;padding:40px 20px;text-align:center;border-top:1px solid var(--border)}
+.footer p{font-size:0.95rem;opacity:0.6;line-height:1.7}
+
+/* RESPONSIVE */
+@media(max-width:1024px){.vm-grid{grid-template-columns:1fr}.tech-grid{grid-template-columns:1fr}.team-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){
+.nav-container{padding:0 20px}.nav-menu{position:fixed;left:-100%;top:72px;flex-direction:column;background:rgba(0,0,0,0.98);width:100%;text-align:center;transition:left 0.3s ease;gap:0;padding:24px 0}.nav-menu.active{left:0}.nav-menu li{width:100%;padding:14px 0}.nav-link{font-size:1.1rem}.nav-auth-btn{display:none}.hamburger{display:flex}
+.hero{padding:130px 20px 80px}.hero h1{font-size:clamp(2.5rem,10vw,4rem)}
+.hero-btns,.cta-btns{flex-direction:column;align-items:center}.btn-p,.btn-o{width:80%;justify-content:center}
+.team-grid{grid-template-columns:1fr 1fr}
+.future-card{padding:40px 28px}
+}
+@media(max-width:480px){.team-grid{grid-template-columns:1fr}.avatars-row{gap:12px}.avatar-circle{width:56px;height:56px;font-size:1.6rem}}
+    
+
+/* ══════════════════════════════════════
+   UNIFIED NAVBAR - Constructor Style
+   ══════════════════════════════════════ */
+.navbar{position:fixed;top:0;width:100%;height:72px;background:#000;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:1000;border-bottom:1px solid rgba(255,255,255,0.07);transition:all 0.3s ease}
+.navbar.scrolled{box-shadow:0 4px 30px rgba(0,0,0,0.5)}
+.nav-container{max-width:1320px;margin:0 auto;padding:0 40px;display:flex;justify-content:space-between;align-items:center;height:100%}
+.nav-logo a{display:flex;align-items:center;text-decoration:none}
+.nav-logo img{height:150px;width:auto;transition:transform 0.3s ease}
+.nav-logo img:hover{transform:scale(1.04)}
+.nav-menu{display:flex;list-style:none;gap:6px;align-items:center;margin:0;padding:0}
+.nav-item{position:relative}
+.nav-link{color:rgba(255,255,255,0.7);font-size:0.9rem;font-weight:500;transition:all 0.3s ease;padding:8px 16px;border-radius:8px;display:inline-flex;align-items:center;gap:6px;text-decoration:none;cursor:pointer}
+.nav-link:hover{color:#fff;background:rgba(255,255,255,0.06)}
+.nav-link svg{transition:transform 0.3s ease;stroke:currentColor;fill:none;stroke-width:2}
+.nav-dropdown:hover .nav-link svg{transform:rotate(180deg)}
+
+/* Mega dropdown */
+.nav-mega{position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(8px);min-width:200px;background:rgba(10,26,18,0.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:10px;opacity:0;visibility:hidden;transition:all 0.25s ease;z-index:2000;box-shadow:0 20px 60px rgba(0,0,0,0.5);pointer-events:none}
+.nav-dropdown:hover .nav-mega{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);pointer-events:auto}
+.nav-mega a{display:block;padding:11px 16px;border-radius:10px;font-size:0.88rem;font-weight:500;color:rgba(255,255,255,0.75);transition:all 0.2s ease;text-decoration:none;white-space:nowrap}
+.nav-mega a:hover{background:rgba(0,168,107,0.12);color:#fff}
+
+/* Right side group */
+.nav-right-group{display:flex;align-items:center;gap:10px}
+.nav-language{display:flex;align-items:center}
+.language-switch{position:relative;display:flex;background:rgba(255,255,255,0.08);border-radius:50px;padding:3px;border:1px solid rgba(255,255,255,0.15)}
+.lang-switch-btn{position:relative;padding:6px 14px;background:transparent;border:none;color:rgba(255,255,255,0.5);border-radius:50px;cursor:pointer;font-size:0.8rem;font-weight:600;font-family:var(--fm,'Space Mono',monospace);transition:color 0.3s ease;z-index:2;min-width:40px}
+.lang-switch-btn.active{color:#fff}
+.switch-slider{position:absolute;top:3px;left:3px;width:calc(50% - 3px);height:calc(100% - 6px);background:var(--green,#00a86b);border-radius:50px;transition:transform 0.3s ease;z-index:1}
+.nav-auth-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 20px;background:transparent;color:rgba(255,255,255,0.85);border:1.5px solid rgba(255,255,255,0.25);border-radius:50px;font-size:0.82rem;font-weight:600;font-family:inherit;cursor:pointer;transition:all 0.3s ease;white-space:nowrap}
+.nav-auth-btn svg{width:18px;height:18px;flex-shrink:0}
+.nav-auth-btn:hover{background:var(--green,#00a86b);border-color:var(--green,#00a86b);color:#fff}
+.hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px;padding:8px}
+.hamburger .bar{width:24px;height:2px;background:#fff;transition:all 0.3s ease;border-radius:2px}
+
+/* Mobile navbar */
+@media(max-width:768px){
+.nav-container{padding:0 20px}
+.nav-menu{position:fixed;left:-100%;top:72px;flex-direction:column;background:rgba(0,0,0,0.98);backdrop-filter:blur(20px);width:100%;height:calc(100vh - 72px);text-align:left;transition:left 0.3s ease;gap:0;padding:24px 20px;overflow-y:auto;z-index:999}
+.nav-menu.active{left:0}
+.nav-item{width:100%;border-bottom:1px solid rgba(255,255,255,0.06)}
+.nav-link{font-size:1.05rem;padding:16px 0;width:100%;border-radius:0}
+.nav-mega{position:static;transform:none;opacity:1;visibility:visible;pointer-events:auto;background:transparent;border:none;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;padding:0 0 8px 16px;min-width:auto;display:none}
+.nav-dropdown.mob-open .nav-mega{display:block}
+.nav-mega a{padding:10px 0;font-size:0.95rem;border-radius:0}
+.nav-right-group{display:none}
+.hamburger{display:flex}
+}
+
+/* ══════════════════════════════════════
+   UNIFIED FOOTER
+   ══════════════════════════════════════ */
+.footer-nav{background:#000;color:#fff;padding:80px 0 40px;border-top:1px solid rgba(255,255,255,0.07)}
+.footer-nav-logo-section{text-align:center;margin-bottom:30px}
+.footer-logo{height:80px;width:auto;opacity:0.9}
+.footer-nav-top{display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:40px;padding-bottom:30px;border-bottom:1px solid rgba(0,168,107,0.2)}
+.footer-connect{font-size:0.9rem;color:rgba(255,255,255,0.6);white-space:nowrap}
+.footer-social-icons{display:flex;gap:14px}
+.footer-social-icons a{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:8px;transition:all 0.3s ease}
+.footer-social-icons a:hover{background:rgba(0,168,107,0.15);transform:translateY(-2px)}
+.footer-social-icons img{width:24px;height:24px;filter:brightness(0) invert(1);opacity:0.7;transition:opacity 0.3s ease}
+.footer-social-icons a:hover img{opacity:1}
+.footer-nav-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1.5fr;gap:40px}
+.footer-nav-column h3{font-family:var(--fb,'DM Sans',sans-serif);font-size:0.92rem;font-weight:600;color:var(--green-light,#00d485);margin-bottom:18px;letter-spacing:0.5px}
+.footer-nav-column ul{list-style:none;padding:0;margin:0}
+.footer-nav-column li{margin-bottom:10px}
+.footer-nav-column a{color:rgba(255,255,255,0.7);font-size:0.88rem;transition:color 0.2s ease;text-decoration:none}
+.footer-nav-column a:hover{color:#fff}
+.footer-nav-double{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.footer-nav-subcolumn h3{font-family:var(--fb,'DM Sans',sans-serif);font-size:0.92rem;font-weight:600;color:var(--green-light,#00d485);margin-bottom:18px;letter-spacing:0.5px}
+.footer-nav-subcolumn ul{list-style:none;padding:0;margin:0}
+.footer-nav-subcolumn li{margin-bottom:10px}
+.footer-nav-subcolumn a{color:rgba(255,255,255,0.7);font-size:0.88rem;transition:color 0.2s ease;text-decoration:none}
+.footer-nav-subcolumn a:hover{color:#fff}
+.footer{background:#000;color:#fff;padding:20px;text-align:center;border-top:1px solid rgba(255,255,255,0.05)}
+.footer-copyright{font-size:0.85rem;opacity:0.5;line-height:1.7}
+
+@media(max-width:1024px){.footer-nav-grid{grid-template-columns:1fr 1fr;gap:30px}}
+@media(max-width:768px){.footer-nav-grid{grid-template-columns:1fr}.footer-nav-double{grid-template-columns:1fr}.footer-nav-top{flex-direction:column;gap:12px}}
+
+</style>
 </head>
 <body>
-    
-    <!-- Navigation Bar -->
-    <nav class="navbar" id="navbar">
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
     <div class="nav-container">
         <div class="nav-logo"><a href="index.html"><img src="Media/LOGO 3.png" alt="Agarta AI Logo"></a></div>
                 <ul class="nav-menu" id="navMenu">
@@ -52,318 +272,127 @@
         </ul>
         <div class="nav-right-group">
             <div class="nav-language"><div class="language-switch"><button class="lang-switch-btn active" data-lang="en">EN</button><button class="lang-switch-btn" data-lang="fr">FR</button><div class="switch-slider"></div></div></div>
-            <button class="nav-auth-btn" id="authOpenBtn"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>Login</button>
+            <button class="nav-auth-btn" id="authOpenBtn"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>Sign Up / Login</button>
             <a href="Contact.html#contact-main" class="nav-get-started">Get Started</a>
         </div>
         <div class="hamburger" id="hamburger"><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
     </div>
 </nav>
 
-    <!-- Auth Popup (Signup / Login) -->
-    <div class="auth-popup" id="authPopup">
-        <div class="auth-overlay" id="authOverlay"></div>
-        <div class="auth-card">
-            <button class="auth-close" id="authCloseBtn">&times;</button>
-            <div class="auth-logo">
-                <img src="Media/LOGO 3.png" alt="Agarta AI">
-            </div>
+<!-- 1. HERO - Interactive Intro -->
+<section class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-content fade-in">
+        <div class="avatars-row">
+        </div>
+        <h1>EXPERIENCE <span class="accent">WITH US</span></h1>
+        <p class="hero-narrator">Welcome to Agarta, where technology, nature, and knowledge grow together. Explore the future of agriculture and the environment through AI-powered virtual tours and immersive experiences.</p>
+        <p class="hero-desc">A generation united by innovation and sustainability, greeting you in English and French. Step inside the world of Agarta.</p>
+        <div class="hero-btns">
+            <button class="btn-p">🚀 Start Your Journey</button>
+            <button class="btn-o" onclick="document.getElementById('vision').scrollIntoView({behavior:'smooth'})">📖 Learn More About Agarta</button>
+        </div>
+    </div>
+</section>
 
-            <!-- LOGIN VIEW -->
-            <div class="auth-view auth-view-login active" id="authLoginView">
-                <p class="auth-subtitle">Enter your email and password to login</p>
-                <form class="auth-form" id="loginForm">
-                    <input type="email" class="auth-input" placeholder="email@domain.com" required>
-                    <input type="password" class="auth-input" placeholder="Password" required>
-                    <button type="submit" class="auth-submit-btn">Login</button>
-                </form>
-                <div class="auth-divider"><span>or continue with</span></div>
-                <button class="auth-google-btn">
-                    <svg width="20" height="20" viewBox="0 0 48 48">
-                        <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/>
-                        <path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/>
-                        <path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/>
-                        <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/>
-                    </svg>
-                    Google
-                </button>
-                <p class="auth-footer">By clicking continue, you agree to our<br><a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></p>
-                <p class="auth-switch">Don't have an account? <a href="#" id="goToSignup">Sign up</a></p>
+<!-- 2. VISION & MISSION -->
+<section class="vision" id="vision">
+    <div class="container">
+        <div class="s-head fade-in">
+            <div class="badge">🌱 Who We Are</div>
+            <h2 class="stitle">VISION & <span class="accent">MISSION</span></h2>
+            <p class="ssub">A next-generation platform uniting artificial intelligence, immersive 3D technology, and environmental education.</p>
+        </div>
+        <div class="vm-grid">
+            <div class="vm-card fade-in">
+                <div class="vm-icon">🔭</div>
+                <h3 data-i18n="ab.vision.title">OUR VISION</h3>
+                <p>Agarta is a next-generation platform that unites artificial intelligence, immersive 3D technology, and environmental education to inspire discovery, promote sustainability, and connect people with the agricultural world like never before. Through virtual tours, 360° simulations, and AI-powered interactivity, Agarta bridges the gap between nature, innovation, and education, empowering users of all ages to learn, explore, and create positive global impact.</p>
             </div>
-
-            <!-- SIGNUP VIEW -->
-            <div class="auth-view auth-view-signup" id="authSignupView">
-                <p class="auth-subtitle">Enter your email to sign up for this app</p>
-                <form class="auth-form" id="signupForm">
-                    <input type="email" class="auth-input" placeholder="email@domain.com" required>
-                    <button type="submit" class="auth-submit-btn">Sign up with email</button>
-                </form>
-                <div class="auth-divider"><span>or continue with</span></div>
-                <button class="auth-google-btn">
-                    <svg width="20" height="20" viewBox="0 0 48 48">
-                        <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/>
-                        <path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/>
-                        <path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/>
-                        <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/>
-                    </svg>
-                    Google
-                </button>
-                <p class="auth-footer">By clicking continue, you agree to our<br><a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></p>
-                <p class="auth-switch">Already have an account? <a href="#" id="goToLogin">Login</a></p>
+            <div class="vm-card fade-in">
+                <div class="vm-icon">🎯</div>
+                <h3 data-i18n="ab.mission.title">OUR MISSION</h3>
+                <p>To transform the way individuals, communities, and institutions experience and understand agriculture and the environment by offering immersive, intelligent, and accessible digital experiences across all platforms. We believe that sustainability begins with knowledge, and Agarta is the gateway to that knowledge for children, students, professionals, and communities worldwide.</p>
             </div>
         </div>
     </div>
+</section>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <video class="hero-background-video" autoplay muted loop playsinline>
-            <source src="Media/Agarta VIDEO(1).mp4" type="video/mp4">
-        </video>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <img src="Media/LOGOS 1.png" alt="Agarta Logo" class="logo">
-            <h1><b>AI-Powered Virtual Tours and Interactive Simulations</b></h1>
-            <h2>Discover the Hidden Intelligence of Earth</h2>
-            <p>Explore nature and the environment through AI-powered virtual tours, 3D simulations, and immersive reality education.</p>
-            <div class="cta-buttons">
-                <button class="btn">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                    Start an Immersive Tour
-                </button>
-                <button class="btn">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
-                    Watch Video Demo
-                </button>
+<!-- 3. OUR TECHNOLOGY -->
+<section class="tech" id="technology">
+    <div class="container">
+        <div class="s-head fade-in">
+            <div class="badge">⚙️ Our Technology</div>
+            <h2 class="stitle">POWERED BY <span class="accent">INTELLIGENCE</span></h2>
+            <p class="ssub">Combining AI, immersive environments, cross-platform accessibility, and smart integrations.</p>
+        </div>
+        <div class="tech-grid fade-in">
+            <div class="tech-card">
+                <span class="tech-icon">🤖</span>
+                <h4 data-i18n="ab.p1.title">AI-POWERED EXPERIENCES</h4>
+                <p>Personalized tours, voice-guided learning, and interactive simulations that adapt to every user.</p>
+            </div>
+            <div class="tech-card">
+                <span class="tech-icon">🎧</span>
+                <h4 data-i18n="ab.p2.title">IMMERSIVE ENVIRONMENTS</h4>
+                <p>High-definition 3D and 360° HDR visuals with realistic soundscapes that transport you anywhere.</p>
+            </div>
+            <div class="tech-card">
+                <span class="tech-icon">📱</span>
+                <h4 data-i18n="ab.p3.title">CROSS-PLATFORM ACCESSIBILITY</h4>
+                <p>Fully compatible with computers, smartphones, tablets, and virtual reality devices.</p>
+            </div>
+            <div class="tech-card">
+                <span class="tech-icon">🔗</span>
+                <h4 data-i18n="ab.p4.title">SMART INTEGRATION</h4>
+                <p>API connections with Google Earth, educational systems (LMS), and IoT data for real-time updates.</p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
-        <h2>About Us</h2>
-        <div class="hero-video-wrapper">
-            <video id="heroVideo" class="hero-video-element" preload="metadata" playsinline>
-                <source src="Media/Aboutus_vid.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="video-overlay" id="videoOverlay">
-                <button class="video-play-btn" id="playBtn" aria-label="Play video">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                </button>
+<!-- 4. OUR STORY -->
+<section class="story" id="story">
+    <div class="container">
+        <div class="s-head fade-in">
+            <div class="badge">📖 Our Story</div>
+            <h2 class="stitle">BORN FROM <span class="accent">INNOVATION</span></h2>
+        </div>
+        <div class="story-content fade-in">
+            <p>Born from an innovative collaboration between academia and technology, Agarta emerged as a visionary initiative supported by <strong>Arizona State University's Capstone Program</strong>, powered by <strong>Kimuntu Power Inc.</strong></p>
+            <p>Developed in collaboration with four talented ASU students who helped engineer the foundation of what would become one of the most advanced AI-Powered Virtual Tours and Interactive Agricultural Simulation Platforms of the decade.</p>
+            <div class="story-partners">
+                <span class="partner-pill">Arizona State University</span>
+                <span class="partner-pill">Kimuntu Power Inc.</span>
             </div>
-            <div class="video-controls" id="videoControls">
-                <button class="control-btn" id="playPauseBtn" aria-label="Play/Pause">
-                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
-                </button>
-                <div class="progress-bar" id="progressBar"><div class="progress-filled" id="progressFilled"></div></div>
-                <button class="control-btn" id="muteBtn" aria-label="Mute/Unmute">
-                    <svg class="unmute-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-                    <svg class="mute-icon" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
-                </button>
-                <button class="control-btn" id="fullscreenBtn" aria-label="Fullscreen">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
-                </button>
+            <p>Today, Agarta stands as a global educational and technological ecosystem, connecting innovation, sustainability, and human experience through immersive learning.</p>
+            <div class="team-grid">
+                <div class="team-card"><div class="team-avatar">👨‍💻</div><h4>Anthony Dagosto</h4><p>ASU Capstone</p></div>
+                <div class="team-card"><div class="team-avatar">👨‍💻</div><h4>Jack Pawlowski</h4><p>ASU Capstone</p></div>
+                <div class="team-card"><div class="team-avatar">👨‍💻</div><h4>Himanshu Chowdary Kolla</h4><p>ASU Capstone</p></div>
+                <div class="team-card"><div class="team-avatar">👨‍💻</div><h4>Saideep Ambari</h4><p>ASU Capstone</p></div>
             </div>
         </div>
-        <button class="read-more-btn" onclick="window.location.href='about.html'">📖 [Read Full Story]</button>
-    </section>
+    </div>
+</section>
 
-    <!-- Why Choose Us Section -->
-    <section class="why-choose" id="why-choose">
-        <div class="container">
-            <h2>Why Choose Us</h2>
-            <div class="features-grid">
-                <div class="feature-card-container"><div class="feature-card"><div class="feature-card-front"><div class="feature-icon"><img src="Media/icons8-brain-50.png" alt="Brain" class="feature-icon-img"></div><h3>AI + Ecology Intelligence</h3></div><div class="feature-card-back"><p>Adaptive learning powered by machine learning for every age group.</p></div></div></div>
-                <div class="feature-card-container"><div class="feature-card"><div class="feature-card-front"><div class="feature-icon"><img src="Media/icons8-person-50.png" alt="Person" class="feature-icon-img"></div><h3>Immersive Multi-Reality Platform</h3></div><div class="feature-card-back"><p>Seamless on Web, Mobile, VR, AR, MR devices.</p></div></div></div>
-                <div class="feature-card-container"><div class="feature-card"><div class="feature-card-front"><div class="feature-icon"><img src="Media/icons8-check-mark-50.png" alt="Checkmark" class="feature-icon-img"></div><h3>Global Impact & Accessibility</h3></div><div class="feature-card-back"><p>Designed for schools, businesses, NGOs, and community centers worldwide.</p></div></div></div>
-            </div>
-            <div class="testimonial">"Trusted by educators, innovators, and explorers across continents."</div>
+<!-- CTA -->
+<section class="cta">
+    <div class="container">
+        <p class="cta-quote">"Step into a world where technology meets nature, and where every exploration plants a seed of knowledge."</p>
+        <div class="cta-btns">
+            <button class="btn-p">🌿 Start Your Virtual Journey</button>
+            <button class="btn-o" onclick="window.location.href='play_games.html'">🎮 Discover Agarta PlayLab</button>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Our Key Solutions Section -->
-    <section class="solutions" id="solutions">
-        <div class="container">
-            <h2>Our Key Solutions</h2>
-            <div class="solutions-grid">
-                <div class="solution-card-container"><div class="solution-card"><div class="solution-card-front"><div class="solution-icon"><img src="Media/icons8-globe-50.png" alt="Globe" class="feature-icon-img"></div><h3>AI-Powered Virtual Tours</h3></div><div class="solution-card-back"><p>High-definition 360° journeys across farms, museums, and nature reserves with guided narration.</p></div></div></div>
-                <div class="solution-card-container"><div class="solution-card"><div class="solution-card-front"><div class="solution-icon"><img src="Media/icons8-stats-50.png" alt="Stats" class="feature-icon-img"></div><h3>3D Agricultural Simulations</h3></div><div class="solution-card-back"><p>Realistic, data-driven learning of ecosystems and crop management.</p></div></div></div>
-                <div class="solution-card-container"><div class="solution-card"><div class="solution-card-front"><div class="solution-icon"><img src="Media/icons8-gamepad-50.png" alt="Gamepad" class="feature-icon-img"></div><h3>Agarta PlayLab™</h3></div><div class="solution-card-back"><p>Interactive educational gaming blending real-world data with fun exploration challenges.</p></div></div></div>
-                <div class="solution-card-container"><div class="solution-card"><div class="solution-card-front"><div class="solution-icon"><img src="Media/icons8-graduation-cap-50.png" alt="Graduation Cap" class="feature-icon-img"></div><h3>Virtual Campus</h3></div><div class="solution-card-back"><p>Teachers can host live VR lessons integrating real-time IoT environmental data.</p></div></div></div>
-            </div>
-            <button class="explore-btn">
-                <svg viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px;"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
-                [Explore Solutions]
-            </button>
-        </div>
-    </section>
-
-    <!-- Interactive Media Section -->
-    <section class="interactive-media">
-        <div class="container">
-            <h2>Agarta 360 Tour</h2>
-            <div class="media-content">
-                <div class="video-container" style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;">
-                    <iframe src="https://www.youtube.com/embed/JN9XNSd2ZAw" title="Agarta 360 Tour" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:12px;"></iframe>
-                </div>
-                <div class="interaction-note">"Click and drag to explore our sample 3D ecosystem."</div>
-                <button class="secondary-btn">
-                    <svg viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px;"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
-                    [Launch Full VR experience]
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Featured Video Section -->
-    <section class="featured-video">
-        <div class="container">
-            <h2>Virtual Campus</h2>
-            <div class="hero-video-wrapper">
-                <video id="featuredVideo" class="hero-video-element" preload="metadata" playsinline>
-                    <source src="Media/WhatsApp Video 2025-11-27 at 4.54.43 AM (1).mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="video-overlay" id="featuredVideoOverlay">
-                    <button class="video-play-btn" id="featuredPlayBtn" aria-label="Play video">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                    </button>
-                    <p class="video-tagline">"From the roots of the Earth to the edge of intelligence."</p>
-                </div>
-                <div class="video-controls" id="featuredVideoControls">
-                    <button class="control-btn" id="featuredPlayPauseBtn" aria-label="Play/Pause">
-                        <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                        <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
-                    </button>
-                    <div class="progress-bar" id="featuredProgressBar"><div class="progress-filled" id="featuredProgressFilled"></div></div>
-                    <button class="control-btn" id="featuredMuteBtn" aria-label="Mute/Unmute">
-                        <svg class="unmute-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-                        <svg class="mute-icon" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
-                    </button>
-                    <button class="control-btn" id="featuredFullscreenBtn" aria-label="Fullscreen">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- AI in Action Section -->
-    <section class="innovation">
-        <div class="container">
-            <h2>AI in Action – Innovation Highlights</h2>
-            <div class="carousel-wrapper">
-                <button class="carousel-btn carousel-btn-prev" aria-label="Previous slide"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
-                <div class="carousel-container">
-                    <div class="carousel-track">
-                        <div class="carousel-slide active"><div class="carousel-icon"><img src="Media/icons8-microphone-75.png" alt="Microphone" class="feature-icon-img"></div><h3>AI Voice Assistant</h3><p>Contextual explanations during tours.</p></div>
-                        <div class="carousel-slide"><div class="carousel-icon dark"><img src="Media/icons8-stats-75.png" alt="Stats" class="feature-icon-img"></div><h3>Smart Learning Dashboard</h3><p>Progress tracking and personalized recommendations.</p></div>
-                        <div class="carousel-slide"><div class="carousel-icon dark"><img src="Media/icons8-globe-75.png" alt="Globe" class="feature-icon-img"></div><h3>Real-Time Environmental Feeds</h3><p>Weather & soil data from partner farms.</p></div>
-                        <div class="carousel-slide"><div class="carousel-icon"><img src="Media/icons8-standing-man-75.png" alt="Person" class="feature-icon-img"></div><h3>Integration APIs</h3><p>Connect with Google Earth, Unity, Unreal, or IoT sensors.</p></div>
-                        <div class="carousel-slide"><div class="carousel-icon dark"><img src="Media/icons8-gamepad-75.png" alt="Gamepad" class="feature-icon-img"></div><h3>Interactive Gaming (Agarta PlayLab™)</h3><p>Educational missions & eco-quests.</p></div>
-                    </div>
-                </div>
-                <button class="carousel-btn carousel-btn-next" aria-label="Next slide"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></button>
-            </div>
-            <div class="carousel-dots">
-                <button class="dot active" data-slide="0"></button>
-                <button class="dot" data-slide="1"></button>
-                <button class="dot" data-slide="2"></button>
-                <button class="dot" data-slide="3"></button>
-                <button class="dot" data-slide="4"></button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Agarta PlayLab Section -->
-    <section class="playlab" id="playlab">
-        <div class="container">
-            <h2>Agarta PlayLab™</h2>
-            <h2>Gaming for Education</h2>
-            </div>
-            <div class="playlab-content">
-                <h3>Learn by Playing - Experience Education Through AI-Powered Games</h3>
-                <ul>
-                    <li>Agarta AI brings immersive learning experiences that transform learning into adventures.</li>
-                    <li>Students, educators, and communities can explore ecosystems, solve challenges, and learn real-world skills while discovering the intelligence of the Earth.</li>
-                </ul>
-            </div>
-            <div class="playlab-buttons">
-                <button class="btn-playlab-primary"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.58 16.09l-1.09-7.66C20.21 6.46 18.52 5 16.53 5H7.47C5.48 5 3.79 6.46 3.51 8.43l-1.09 7.66C2.2 17.63 3.39 19 4.94 19h0c.68 0 1.32-.27 1.8-.75L9 16h6l2.25 2.25c.48.48 1.13.75 1.8.75h0c1.56 0 2.75-1.37 2.53-2.91z"/></svg>Play Demo</button>
-                <button class="btn-playlab-secondary">Join Playgame</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Partners Section -->
-    <section class="partners" id="partners">
-        <div class="container">
-            <h2>Partners</h2>
-            <div class="partners-carousel-wrapper">
-                <div class="partners-carousel">
-                    <div class="partner-slide"><img src="Media/WhatsApp Image 2025-11-27 at 4.54.10 AM (2).jpeg" alt="Dun & Bradstreet Partner"></div>
-                    <div class="partner-slide"><img src="Media/Lot_Network_Logo_600_162_2 (1).png" alt="IOT Network Partner"></div>
-                    <div class="partner-slide"><img src="Media/aws-partner-logo (1).png" alt="AWS Partner Network"></div>
-                    <div class="partner-slide"><img src="Media/WhatsApp Image 2025-11-27 at 4.54.10 AM (2).jpeg" alt="Dun & Bradstreet Partner"></div>
-                    <div class="partner-slide"><img src="Media/Lot_Network_Logo_600_162_2 (1).png" alt="IOT Network Partner"></div>
-                    <div class="partner-slide"><img src="Media/aws-partner-logo (1).png" alt="AWS Partner Network"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Metrics Section -->
-    <section class="metrics-section">
-        <div class="container">
-            <p class="metrics-tagline">A clear vision. A trusted execution.</p>
-            <div class="metrics-grid">
-                <div class="metric-card">
-                    <span class="metric-number" data-target="120">0</span>
-                    <span class="metric-plus">+</span>
-                    <h3 class="metric-title">Immersive Experiences & Virtual Environments</h3>
-                    <p class="metric-desc">Farms, museums, science labs, campuses, ecosystems</p>
-                </div>
-                <div class="metric-card">
-                    <span class="metric-number" data-target="35">0</span>
-                    <span class="metric-plus">+</span>
-                    <h3 class="metric-title">Partner Institutions & Pilot Programs</h3>
-                    <p class="metric-desc">Schools, universities, NGOs, innovation hubs</p>
-                </div>
-                <div class="metric-card">
-                    <span class="metric-number" data-target="8">0</span>
-                    <span class="metric-plus">+</span>
-                    <h3 class="metric-title">Countries Engaged</h3>
-                    <p class="metric-desc">Education, community learning, digital inclusion</p>
-                </div>
-                <div class="metric-card">
-                    <span class="metric-number metric-number-pct">100</span>
-                    <span class="metric-plus">%</span>
-                    <h3 class="metric-title">AI-Powered & Multi-Platform</h3>
-                    <p class="metric-desc">Web • Mobile • VR • AR • MR</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Call to Action Section -->
-    <section class="cta-section">
-        <div class="container">
-            <h2>Join the Movement / Call to Action</h2>
-            <p class="cta-subtitle">Become part of a global initiative connecting humans, nature, and intelligence</p>
-            <div class="cta-buttons-group">
-                <button class="cta-btn cta-btn-primary">Request a Demo</button>
-                <button class="cta-btn cta-btn-secondary"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>Join as Partner</button>
-                <button class="cta-btn cta-btn-tertiary"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>Donate</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer Navigation Section -->
-    <section class="footer-nav">
+<!-- FOOTER -->
+<section class="footer-nav">
     <div class="container">
         <div class="footer-nav-logo-section"><img src="Media/Agarta logo.png" alt="Agarta Logo" class="footer-logo"></div>
         <div class="footer-nav-top">
-            <p class="footer-connect">Connect with us:</p>
+            <p class="footer-connect" data-i18n="ft.connect">Connect with us:</p>
             <div class="footer-social-icons">
                 <a href="https://www.facebook.com/agartaai" aria-label="Facebook"><img src="Media/icons8-facebook-50.png" alt="Facebook"></a>
                 <a href="https://www.linkedin.com/company/agarta_official" aria-label="LinkedIn"><img src="Media/icons8-linkedin-50.png" alt="LinkedIn"></a>
@@ -372,12 +401,12 @@
             </div>
         </div>
         <div class="footer-nav-grid">
-            <div class="footer-nav-column"><h3>Company</h3><ul><li><a href="About.html">About Us</a></li><li><a href="About.html#story">Our Story & Mission</a></li><li><a href="#">Ethics & Sustainability</a></li><li><a href="#">Careers</a></li><li><a href="#">Partnerships</a></li></ul></div>
-            <div class="footer-nav-column"><h3>Features</h3><ul><li><a href="explore.html">Explore</a></li><li><a href="play_games.html">Play & Games</a></li><li><a href="Virtual_campus.html">Virtual Campus</a></li><li><a href="Events.html">Events</a></li><li><a href="#">Agarta AI PlayLab&trade;</a></li><li><a href="Marketplace.html">Marketplace</a></li><li><a href="#">AI Voice Assistant</a></li></ul></div>
-            <div class="footer-nav-column"><h3>Resources</h3><ul><li><a href="#">Blog</a></li><li><a href="#">Tutorials & Webinars</a></li><li><a href="#">Developer API Portal</a></li><li><a href="Technologies.html">Technologies</a></li><li><a href="#">AI Voice Assistant</a></li><li><a href="Integrations.html">Integration Guides</a></li><li><a href="#">Community Forum</a></li><li><a href="FAQ.html">FAQs</a></li></ul></div>
+            <div class="footer-nav-column"><h3 data-i18n="ft.company">Company</h3><ul><li><a href="About.html">About Us</a></li><li><a href="About.html#story">Our Story & Mission</a></li><li><a href="#">Ethics & Sustainability</a></li><li><a href="#">Careers</a></li><li><a href="#">Partnerships</a></li></ul></div>
+            <div class="footer-nav-column"><h3 data-i18n="ft.features">Features</h3><ul><li><a href="explore.html">Explore</a></li><li><a href="play_games.html">Play & Games</a></li><li><a href="Virtual_campus.html">Virtual Campus</a></li><li><a href="Events.html">Events</a></li><li><a href="#">Agarta AI PlayLab&trade;</a></li><li><a href="Marketplace.html">Marketplace</a></li><li><a href="#">AI Voice Assistant</a></li></ul></div>
+            <div class="footer-nav-column"><h3 data-i18n="ft.resources">Resources</h3><ul><li><a href="#">Blog</a></li><li><a href="#">Tutorials & Webinars</a></li><li><a href="#">Developer API Portal</a></li><li><a href="Technologies.html">Technologies</a></li><li><a href="#">AI Voice Assistant</a></li><li><a href="#">Integration Guides</a></li><li><a href="#">Community Forum</a></li><li><a href="FAQ.html">FAQs</a></li></ul></div>
             <div class="footer-nav-column footer-nav-double">
-                <div class="footer-nav-subcolumn"><h3>Support</h3><ul><li><a href="Contact.html">Contact Us</a></li><li><a href="Help_support.html">Help Center</a></li><li><a href="#">AI Assistant Chat (24/7)</a></li></ul></div>
-                <div class="footer-nav-subcolumn"><h3>Legal</h3><ul><li><a href="Legal.html">Privacy Policy</a></li><li><a href="Legal.html#terms">Terms of Service</a></li><li><a href="Legal.html#cookies">Data & AI Ethics Policy</a></li><li><a href="Legal.html#cookies">Copyrights & Trademarks</a></li><li><a href="Legal.html#cookies">Cookie Preferences</a></li><li><a href="#">Open Data Licensing</a></li><li><a href="#">Environmental Compliance</a></li></ul></div>
+                <div class="footer-nav-subcolumn"><h3 data-i18n="ft.support">Support</h3><ul><li><a href="Contact.html">Contact Us</a></li><li><a href="Help_support.html">Help Center</a></li><li><a href="#">AI Assistant Chat (24/7)</a></li></ul></div>
+                <div class="footer-nav-subcolumn"><h3 data-i18n="ft.legal">Legal</h3><ul><li><a href="Legal.html">Privacy Policy</a></li><li><a href="Legal.html#terms">Terms of Service</a></li><li><a href="Legal.html#cookies">Data & AI Ethics Policy</a></li><li><a href="Legal.html#cookies">Copyrights & Trademarks</a></li><li><a href="Legal.html#cookies">Cookie Preferences</a></li><li><a href="#">Open Data Licensing</a></li><li><a href="#">Environmental Compliance</a></li></ul></div>
             </div>
         </div>
     </div>
@@ -389,33 +418,7 @@
     </div>
 </footer>
 
-    <!-- Newsletter Signup Popup -->
-    <div class="newsletter-popup" id="newsletterPopup">
-        <div class="popup-overlay"></div>
-        <div class="popup-content">
-            <button class="popup-close" id="closePopup">&times;</button>
-            <div class="popup-image"><img src="Media/Agarta logo.png" alt="Agarta AI"></div>
-            <div class="popup-form">
-                <div class="popup-header"><p style="text-align:center;">RECIEVE THE LATEST NEWS</p><h2>Sign Up Today!</h2></div>
-                <p class="popup-description">Be the first to know the latest in AI-assisted XR-based technology for learning and training.<br>Stay ahead of the curve.<b> Sign up today.</b></p>
-                <form class="newsletter-form" id="newsletterForm">
-                    <input type="text" name="firstName" placeholder="First Name" required>
-                    <input type="text" name="lastName" placeholder="Last Name" required>
-                    <input type="email" name="email" placeholder="Email" required>
-                    <input type="text" name="country" placeholder="Country" required>
-                    <div class="recaptcha-placeholder"><small>protected by reCAPTCHA</small><div class="recaptcha-links"><a href="https://policies.google.com/privacy" target="_blank">Privacy</a> - <a href="https://policies.google.com/terms" target="_blank">Terms</a></div></div>
-                    <button type="submit" class="popup-submit-btn">SIGN UP</button>
-                </form>
-            </div>
-        </div>
-    </div>
 
-    <script src="script.js">
-// Pages dropdown
-const pagesBtn=document.getElementById('pagesBtn');const pagesDd=document.getElementById('pagesDropdown');
-if(pagesBtn){pagesBtn.addEventListener('click',(e)=>{e.stopPropagation();pagesDd.classList.toggle('open')});}
-document.addEventListener('click',(e)=>{if(pagesDd&&!pagesDd.contains(e.target))pagesDd.classList.remove('open');});
-</script>
 <script>
 // ── Unified Navbar ──
 const navbar=document.getElementById('navbar');
@@ -453,6 +456,10 @@ document.querySelectorAll('.nav-mega a').forEach(link=>{
 });
 // Language switch
 // Language switching handled by i18n-all.js
+
+// Scroll-reveal observer
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
 </script>
 <script src="i18n-all.js"></script>
 </body>
