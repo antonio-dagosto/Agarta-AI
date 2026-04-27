@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
 using UnityEngine.XR;
@@ -9,7 +9,7 @@ using System.Net.Sockets;
 public class VRVoiceAssistant : MonoBehaviour
 {
     [Header("Server")]
-    public string serverURL = "https://aiserverpy.onrender.com";
+    public string serverURL = "https://agartaassistantserver.onrender.com";
     private bool serverReady = false;
 
     [Header("Audio")]
@@ -52,7 +52,7 @@ public class VRVoiceAssistant : MonoBehaviour
 
     IEnumerator TestRequest()
     {
-        UnityWebRequest req = UnityWebRequest.Get("https://aiserverpy.onrender.com/");
+        UnityWebRequest req = UnityWebRequest.Get("https://agartaassistantserver.onrender.com/");
         req.timeout = 60;
         yield return req.SendWebRequest();
 
@@ -141,7 +141,7 @@ public class VRVoiceAssistant : MonoBehaviour
         form.AddField("context", context);
         form.AddField("voice", selectedVoice);
 
-        string fullURL = "https://aiserverpy.onrender.com/speech";
+        string fullURL = "https://agartaassistantserver.onrender.com/speech";
         UnityEngine.Debug.Log("Sending audio to: " + fullURL);
 
         UnityWebRequest req = UnityWebRequest.Post(fullURL, form);

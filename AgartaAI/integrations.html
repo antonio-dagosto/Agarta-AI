@@ -1,226 +1,930 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Integrations | Agarta</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agarta AI | Integrations</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --green: #00a86b;
+            --green-dark: #00925d;
+            --green-deeper: #004d33;
+            --green-light: #d4f4dd;
+            --green-lighter: #eafaf0;
+            --black: #111;
+            --white: #fff;
+            --gray-50: #f8faf9;
+            --gray-100: #f0f4f2;
+            --gray-300: #ccc;
+            --gray-500: #777;
+            --gray-700: #444;
+            --font-display: 'Bebas Neue', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+            --font-mono: 'Space Mono', monospace;
+        }
+        html{scroll-behavior:smooth;scroll-padding-top:80px}
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-body); line-height: 1.6; color: #333; -webkit-font-smoothing: antialiased; background: var(--white); }
+
+        /* ══════ NAVBAR ══════ */
+        .navbar{position:fixed;top:0;width:100%;height:72px;background:#000;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:1000;border-bottom:1px solid rgba(255,255,255,0.07);transition:all 0.3s ease}
+        .navbar.scrolled{box-shadow:0 4px 30px rgba(0,0,0,0.5)}
+        .nav-container{max-width:1320px;margin:0 auto;padding:0 40px;display:flex;justify-content:space-between;align-items:center;height:100%}
+        .nav-logo a{display:flex;align-items:center;text-decoration:none}
+        .nav-logo img{height:150px;width:auto;transition:transform 0.3s ease}
+        .nav-logo img:hover{transform:scale(1.04)}
+        .nav-menu{display:flex;list-style:none;gap:6px;align-items:center;margin:0;padding:0}
+        .nav-item{position:relative}
+        .nav-link{color:rgba(255,255,255,0.7);font-size:0.9rem;font-weight:500;transition:all 0.3s ease;padding:8px 16px;border-radius:8px;display:inline-flex;align-items:center;gap:6px;text-decoration:none;cursor:pointer}
+        .nav-link:hover{color:#fff;background:rgba(255,255,255,0.06)}
+        .nav-link svg{transition:transform 0.3s ease;stroke:currentColor;fill:none;stroke-width:2}
+        .nav-dropdown:hover .nav-link svg{transform:rotate(180deg)}
+        .nav-mega{position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(8px);min-width:200px;background:rgba(10,26,18,0.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:10px;opacity:0;visibility:hidden;transition:all 0.25s ease;z-index:2000;box-shadow:0 20px 60px rgba(0,0,0,0.5);pointer-events:none}
+        .nav-dropdown:hover .nav-mega{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);pointer-events:auto}
+        .nav-mega a{display:block;padding:11px 16px;border-radius:10px;font-size:0.88rem;font-weight:500;color:rgba(255,255,255,0.75);transition:all 0.2s ease;text-decoration:none;white-space:nowrap}
+        .nav-mega a:hover{background:rgba(0,168,107,0.12);color:#fff}
+        .nav-right-group{display:flex;align-items:center;gap:10px}
+        .nav-language{display:flex;align-items:center}
+        .language-switch{position:relative;display:flex;background:rgba(255,255,255,0.08);border-radius:50px;padding:3px;border:1px solid rgba(255,255,255,0.15)}
+        .lang-switch-btn{position:relative;padding:6px 14px;background:transparent;border:none;color:rgba(255,255,255,0.5);border-radius:50px;cursor:pointer;font-size:0.8rem;font-weight:600;font-family:var(--font-mono);transition:color 0.3s ease;z-index:2;min-width:40px}
+        .lang-switch-btn.active{color:#fff}
+        .switch-slider{position:absolute;top:3px;left:3px;width:calc(50% - 3px);height:calc(100% - 6px);background:var(--green);border-radius:50px;transition:transform 0.3s ease;z-index:1}
+        .nav-auth-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 20px;background:transparent;color:rgba(255,255,255,0.85);border:1.5px solid rgba(255,255,255,0.25);border-radius:50px;font-size:0.82rem;font-weight:600;font-family:inherit;cursor:pointer;transition:all 0.3s ease;white-space:nowrap}
+        .nav-auth-btn svg{width:18px;height:18px;flex-shrink:0}
+        .nav-auth-btn:hover{background:var(--green);border-color:var(--green);color:#fff}
+        .nav-get-started{display:inline-flex;align-items:center;padding:9px 20px;background:var(--green);color:#fff;border:1.5px solid var(--green);border-radius:50px;font-size:0.82rem;font-weight:600;font-family:inherit;cursor:pointer;transition:all 0.3s ease;white-space:nowrap;text-decoration:none}
+        .nav-get-started:hover{background:transparent;color:var(--green)}
+        .hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px;padding:8px}
+        .hamburger .bar{width:24px;height:2px;background:#fff;transition:all 0.3s ease;border-radius:2px}
+        .hamburger.active .bar:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+        .hamburger.active .bar:nth-child(2){opacity:0}
+        .hamburger.active .bar:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+        /* ══════ AUTH POPUP ══════ */
+        .auth-popup{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all 0.3s ease}
+        .auth-popup.active{opacity:1;visibility:visible}
+        .auth-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(8px)}
+        .auth-card{position:relative;background:#fff;border-radius:20px;padding:40px 36px;max-width:420px;width:90%;box-shadow:0 25px 80px rgba(0,0,0,0.3);animation:authSlideUp 0.35s cubic-bezier(0.16,1,0.3,1)}
+        @keyframes authSlideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+        .auth-close{position:absolute;top:16px;right:16px;background:none;border:none;font-size:1.6rem;color:#999;cursor:pointer;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all 0.2s}
+        .auth-close:hover{background:var(--gray-100);color:#333}
+        .auth-logo{text-align:center;margin-bottom:20px}
+        .auth-logo img{height:80px;width:auto}
+        .auth-view{display:none}
+        .auth-view.active{display:block}
+        .auth-subtitle{text-align:center;color:var(--gray-500);font-size:0.92rem;margin-bottom:24px}
+        .auth-form{display:flex;flex-direction:column;gap:12px;margin-bottom:20px}
+        .auth-input{padding:12px 16px;border:1.5px solid #e0e0e0;border-radius:10px;font-size:0.95rem;font-family:inherit;transition:border-color 0.2s;outline:none}
+        .auth-input:focus{border-color:var(--green)}
+        .auth-submit-btn{padding:13px;background:var(--green);color:#fff;border:none;border-radius:10px;font-size:0.95rem;font-weight:600;font-family:inherit;cursor:pointer;transition:background 0.2s}
+        .auth-submit-btn:hover{background:var(--green-dark)}
+        .auth-divider{display:flex;align-items:center;gap:14px;margin:20px 0;color:#bbb;font-size:0.82rem}
+        .auth-divider::before,.auth-divider::after{content:'';flex:1;height:1px;background:#e0e0e0}
+        .auth-google-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:12px;background:#fff;border:1.5px solid #e0e0e0;border-radius:10px;font-size:0.95rem;font-weight:500;font-family:inherit;cursor:pointer;transition:all 0.2s}
+        .auth-google-btn:hover{border-color:#ccc;background:#fafafa}
+        .auth-footer{text-align:center;font-size:0.78rem;color:#999;margin-top:18px;line-height:1.6}
+        .auth-footer a{color:var(--green);text-decoration:none}
+        .auth-switch{text-align:center;font-size:0.88rem;color:var(--gray-500);margin-top:14px}
+        .auth-switch a{color:var(--green);text-decoration:none;font-weight:600}
+
+        /* ══════ HERO ══════ */
+        .integ-hero {
+            padding: 160px 20px 90px;
+            background: linear-gradient(155deg, #00301e 0%, #004d33 30%, #00a86b 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .integ-hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(0,168,107,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0,200,120,0.1) 0%, transparent 40%);
+            pointer-events: none;
+        }
+        .integ-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 120px;
+            background: linear-gradient(to top, var(--white), transparent);
+            pointer-events: none;
+        }
+        .integ-hero-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+        .integ-hero h1 {
+            font-family: var(--font-display);
+            font-size: 5rem;
+            color: var(--white);
+            letter-spacing: 6px;
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+        .integ-hero p {
+            font-size: 1.12rem;
+            color: rgba(255,255,255,0.8);
+            line-height: 1.7;
+            max-width: 660px;
+            margin: 0 auto;
+        }
+        .integ-hero-btns{display:flex;gap:14px;justify-content:center;margin-top:30px;flex-wrap:wrap}
+        .integ-hero-btn{padding:13px 30px;border-radius:50px;font-size:0.92rem;font-weight:600;font-family:inherit;cursor:pointer;transition:all 0.3s ease;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+        .integ-hero-btn-primary{background:#fff;color:var(--green-dark);border:2px solid #fff}
+        .integ-hero-btn-primary:hover{background:transparent;color:#fff;transform:translateY(-2px)}
+        .integ-hero-btn-secondary{background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.4)}
+        .integ-hero-btn-secondary:hover{border-color:#fff;transform:translateY(-2px)}
+
+        /* ══════ SECTION NAV ══════ */
+        .section-nav {
+            position: sticky;
+            top: 72px;
+            z-index: 900;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,168,107,0.15);
+            margin-top: -40px;
+        }
+        .section-nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .section-nav-inner::-webkit-scrollbar { display: none; }
+        .section-pill {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--gray-700);
+            background: var(--gray-100);
+            border: 1px solid transparent;
+            white-space: nowrap;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .section-pill:hover { border-color: var(--green); color: var(--green); background: rgba(0,168,107,0.06); }
+        .pill-num { font-family: var(--font-mono); font-size: 0.72rem; color: var(--green); }
+
+        /* ══════ SECTIONS ══════ */
+        .integ-section { padding: 80px 20px; }
+        .integ-section:nth-child(even) { background: var(--gray-50); }
+        .integ-container { max-width: 1100px; margin: 0 auto; }
+        .integ-section-header { margin-bottom: 40px; }
+        .integ-section-num {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--green);
+            letter-spacing: 3px;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .integ-section-title {
+            font-family: var(--font-display);
+            font-size: 2.8rem;
+            color: var(--black);
+            letter-spacing: 3px;
+        }
+        .integ-section-overview {
+            font-size: 1.05rem;
+            color: var(--gray-500);
+            line-height: 1.8;
+            max-width: 800px;
+            margin-bottom: 40px;
+        }
+
+        /* ══════ CARDS GRID ══════ */
+        .integ-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        .integ-card {
+            background: var(--white);
+            border: 1px solid rgba(0,168,107,0.12);
+            border-radius: 18px;
+            padding: 32px 28px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .integ-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--green), #00d485);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        .integ-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,168,107,0.1); border-color: rgba(0,168,107,0.3); }
+        .integ-card:hover::before { transform: scaleX(1); }
+        .integ-card-icon { font-size: 2.4rem; margin-bottom: 16px; display: block; }
+        .integ-card h4 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            letter-spacing: 1.5px;
+            color: var(--black);
+            margin-bottom: 12px;
+        }
+        .integ-card p, .integ-card li {
+            font-size: 0.92rem;
+            color: var(--gray-500);
+            line-height: 1.7;
+        }
+        .integ-card ul { list-style: none; padding: 0; }
+        .integ-card li { padding: 4px 0; padding-left: 20px; position: relative; }
+        .integ-card li::before { content: '▸'; position: absolute; left: 0; color: var(--green); font-weight: bold; }
+
+        /* Tags */
+        .integ-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+        .integ-tag {
+            display: inline-block;
+            padding: 5px 14px;
+            background: var(--green-lighter);
+            color: var(--green-dark);
+            border-radius: 30px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            font-family: var(--font-mono);
+            border: 1px solid rgba(0,168,107,0.15);
+        }
+
+        /* ══════ WHY INTEGRATIONS ══════ */
+        .why-integ {
+            background: linear-gradient(135deg, var(--green-lighter) 0%, #fff 100%);
+            padding: 80px 20px;
+        }
+        .why-integ-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+        .why-integ h2 {
+            font-family: var(--font-display);
+            font-size: 2.8rem;
+            letter-spacing: 3px;
+            color: var(--black);
+            margin-bottom: 16px;
+        }
+        .why-integ > .integ-container > p { font-size: 1.05rem; color: var(--gray-500); max-width: 700px; margin: 0 auto 40px; line-height: 1.8; }
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .why-item {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 28px 20px;
+            text-align: center;
+            border: 1px solid rgba(0,168,107,0.1);
+            transition: all 0.3s ease;
+        }
+        .why-item:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,168,107,0.08); }
+        .why-item-icon { font-size: 2rem; margin-bottom: 12px; display: block; }
+        .why-item h4 { font-size: 0.95rem; font-weight: 600; color: var(--black); margin-bottom: 6px; }
+        .why-item p { font-size: 0.82rem; color: var(--gray-500); }
+
+        /* ══════ FUTURE INTEGRATIONS ══════ */
+        .future-integrations {
+            background: linear-gradient(180deg, #020a06 0%, #081610 50%, #020a06 100%);
+            padding: 100px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .future-integrations::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 30% 50%, rgba(0,168,107,0.04) 0%, transparent 55%),
+                        radial-gradient(ellipse at 70% 40%, rgba(0,212,133,0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .future-header { text-align: center; margin-bottom: 60px; position: relative; z-index: 1; }
+        .future-header .integ-section-title { color: var(--white); }
+        .future-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(0,168,107,0.1);
+            border: 1px solid rgba(0,168,107,0.25);
+            padding: 7px 16px;
+            border-radius: 30px;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #00d485;
+            margin-bottom: 18px;
+        }
+        .future-desc {
+            font-size: 1.05rem;
+            color: rgba(255,255,255,0.6);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        .future-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        .future-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 22px;
+            padding: 44px 36px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+        .future-card:hover { border-color: rgba(0,168,107,0.35); transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,168,107,0.12); }
+        .future-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--green), #00d485); transform: scaleX(0); transform-origin: left; transition: transform 0.5s ease; }
+        .future-card:hover::before { transform: scaleX(1); }
+        .future-card-bg { position: absolute; top: 20px; right: 20px; font-size: 6rem; opacity: 0.04; pointer-events: none; }
+        .future-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: 20px; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; background: rgba(0,168,107,0.1); border: 1px solid rgba(0,168,107,0.2); color: #00d485; margin-bottom: 16px; }
+        .future-icon { font-size: 2.2rem; display: block; margin-bottom: 14px; }
+        .future-card h3 { font-family: var(--font-display); font-size: 1.6rem; letter-spacing: 2px; color: var(--white); margin-bottom: 14px; }
+        .future-card p { font-size: 0.92rem; color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: 20px; }
+        .future-features { display: flex; flex-direction: column; gap: 10px; }
+        .future-feat { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: rgba(255,255,255,0.5); padding: 8px 12px; background: rgba(255,255,255,0.02); border-radius: 10px; border: 1px solid rgba(255,255,255,0.04); }
+        .future-feat span { font-size: 1.1rem; }
+
+        /* ══════ CTA ══════ */
+        .integ-cta {
+            background: linear-gradient(155deg, #00301e, #00a86b);
+            padding: 100px 20px;
+            text-align: center;
+        }
+        .integ-cta h2 {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            color: var(--white);
+            letter-spacing: 4px;
+            margin-bottom: 16px;
+        }
+        .integ-cta p { font-size: 1.05rem; color: rgba(255,255,255,0.75); max-width: 560px; margin: 0 auto 36px; line-height: 1.7; }
+        .integ-cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+        .integ-cta-btn {
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .integ-cta-btn-primary { background: var(--white); color: var(--green-dark); border: 2px solid var(--white); }
+        .integ-cta-btn-primary:hover { background: transparent; color: var(--white); transform: translateY(-2px); }
+        .integ-cta-btn-secondary { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,0.4); }
+        .integ-cta-btn-secondary:hover { border-color: var(--white); transform: translateY(-2px); }
+
+        /* ══════ SCROLL REVEAL ══════ */
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ══════ FOOTER ══════ */
+        .footer-nav{background:#000;color:#fff;padding:80px 0 40px;border-top:1px solid rgba(255,255,255,0.07)}
+        .footer-nav .container{max-width:1200px;margin:0 auto;padding:0 40px}
+        .footer-nav-logo-section{text-align:center;margin-bottom:30px}
+        .footer-logo{height:100px;width:auto;opacity:0.9}
+        .footer-nav-top{display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:40px;padding-bottom:30px;border-bottom:1px solid rgba(0,168,107,0.2)}
+        .footer-connect{font-size:1.125rem;color:rgba(255,255,255,0.6);white-space:nowrap}
+        .footer-social-icons{display:flex;gap:18px}
+        .footer-social-icons a{width:45px;height:45px;display:flex;align-items:center;justify-content:center;border-radius:8px;transition:all 0.3s ease}
+        .footer-social-icons a:hover{background:rgba(0,168,107,0.15);transform:translateY(-2px)}
+        .footer-social-icons img{width:30px;height:30px;filter:brightness(0) invert(1);opacity:0.7;transition:opacity 0.3s ease}
+        .footer-social-icons a:hover img{opacity:1}
+        .footer-nav-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1.5fr;gap:40px}
+        .footer-nav-column h3{font-family:var(--font-body);font-size:1.15rem;font-weight:600;color:#00d485;margin-bottom:18px;letter-spacing:0.5px}
+        .footer-nav-column ul{list-style:none;padding:0;margin:0}
+        .footer-nav-column li{margin-bottom:10px}
+        .footer-nav-column a{color:rgba(255,255,255,0.7);font-size:1.1rem;transition:color 0.2s ease;text-decoration:none}
+        .footer-nav-column a:hover{color:#fff}
+        .footer-nav-double{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+        .footer-nav-subcolumn h3{font-family:var(--font-body);font-size:1.15rem;font-weight:600;color:#00d485;margin-bottom:18px;letter-spacing:0.5px}
+        .footer-nav-subcolumn ul{list-style:none;padding:0;margin:0}
+        .footer-nav-subcolumn li{margin-bottom:10px}
+        .footer-nav-subcolumn a{color:rgba(255,255,255,0.7);font-size:1.1rem;transition:color 0.2s ease;text-decoration:none}
+        .footer-nav-subcolumn a:hover{color:#fff}
+        .footer{background:#000;color:#fff;padding:20px;text-align:center;border-top:1px solid rgba(255,255,255,0.05)}
+        .footer-copyright{font-size:1.06rem;opacity:0.5;line-height:1.7}
+        @media(max-width:1024px){.footer-nav-grid{grid-template-columns:1fr 1fr;gap:30px}}
+        @media(max-width:768px){.footer-nav-grid{grid-template-columns:1fr}.footer-nav-double{grid-template-columns:1fr}.footer-nav-top{flex-direction:column;gap:12px}}
+
+        /* ══════ RESPONSIVE ══════ */
+        @media (max-width: 768px) {
+            .nav-container{padding:0 20px}
+            .nav-menu{position:fixed;left:-100%;top:72px;flex-direction:column;background:rgba(0,0,0,0.98);backdrop-filter:blur(20px);width:100%;height:calc(100vh - 72px);text-align:left;transition:left 0.3s ease;gap:0;padding:24px 20px;overflow-y:auto;z-index:999}
+            .nav-menu.active{left:0}
+            .nav-item{width:100%;border-bottom:1px solid rgba(255,255,255,0.06)}
+            .nav-link{font-size:1.05rem;padding:16px 0;width:100%;border-radius:0}
+            .nav-mega{position:static;transform:none;opacity:1;visibility:visible;pointer-events:auto;background:transparent;border:none;box-shadow:none;backdrop-filter:none;padding:0 0 8px 16px;min-width:auto;display:none}
+            .nav-dropdown.mob-open .nav-mega{display:block}
+            .nav-mega a{padding:10px 0;font-size:0.95rem;border-radius:0}
+            .nav-right-group{display:none}
+            .hamburger{display:flex}
+
+            .integ-hero { padding: 130px 20px 70px; }
+            .integ-hero h1 { font-size: 3.2rem; }
+            .integ-hero p { font-size: 1rem; }
+            .section-nav { margin-top: -28px; }
+            .section-nav-inner { padding: 12px 16px; gap: 8px; }
+            .section-pill { padding: 8px 14px; font-size: 0.78rem; }
+            .integ-section { padding: 50px 20px; }
+            .integ-section-title { font-size: 2rem; }
+            .integ-grid { grid-template-columns: 1fr; }
+            .future-cards { grid-template-columns: 1fr; }
+            .integ-cta h2 { font-size: 2rem; }
+            .integ-cta-buttons { flex-direction: column; align-items: center; }
+            .integ-cta-btn { width: 80%; justify-content: center; }
+            .auth-card{padding:30px 24px;max-width:360px}
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Navigation Bar -->
+    <!-- NAVBAR -->
     <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <a href="index.html">
-                    <img src="Media/LOGO 3.png" alt="Agarta AI Logo">
-                </a>
-            </div>
-
-            <ul class="nav-menu">
-                <li class="nav-item"><a href="index.html#about" class="nav-link">About</a></li>
-                <li class="nav-item"><a href="index.html#solutions" class="nav-link">Solutions</a></li>
-                <li class="nav-item"><a href="index.html#playlab" class="nav-link">PlayLab</a></li>
-                <li class="nav-item"><a href="index.html#partners" class="nav-link">Partners</a></li>
-                <li class="nav-item"><a href="index.html#contact" class="nav-link">Contact</a></li>
-            </ul>
-
-            <div class="nav-cta">
-                <button class="nav-btn" onclick="document.getElementById('integrations-intro').scrollIntoView({behavior:'smooth'})">
-                    Explore Integrations
-                </button>
-            </div>
-
-            <div class="nav-language">
-                <div class="language-switch">
-                    <button class="lang-switch-btn active" data-lang="en">EN</button>
-                    <button class="lang-switch-btn" data-lang="fr">FR</button>
-                    <div class="switch-slider"></div>
+    <div class="nav-container">
+        <div class="nav-logo"><a href="index.html"><img src="Media/LOGO 3.png" alt="Agarta AI Logo"></a></div>
+                <ul class="nav-menu" id="navMenu">
+            <li class="nav-item">
+                <a href="About.html" class="nav-link" data-i18n="nav.about">About</a>
+            </li>
+            <li class="nav-item">
+                <a href="Integrations.html" class="nav-link" data-i18n="nav.integrations">Integrations</a>
+            </li>
+            <li class="nav-item nav-dropdown">
+                <a href="#" class="nav-link nav-dd-trigger" data-i18n="nav.features">Features <svg width="10" height="6" viewBox="0 0 10 6" fill="currentColor"><path d="M1 1l4 4 4-4"/></svg></a>
+                <div class="nav-mega">
+                    <a href="explore.html" data-i18n="nav.f.explore">Explore</a>
+                    <a href="play_games.html" data-i18n="nav.f.games">Play & Games</a>
+                    <a href="Virtual_campus.html" data-i18n="nav.f.campus">Virtual Campus</a>
+                    <a href="Events.html" data-i18n="nav.f.events">Events</a>
+                    <a href="Marketplace.html" data-i18n="nav.f.marketplace">Marketplace</a>
+                    <a href="lab_tours.html" data-i18n="nav.f.labs">Lab Tours</a>
+                    <a href="Media_Streaming.html" data-i18n="nav.f.media">Media Hub</a>
+                    <a href="Web_Navigator.html" data-i18n="nav.f.webnav">Web Navigator</a>
                 </div>
-            </div>
-
-            <button class="nav-auth-btn" id="authOpenBtn">
-                <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
-                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                </svg>
-                Sign Up / Login
-            </button>
-
-            <div class="pages-dropdown" id="pagesDropdown">
-                <button class="pages-dd-btn" id="pagesBtn">Features
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-                        <polyline points="6 9 12 15 18 9"/>
-                    </svg>
-                </button>
-                <div class="pages-dd-menu">
-                    <a href="explore.html"><span>🌍</span>Explore</a>
-                    <a href="play_games.html"><span>🎮</span>Play & Games</a>
-                    <a href="Virtual_campus.html"><span>🎓</span>Virtual Campus</a>
-                    <a href="events.html"><span>🎟</span>Events</a>
-                    <a href="marketplace.html"><span>🛒</span>Marketplace</a>
-                    <a href="integrations.html"><span>🔗</span>Integrations</a>
-                    <a href="technologies.html"><span>⚙️</span>Technologies</a>
-                    <a href="lab_tours.html"><span>🎬</span>Lab Tours</a>
-                    <a href="help_support.html"><span>🆘</span>Help</a>
-                    <a href="contact.html"><span>📞</span>Contact</a>
+            </li>
+            <li class="nav-item nav-dropdown">
+                <a href="#" class="nav-link nav-dd-trigger" data-i18n="nav.resources">Resources <svg width="10" height="6" viewBox="0 0 10 6" fill="currentColor"><path d="M1 1l4 4 4-4"/></svg></a>
+                <div class="nav-mega">
+                    <a href="Technologies.html" data-i18n="nav.r.tech">Technologies</a>
+                    <a href="FAQ.html" data-i18n="nav.r.faq">FAQs</a>
                 </div>
-            </div>
+            </li>
+            <li class="nav-item nav-dropdown">
+                <a href="#" class="nav-link nav-dd-trigger" data-i18n="nav.support">Support <svg width="10" height="6" viewBox="0 0 10 6" fill="currentColor"><path d="M1 1l4 4 4-4"/></svg></a>
+                <div class="nav-mega">
+                    <a href="Help_support.html" data-i18n="nav.s.help">Help Center</a>
+                    <a href="Contact.html" data-i18n="nav.s.contact">Contact Us</a>
+                    <a href="Legal.html" data-i18n="nav.s.legal">Legal</a>
+                </div>
+            </li>
+        </ul>
+        <div class="nav-right-group">
+            <div class="nav-language"><div class="language-switch"><button class="lang-switch-btn active" data-lang="en">EN</button><button class="lang-switch-btn" data-lang="fr">FR</button><div class="switch-slider"></div></div></div>
+            <button class="nav-auth-btn" id="authOpenBtn"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>Sign Up / Login</button>
+            <a href="Contact.html#contact-main" class="nav-get-started">Get Started</a>
+        </div>
+        <div class="hamburger" id="hamburger"><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
+    </div>
+</nav>
 
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+    <!-- Auth Popup -->
+    <div class="auth-popup" id="authPopup">
+        <div class="auth-overlay" id="authOverlay"></div>
+        <div class="auth-card">
+            <button class="auth-close" id="authCloseBtn">&times;</button>
+            <div class="auth-logo"><img src="Media/LOGO 3.png" alt="Agarta AI"></div>
+            <div class="auth-view auth-view-login" id="authLoginView">
+                <p class="auth-subtitle">Enter your email and password to login</p>
+                <form class="auth-form" id="loginForm">
+                    <input type="email" class="auth-input" placeholder="email@domain.com" required>
+                    <input type="password" class="auth-input" placeholder="Password" required>
+                    <button type="submit" class="auth-submit-btn">Login</button>
+                </form>
+                <div class="auth-divider"><span>or continue with</span></div>
+                <button class="auth-google-btn"><svg width="20" height="20" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>Google</button>
+                <p class="auth-footer">By clicking continue, you agree to our<br><a href="Legal.html">Terms of Service</a> and <a href="Legal.html">Privacy Policy</a></p>
+                <p class="auth-switch">Don't have an account? <a href="#" id="goToSignup">Sign up</a></p>
+            </div>
+            <div class="auth-view auth-view-signup" id="authSignupView">
+                <p class="auth-subtitle">Enter your email to sign up for this app</p>
+                <form class="auth-form" id="signupForm">
+                    <input type="email" class="auth-input" placeholder="email@domain.com" required>
+                    <button type="submit" class="auth-submit-btn">Sign up with email</button>
+                </form>
+                <div class="auth-divider"><span>or continue with</span></div>
+                <button class="auth-google-btn"><svg width="20" height="20" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>Google</button>
+                <p class="auth-footer">By clicking continue, you agree to our<br><a href="Legal.html">Terms of Service</a> and <a href="Legal.html">Privacy Policy</a></p>
+                <p class="auth-switch">Already have an account? <a href="#" id="goToLogin">Login</a></p>
             </div>
         </div>
-    </nav>
+    </div>
 
-    <!-- Hero Section -->
-    <section class="hero" id="integrations-intro">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <img src="Media/LOGOS 1.png" alt="Agarta Logo" class="logo">
-            <h1><b>Integrations</b></h1>
-            <h2>An Open Ecosystem Built for Infinite Possibilities</h2>
-            <p>
-                Agarta connects satellite data, media, and APIs to deliver immersive, real-time experiences across education, exploration, and innovation.
-            </p>
-            <div class="cta-buttons">
-                <button class="btn" onclick="document.getElementById('integrations-grid').scrollIntoView({behavior:'smooth'})">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                    Explore Platforms
-                </button>
-                <a href="contact.html" class="btn">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
-                    Become a Partner
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why Integrations Matter -->
-    <section class="about">
-        <div class="container">
-            <h2>Why Integrations Matter</h2>
-            <p style="max-width: 900px; margin: 0 auto; text-align: center;">
-                Agarta is built as a modular platform, which means it can connect to trusted technologies without locking you into one system.
-            </p>
-            <div class="features-grid">
-                <div class="feature-card-container">
-                    <div class="feature-card">
-                        <div class="feature-card-front">
-                            <h3>Real-Time Data</h3>
-                        </div>
-                        <div class="feature-card-back">
-                            <p>Connect live data for more accurate immersive experiences.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="feature-card-container">
-                    <div class="feature-card">
-                        <div class="feature-card-front">
-                            <h3>Cross-Platform</h3>
-                        </div>
-                        <div class="feature-card-back">
-                            <p>Works across web, mobile, VR, AR, and MR experiences.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="feature-card-container">
-                    <div class="feature-card">
-                        <div class="feature-card-front">
-                            <h3>Scalable</h3>
-                        </div>
-                        <div class="feature-card-back">
-                            <p>Built for schools, institutions, and partner organizations.</p>
-                        </div>
-                    </div>
-                </div>
+    <!-- HERO -->
+    <section class="integ-hero">
+        <div class="integ-hero-content">
+            <h1 data-i18n="ig.hero.title">INTEGRATIONS</h1>
+            <p>An open ecosystem built for infinite possibilities. Agarta integrates world-class mapping, satellite, media, hardware, and API technologies to deliver trusted, real-time, immersive experiences.</p>
+            <div class="integ-hero-btns">
+                <a href="#mapping" class="integ-hero-btn integ-hero-btn-primary" data-i18n="ig.hero.btn1">Explore Integrations</a>
+                <a href="Contact.html" class="integ-hero-btn integ-hero-btn-secondary" data-i18n="ig.hero.btn2">Become a Technology Partner</a>
             </div>
         </div>
     </section>
 
-    <!-- Integration Grid -->
-    <section class="solutions" id="integrations-grid">
-        <div class="container">
-            <h2>Integrated Platforms</h2>
-            <div class="solutions-grid">
+    <!-- SECTION NAV -->
+    <div class="section-nav">
+        <div class="section-nav-inner">
+            <a href="#why" class="section-pill"><span class="pill-num">01</span> Why Integrations</a>
+            <a href="#mapping" class="section-pill"><span class="pill-num">02</span> Mapping & Geospatial</a>
+            <a href="#satellite" class="section-pill"><span class="pill-num">03</span> Satellite Data</a>
+            <a href="#media" class="section-pill"><span class="pill-num">04</span> Media & Streaming</a>
+            <a href="#hardware" class="section-pill"><span class="pill-num">05</span> Hardware</a>
+            <a href="#apis" class="section-pill"><span class="pill-num">06</span> APIs & Dev</a>
+            <a href="#security" class="section-pill"><span class="pill-num">07</span> Security</a>
+            <a href="#future" class="section-pill"><span class="pill-num">08</span> Future</a>
+        </div>
+    </div>
 
-                <div class="solution-card-container">
-                    <div class="solution-card">
-                        <div class="solution-card-front">
-                            <h3>Satellite Data</h3>
-                        </div>
-                        <div class="solution-card-back">
-                            <p>NASA EarthData and Sentinel Hub for environmental and scientific visualization.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="solution-card-container">
-                    <div class="solution-card">
-                        <div class="solution-card-front">
-                            <h3>Media & Streaming</h3>
-                        </div>
-                        <div class="solution-card-back">
-                            <p>YouTube, 360° video, and live streaming for immersive content delivery.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="solution-card-container">
-                    <div class="solution-card">
-                        <div class="solution-card-front">
-                            <h3>APIs & Developer Tools</h3>
-                        </div>
-                        <div class="solution-card-back">
-                            <p>REST APIs, WebXR, and cloud services for scalable and customizable integrations.</p>
-                        </div>
-                    </div>
-                </div>
-
+    <!-- 1. WHY INTEGRATIONS MATTER -->
+    <section class="why-integ" id="why">
+        <div class="integ-container">
+            <h2 class="reveal" data-i18n="ig.why.title">POWERING REAL-WORLD EXPERIENCES</h2>
+            <p class="integ-section-overview reveal" style="text-align:center;margin:0 auto 40px;">Agarta is designed as an open, modular platform. By integrating industry-leading technologies, we ensure reliability, scalability, and continuous innovation.</p>
+            <div class="why-grid">
+                <div class="why-item reveal"><span class="why-item-icon">📡</span><h4>Real-Time Data</h4><p>Reliable global data streams</p></div>
+                <div class="why-item reveal"><span class="why-item-icon">🌐</span><h4>3D Visualization</h4><p>Accurate satellite & 3D rendering</p></div>
+                <div class="why-item reveal"><span class="why-item-icon">📱</span><h4>Cross-Platform</h4><p>Web, Mobile, VR, AR, MR</p></div>
+                <div class="why-item reveal"><span class="why-item-icon">🏛</span><h4>Institutional Scale</h4><p>Built for governments & institutions</p></div>
+                <div class="why-item reveal"><span class="why-item-icon">🔓</span><h4>No Vendor Lock-in</h4><p>Open ecosystem, continuous innovation</p></div>
             </div>
         </div>
     </section>
 
-    <!-- Future Integrations -->
-    <section class="innovation">
-        <div class="container">
-            <h2>Future Integrations</h2>
-            <div class="carousel-wrapper">
-                <div class="carousel-container">
-                    <div class="carousel-track">
-                        <div class="carousel-slide active">
-                            <h3>Drone Exploration</h3>
-                            <p>Live 360° drone integration for immersive fly-through experiences.</p>
-                        </div>
-                        <div class="carousel-slide">
-                            <h3>Agarta Glass API</h3>
-                            <p>Smart glasses and wearable XR overlays for hands-free exploration.</p>
-                        </div>
-                        <div class="carousel-slide">
-                            <h3>AI Expansion</h3>
-                            <p>New AI models and smarter personalization across the platform.</p>
-                        </div>
+    <!-- 2. MAPPING & GEOSPATIAL -->
+    <section class="integ-section" id="mapping">
+        <div class="integ-container">
+            <div class="integ-section-header reveal">
+                <span class="integ-section-num">02</span>
+                <h2 class="integ-section-title" data-i18n="ig.s2.title">MAPPING & GEOSPATIAL PLATFORMS</h2>
+            </div>
+            <p class="integ-section-overview reveal">Explore the planet in true 3D with industry-leading mapping technologies powering Agarta's virtual exploration engine.</p>
+            <div class="integ-grid">
+                <div class="integ-card reveal">
+                    <span class="integ-card-icon">🌍</span>
+                    <h4>GOOGLE EARTH & MAPS</h4>
+                    <ul>
+                        <li>Real-time satellite imagery</li>
+                        <li>3D globe navigation</li>
+                        <li>Street View (360°)</li>
+                        <li>Cities, landscapes, infrastructure</li>
+                    </ul>
+                    <div class="integ-tags">
+                        <span class="integ-tag">Virtual Field Trips</span>
+                        <span class="integ-tag">Geographic Education</span>
+                        <span class="integ-tag">Urban Exploration</span>
+                    </div>
+                </div>
+                <div class="integ-card reveal">
+                    <span class="integ-card-icon">🗺</span>
+                    <h4>MAPBOX</h4>
+                    <ul>
+                        <li>High-resolution 3D maps</li>
+                        <li>Custom layers and AI overlays</li>
+                        <li>Advanced visualization</li>
+                    </ul>
+                    <div class="integ-tags">
+                        <span class="integ-tag">Data-Driven Simulations</span>
+                        <span class="integ-tag">Custom Thematic Maps</span>
+                    </div>
+                </div>
+                <div class="integ-card reveal">
+                    <span class="integ-card-icon">🌐</span>
+                    <h4>OPENSTREETMAP (OSM)</h4>
+                    <ul>
+                        <li>Open-source global map data</li>
+                        <li>Strong rural & remote coverage</li>
+                        <li>Community-driven mapping</li>
+                    </ul>
+                    <div class="integ-tags">
+                        <span class="integ-tag">Offline Regions</span>
+                        <span class="integ-tag">Low-Bandwidth</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Call to Action -->
-    <section class="cta-section">
-        <div class="container">
-            <h2>Build the Future with Agarta</h2>
-            <p class="cta-subtitle">Connect with us to explore partnerships, documentation, and technical collaboration.</p>
-            <div class="cta-buttons-group">
-                <a href="contact.html" class="cta-btn cta-btn-primary">Request Technical Documentation</a>
-                <a href="contact.html" class="cta-btn cta-btn-secondary">Become an Integration Partner</a>
+    <!-- 3. SATELLITE & EARTH OBSERVATION -->
+    <section class="integ-section" id="satellite">
+        <div class="integ-container">
+            <div class="integ-section-header reveal">
+                <span class="integ-section-num">03</span>
+                <h2 class="integ-section-title" data-i18n="ig.s3.title">SATELLITE & EARTH OBSERVATION DATA</h2>
+            </div>
+            <p class="integ-section-overview reveal">Science-grade data for real-world understanding, powering environmental simulations and research across Agarta.</p>
+            <div class="integ-grid">
+                <div class="integ-card reveal">
+                    <span class="integ-card-icon">🛰</span>
+                    <h4>NASA EARTHDATA</h4>
+                    <ul>
+                        <li>Climate data</li>
+                        <li>Vegetation indices (NDVI)</li>
+                        <li>Weather & atmospheric monitoring</li>
+                        <li>Environmental change analysis</li>
+                    </ul>
+                    <div class="integ-tags">
+                        <span class="integ-tag">Scientific Education</span>
+                        <span class="integ-tag">Research Labs</span>
+                    </div>
+                </div>
+                <div class="integ-card reveal">
+                    <span class="integ-card-icon">🛰️</span>
+                    <h4>ESA SENTINEL HUB</h4>
+                    <ul>
+                        <li>High-frequency satellite imagery</li>
+                        <li>Soil health and land use</li>
+                        <li>Climate change tracking</li>
+                    </ul>
+                    <div class="integ-tags">
+                        <span class="integ-tag">Environmental Simulations</span>
+                        <span class="integ-tag">Government & NGO</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <script src="script.js"></script>
+    <!-- 4. MEDIA & STREAMING -->
+    <section class="integ-section" id="media">
+        <div class="integ-container">
+            <div class="integ-section-header reveal">
+                <span class="integ-section-num">04</span>
+                <h2 class="integ-section-title" data-i18n="ig.s4.title">MEDIA & STREAMING PLATFORMS</h2>
+            </div>
+            <p class="integ-section-overview reveal">Immersive media everywhere — from 360° videos to live streaming and educational content.</p>
+            <div class="integ-grid">
+                <div class="integ-card reveal">
+                    <span class="integ-card-icon">▶️</span>
+                    <h4>YOUTUBE & YOUTUBE 360°</h4>
+                    <ul>
+                        <li>VR-compatible 360° videos</li>
+                        <li>Live streaming integration</li>
+                        <li>Educational & documentary content</li>
+                    </ul>
+                </div>
+                <div class="integ-card reveal">
+                    <span class="integ-card-icon">🎬</span>
+                    <h4>NETFLIX, AMAZON PRIME, TUBI</h4>
+                    <ul>
+                        <li>Educational documentaries</li>
+                        <li>Licensed content (where applicable)</li>
+                        <li>Embedded viewing experiences</li>
+                    </ul>
+                </div>
+                <div class="integ-card reveal">
+                    <span class="integ-card-icon">📡</span>
+                    <h4>INSTA360 CLOUD</h4>
+                    <ul>
+                        <li>Live 360° streaming</li>
+                        <li>High-resolution VR video hosting</li>
+                    </ul>
+                    <div class="integ-tags">
+                        <span class="integ-tag">Virtual Museums</span>
+                        <span class="integ-tag">Live Nature</span>
+                        <span class="integ-tag">Educational Streaming</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. HARDWARE & CAPTURE -->
+    <section class="integ-section" id="hardware">
+        <div class="integ-container">
+            <div class="integ-section-header reveal">
+                <span class="integ-section-num">05</span>
+                <h2 class="integ-section-title" data-i18n="ig.s5.title">HARDWARE & CAPTURE DEVICES</h2>
+            </div>
+            <p class="integ-section-overview reveal">From the real world to virtual reality — supported cameras, drones, and capture devices that power Agarta content.</p>
+            <div class="integ-grid">
+                <div class="integ-card reveal">
+                    <span class="integ-card-icon">🎥</span>
+                    <h4>360° CAMERAS</h4>
+                    <div class="integ-tags">
+                        <span class="integ-tag">Insta360 Pro 2 (8K HDR)</span>
+                        <span class="integ-tag">Insta360 One RS</span>
+                        <span class="integ-tag">GoPro Max</span>
+                    </div>
+                </div>
+                <div class="integ-card reveal">
+                    <span class="integ-card-icon">🚁</span>
+                    <h4>DRONES</h4>
+                    <div class="integ-tags">
+                        <span class="integ-tag">DJI Mini 4 Pro</span>
+                        <span class="integ-tag">DJI Air & Mavic Series</span>
+                    </div>
+                    <ul style="margin-top:14px">
+                        <li>Real-world scanning</li>
+                        <li>Aerial mapping</li>
+                        <li>Live VR broadcasting</li>
+                        <li>High-fidelity 3D capture</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. APIs & DEVELOPER -->
+    <section class="integ-section" id="apis">
+        <div class="integ-container">
+            <div class="integ-section-header reveal">
+                <span class="integ-section-num">06</span>
+                <h2 class="integ-section-title" data-i18n="ig.s6.title">APIs & DEVELOPER INTEGRATIONS</h2>
+            </div>
+            <p class="integ-section-overview reveal">Built for developers. Ready for innovation. Connect, customize, and scale with Agarta's API ecosystem.</p>
+            <div class="integ-grid">
+                <div class="integ-card reveal">
+                    <span class="integ-card-icon">🔌</span>
+                    <h4>API CAPABILITIES</h4>
+                    <ul>
+                        <li>Custom content ingestion</li>
+                        <li>Institutional data integration</li>
+                        <li>AI analytics & personalization</li>
+                        <li>User management & authentication</li>
+                        <li>Real-time synchronization</li>
+                    </ul>
+                </div>
+                <div class="integ-card reveal">
+                    <span class="integ-card-icon">⚙️</span>
+                    <h4>SUPPORTED STANDARDS</h4>
+                    <div class="integ-tags">
+                        <span class="integ-tag">REST APIs</span>
+                        <span class="integ-tag">WebXR</span>
+                        <span class="integ-tag">Cloud Microservices</span>
+                    </div>
+                    <p style="margin-top:16px"><strong>Who uses this:</strong> Universities, Research Labs, Government Platforms, Enterprise Partners</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. SECURITY & COMPLIANCE -->
+    <section class="integ-section" id="security">
+        <div class="integ-container">
+            <div class="integ-section-header reveal">
+                <span class="integ-section-num">07</span>
+                <h2 class="integ-section-title" data-i18n="ig.s7.title">SECURITY & COMPLIANCE</h2>
+            </div>
+            <p class="integ-section-overview reveal">Trusted, secure, and scalable infrastructure ensuring data privacy and institutional-grade access control.</p>
+            <div class="integ-grid">
+                <div class="integ-card reveal">
+                    <span class="integ-card-icon">🔐</span>
+                    <h4>SECURITY FEATURES</h4>
+                    <ul>
+                        <li>Secure data transmission</li>
+                        <li>Privacy-first design</li>
+                        <li>Compliance with international standards</li>
+                        <li>Institutional-grade access control</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. FUTURE INTEGRATIONS -->
+    <section class="future-integrations" id="future">
+        <div class="integ-container">
+            <div class="future-header">
+                <span class="future-tag">🚀 Always Expanding</span>
+                <h2 class="integ-section-title" style="color:#fff" data-i18n="ig.future.title">FUTURE INTEGRATIONS</h2>
+                <p class="future-desc">Agarta continuously expands its ecosystem to include advanced AI models, emerging XR hardware, educational platforms, and government smart-city systems.</p>
+            </div>
+            <div class="future-cards">
+                <div class="future-card reveal">
+                    <div class="future-card-bg">🚁</div>
+                    <span class="future-badge">✈️ Coming Soon</span>
+                    <span class="future-icon">🚁</span>
+                    <h3>DRONE EXPLORATION VISION</h3>
+                    <p>Real-time 360° drone integration enabling users to explore the world live through VR. Navigate environments naturally with head movement, creating a fully immersive "fly-through" experience powered by AI and spatial control.</p>
+                    <div class="future-features">
+                        <div class="future-feat"><span>📡</span> Real-time 360° live drone feed</div>
+                        <div class="future-feat"><span>🥽</span> VR head-tracking navigation</div>
+                        <div class="future-feat"><span>🤖</span> AI-powered spatial awareness</div>
+                        <div class="future-feat"><span>🌍</span> Explore any location on Earth live</div>
+                    </div>
+                </div>
+                <div class="future-card reveal">
+                    <div class="future-card-bg">👓</div>
+                    <span class="future-badge">👓 Coming Soon</span>
+                    <span class="future-icon">👓</span>
+                    <h3>AGARTA GLASS API</h3>
+                    <p>A next-generation interface connecting Agarta to smart glasses and wearable XR devices. Enables real-time overlays, guided exploration, AI assistance, and hands-free interaction.</p>
+                    <div class="future-features">
+                        <div class="future-feat"><span>🔮</span> Real-time AR overlays</div>
+                        <div class="future-feat"><span>🗺️</span> Guided exploration mode</div>
+                        <div class="future-feat"><span>🤖</span> AI voice & visual assistant</div>
+                        <div class="future-feat"><span>✋</span> Hands-free gesture interaction</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="integ-cta">
+        <h2 data-i18n="ig.cta.title">BUILD THE FUTURE WITH AGARTA</h2>
+        <p>Partner with us to shape the next generation of immersive, intelligent experiences.</p>
+        <div class="integ-cta-buttons">
+            <a href="Contact.html" class="integ-cta-btn integ-cta-btn-primary" data-i18n="ig.cta.btn1">Become an Integration Partner</a>
+            <a href="#" class="integ-cta-btn integ-cta-btn-secondary" data-i18n="ig.cta.btn2">Request Technical Documentation</a>
+            <a href="Contact.html" class="integ-cta-btn integ-cta-btn-secondary" data-i18n="ig.cta.btn3">Contact Our Team</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <section class="footer-nav">
+    <div class="container" style="max-width:1200px;margin:0 auto;padding:0 40px">
+        <div class="footer-nav-logo-section"><img src="Media/Agarta logo.png" alt="Agarta Logo" class="footer-logo"></div>
+        <div class="footer-nav-top">
+            <p class="footer-connect" data-i18n="ft.connect">Connect with us:</p>
+            <div class="footer-social-icons">
+                <a href="https://www.facebook.com/agartaai" aria-label="Facebook"><img src="Media/icons8-facebook-50.png" alt="Facebook"></a>
+                <a href="https://www.linkedin.com/company/agarta_official" aria-label="LinkedIn"><img src="Media/icons8-linkedin-50.png" alt="LinkedIn"></a>
+                <a href="https://www.youtube.com/@Agartaai" aria-label="YouTube"><img src="Media/icons8-youtube-50.png" alt="YouTube"></a>
+                <a href="https://www.facebook.com/agartaai" aria-label="Instagram"><img src="Media/icons8-instagram-50.png" alt="Instagram"></a>
+            </div>
+        </div>
+        <div class="footer-nav-grid">
+            <div class="footer-nav-column"><h3 data-i18n="ft.company">Company</h3><ul><li><a href="About.html">About Us</a></li><li><a href="About.html#story">Our Story & Mission</a></li><li><a href="#">Ethics & Sustainability</a></li><li><a href="#">Careers</a></li><li><a href="#">Partnerships</a></li></ul></div>
+            <div class="footer-nav-column"><h3 data-i18n="ft.features">Features</h3><ul><li><a href="explore.html">Explore</a></li><li><a href="play_games.html">Play & Games</a></li><li><a href="Virtual_campus.html">Virtual Campus</a></li><li><a href="Events.html">Events</a></li><li><a href="#">Agarta AI PlayLab&trade;</a></li><li><a href="Marketplace.html">Marketplace</a></li><li><a href="#">AI Voice Assistant</a></li></ul></div>
+            <div class="footer-nav-column"><h3 data-i18n="ft.resources">Resources</h3><ul><li><a href="#">Blog</a></li><li><a href="#">Tutorials & Webinars</a></li><li><a href="#">Developer API Portal</a></li><li><a href="Technologies.html">Technologies</a></li><li><a href="Integrations.html">Integrations</a></li><li><a href="#">Integration Guides</a></li><li><a href="#">Community Forum</a></li><li><a href="FAQ.html">FAQs</a></li></ul></div>
+            <div class="footer-nav-column footer-nav-double">
+                <div class="footer-nav-subcolumn"><h3 data-i18n="ft.support">Support</h3><ul><li><a href="Contact.html">Contact Us</a></li><li><a href="Help_support.html">Help Center</a></li><li><a href="#">AI Assistant Chat (24/7)</a></li></ul></div>
+                <div class="footer-nav-subcolumn"><h3 data-i18n="ft.legal">Legal</h3><ul><li><a href="Legal.html">Privacy Policy</a></li><li><a href="Legal.html#terms">Terms of Service</a></li><li><a href="Legal.html#cookies">Data & AI Ethics Policy</a></li><li><a href="Legal.html#cookies">Copyrights & Trademarks</a></li><li><a href="Legal.html#cookies">Cookie Preferences</a></li><li><a href="#">Open Data Licensing</a></li><li><a href="#">Environmental Compliance</a></li></ul></div>
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="footer">
+    <div class="container">
+        <div class="footer-top"><p class="footer-copyright">&copy; 2026 Agarta AI | All rights reserved. | Designed with purpose and powered by Kimuntu Power Inc.</p></div>
+    </div>
+</footer>
+
+<script>
+// ── Navbar ──
+const navbar=document.getElementById('navbar');
+if(navbar)window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',window.scrollY>50));
+const hamburger=document.getElementById('hamburger');
+const navMenu=document.getElementById('navMenu');
+if(hamburger){hamburger.addEventListener('click',()=>{hamburger.classList.toggle('active');navMenu.classList.toggle('active');if(!navMenu.classList.contains('active')){document.querySelectorAll('.nav-dropdown.mob-open').forEach(d=>d.classList.remove('mob-open'))}});}
+document.querySelectorAll('.nav-dd-trigger').forEach(trigger=>{trigger.addEventListener('click',(e)=>{if(window.innerWidth<=768){e.preventDefault();const parent=trigger.closest('.nav-dropdown');const wasOpen=parent.classList.contains('mob-open');document.querySelectorAll('.nav-dropdown.mob-open').forEach(d=>d.classList.remove('mob-open'));if(!wasOpen)parent.classList.add('mob-open')}})});
+document.querySelectorAll('.nav-mega a').forEach(link=>{link.addEventListener('click',()=>{if(hamburger)hamburger.classList.remove('active');if(navMenu)navMenu.classList.remove('active')})});
+// Language switching handled by i18n-all.js
+
+// ── Auth Popup ──
+(function(){
+    const popup=document.getElementById('authPopup'),overlay=document.getElementById('authOverlay'),closeBtn=document.getElementById('authCloseBtn'),openBtn=document.getElementById('authOpenBtn'),loginView=document.getElementById('authLoginView'),signupView=document.getElementById('authSignupView');
+    if(!popup)return;
+    function showView(v){loginView.classList.remove('active');signupView.classList.remove('active');if(v==='login')loginView.classList.add('active');else signupView.classList.add('active')}
+    function openPopup(v){popup.classList.add('active');showView(v)}
+    function closePopup(){popup.classList.remove('active')}
+    if(openBtn)openBtn.addEventListener('click',()=>openPopup('login'));
+    
+    if(closeBtn)closeBtn.addEventListener('click',closePopup);
+    if(overlay)overlay.addEventListener('click',closePopup);
+    document.addEventListener('keydown',(e)=>{if(e.key==='Escape'&&popup.classList.contains('active'))closePopup()});
+    const goSignup=document.getElementById('goToSignup'),goLogin=document.getElementById('goToLogin');
+    if(goSignup)goSignup.addEventListener('click',(e)=>{e.preventDefault();showView('signup')});
+    if(goLogin)goLogin.addEventListener('click',(e)=>{e.preventDefault();showView('login')});
+})();
+
+// ── Scroll Reveal ──
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+<script src="i18n-all.js"></script>
 </body>
 </html>
